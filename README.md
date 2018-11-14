@@ -1,3 +1,3 @@
-Admint Frontend
+Admin Frontend
 ===============
 
