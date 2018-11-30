@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule, MatToolbarModule, MatButtonModule, MatIconModule, MatListModule } from '@angular/material';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -15,6 +15,13 @@ import { ProductsComponent } from './products/products.component';
 import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { SalesStatisticsComponent } from './sales-statistics/sales-statistics.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AccountModalComponent } from './account-management/account-modal/account-modal.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -28,7 +35,8 @@ import { SalesStatisticsComponent } from './sales-statistics/sales-statistics.co
     ProductsComponent,
     InventoryListComponent,
     TransactionsComponent,
-    SalesStatisticsComponent
+    SalesStatisticsComponent,
+    AccountModalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,8 +47,15 @@ import { SalesStatisticsComponent } from './sales-statistics/sales-statistics.co
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule,
+    ModalModule.forRoot(),
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ToastrModule.forRoot()
   ],
+  entryComponents: [AccountModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

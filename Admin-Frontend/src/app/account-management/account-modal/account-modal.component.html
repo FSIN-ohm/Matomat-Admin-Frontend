@@ -1,0 +1,26 @@
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+  <div class="modal-header">
+    <h3 class="modal-title">{{header}}</h3>
+  </div>
+
+  <div class="modal-body">
+    <div formGroupName="account">
+      <div class="fields-container">
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Name" formControlName="name" [ngModel]="account.name">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Credit" formControlName="credit" [ngModel]="account.credit">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Active" formControlName="active" [ngModel]="account.active">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-default" (click)="onCancel()">cancel</button>
+    <button class="btn btn-success" type="submit">save</button>
+  </div>
+</form>

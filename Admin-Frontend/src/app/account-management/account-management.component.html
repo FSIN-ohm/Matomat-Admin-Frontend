@@ -1,3 +1,20 @@
-<p>
-  account-management works!
-</p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Credit</th>
+    <th>Creation Date</th>
+    <th>Last Activity</th>
+    <th>Active</th>
+  </tr>
+  <tr *ngFor="let account of accounts">
+    <td>{{account.name}}</td>
+    <td>{{account.credit}}</td>
+    <td>{{account.creationDate}}</td>
+    <td>{{account.lastActivity}}</td>
+    <td>{{account.active}}</td>
+    <td><button class="btn btn-default" (click)="editAccount(account)">Edit</button></td>
+    <td><button class="btn btn-default" (click)="deleteAccount(account)">Delete</button></td>
+  </tr>
+</table>
+
+<button class="btn btn-primary" (click)="createAccount()">Create new Account</button>
