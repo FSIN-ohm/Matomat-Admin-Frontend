@@ -1,20 +1,42 @@
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Credit</th>
-    <th>Creation Date</th>
-    <th>Last Activity</th>
-    <th>Active</th>
-  </tr>
-  <tr *ngFor="let account of accounts">
-    <td>{{account.name}}</td>
-    <td>{{account.credit}}</td>
-    <td>{{account.creationDate}}</td>
-    <td>{{account.lastActivity}}</td>
-    <td>{{account.active}}</td>
-    <td><button class="btn btn-default" (click)="editAccount(account)">Edit</button></td>
-    <td><button class="btn btn-default" (click)="deleteAccount(account)">Delete</button></td>
-  </tr>
+<table mat-table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="userName">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let account"> {{account.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="credit">
+    <th mat-header-cell *matHeaderCellDef> Credits </th>
+    <td mat-cell *matCellDef="let account"> {{account.credit}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="creationDate">
+    <th mat-header-cell *matHeaderCellDef> Creation Date </th>
+    <td mat-cell *matCellDef="let account"> {{account.creationDate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastActivity">
+    <th mat-header-cell *matHeaderCellDef> Last Activity </th>
+    <td mat-cell *matCellDef="let account"> {{account.lastActivity}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="active">
+    <th mat-header-cell *matHeaderCellDef> Active? </th>
+    <td mat-cell *matCellDef="let account"> {{account.active}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let account"><button class="btn btn-default" (click)="editAccount(account)">Edit</button></td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let account"><button class="btn btn-default" (click)="deleteAccount(account)">Delete</button></td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
 </table>
 
 <button class="btn btn-primary" (click)="createAccount()">Create new Account</button>

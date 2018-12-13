@@ -1,6 +1,7 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AccountModalComponent } from './account-modal/account-modal.component';
+import { MatTableDataSource } from '@angular/material';
 
 
 export interface Account {
@@ -12,29 +13,47 @@ export interface Account {
   active: boolean;
 }
 
+const ACCOUNTS: Account[] = [
+  { id: 1, name: 'PersonA', credit: 3, creationDate: '21.11.2018', lastActivity: '23.11.2018', active: true },
+  { id: 2, name: 'PersonB', credit: 5, creationDate: '15.11.2018', lastActivity: '20.11.2018', active: true },
+];
+
 @Component({
   selector: 'app-account-management',
   templateUrl: './account-management.component.html',
   styleUrls: ['./account-management.component.scss']
 })
 export class AccountManagementComponent implements OnInit {
-  accounts: Account[] = [
-    { id: 1, name: 'PersonA', credit: 3, creationDate: '21.11.2018', lastActivity: '23.11.2018', active: true },
-    { id: 2, name: 'PersonB', credit: 5, creationDate: '15.11.2018', lastActivity: '20.11.2018', active: true },
-  ];
+  dataSource = new MatTableDataSource<Account>(ACCOUNTS);
+  columnsToDisplay = ['userName', 'credit', 'creationDate', 'lastActivity', 'active', 'edit', 'delete'];
 
   constructor(private injector: Injector) { }
 
   ngOnInit() {
+    console.log("ACCOUNT");
   }
 
   editAccount(account) {
+    console.log("EDIT");
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(AccountModalComponent);
     (<AccountModalComponent>modalRef.content).showEditModal(account);
-    // modalRef.content.onClose.subscribe(result => {
-    //   console.log(result);
-    // });
+    modalRef.content.onClose.subscribe(result => {
+      this.updateData(result.account, result.id);
+      // this.dataSource._updateChangeSubscription(); // gar nicht notwendig??
+    });
+  }
+
+  updateData(newAccount, id) {
+    // ACCOUNTS updaten
+    for (let account of ACCOUNTS) {
+      if (account.id === id) {
+        account.name = newAccount.name;
+        account.active = newAccount.active;
+        account.credit = newAccount.credit;
+        return;
+      }
+    }
   }
 
   createAccount() {
@@ -42,7 +61,6 @@ export class AccountManagementComponent implements OnInit {
     const modalRef = modalService.show(AccountModalComponent);
     (<AccountModalComponent>modalRef.content).showCreationModal();
     modalRef.content.onClose.subscribe(result => {
-      console.log(result);
       const data: Account = {
         id: 1,
         name: result.account.name,
@@ -51,11 +69,16 @@ export class AccountManagementComponent implements OnInit {
         lastActivity: 'heute',
         active: result.account.active,
       }
-      this.accounts.push(data);
+      ACCOUNTS.push(data);
+      this.dataSource._updateChangeSubscription();
     });
   }
 
   deleteAccount(account) {
-    this.accounts = this.accounts.filter(item => item !== account);
+    const index = ACCOUNTS.indexOf(account);
+    if (account.id > -1) {
+      ACCOUNTS.splice(index, 1);
+      this.dataSource._updateChangeSubscription();
+    }
   }
 }

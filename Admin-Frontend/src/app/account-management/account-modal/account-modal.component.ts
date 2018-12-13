@@ -59,7 +59,14 @@ export class AccountModalComponent implements OnInit {
   onSubmit() {
     if (this.accountForm.valid) {
       console.log("Valid");
-      this.toastr.success('Success', 'added account successfully!');
+      if (this.creationModal) {
+        // add account
+        this.toastr.success('Success', 'added account successfully!');
+      } else {
+        // edit account
+        this.toastr.success('Success', 'edited account successfully!');
+        this.accountForm.value.id = this.account.id;
+      }
       this.onClose.next(this.accountForm.value);
       this.bsModal.hide();
     } else {
