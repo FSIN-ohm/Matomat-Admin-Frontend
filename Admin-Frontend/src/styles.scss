@@ -41,3 +41,9 @@ body {
 
 
 @import '~ngx-toastr/toastr.css';
+@import '~material-design-icons/iconfont/material-icons.css';
+
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index: 99999 !important;
+}

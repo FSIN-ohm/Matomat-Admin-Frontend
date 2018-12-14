@@ -1,37 +1,30 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AccountModalComponent } from './account-modal/account-modal.component';
-import { MatTableDataSource } from '@angular/material';
-
-
-export interface Account {
-  id: number;
-  name: string;
-  credit: number;
-  creationDate: string;
-  lastActivity: string;
-  active: boolean;
-}
-
-const ACCOUNTS: Account[] = [
-  { id: 1, name: 'PersonA', credit: 3, creationDate: '21.11.2018', lastActivity: '23.11.2018', active: true },
-  { id: 2, name: 'PersonB', credit: 5, creationDate: '15.11.2018', lastActivity: '20.11.2018', active: true },
-];
+import { MatPaginator, MatSort } from '@angular/material';
+import { AccountManagementSource } from '../account-management/account-management-source';
+import { Account } from '../account-management/account';
+import { DeleteAccountModalComponent } from './delete-account-modal/delete-account-modal.component';
 
 @Component({
   selector: 'app-account-management',
   templateUrl: './account-management.component.html',
   styleUrls: ['./account-management.component.scss']
 })
+
 export class AccountManagementComponent implements OnInit {
-  dataSource = new MatTableDataSource<Account>(ACCOUNTS);
-  columnsToDisplay = ['userName', 'credit', 'creationDate', 'lastActivity', 'active', 'edit', 'delete'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource: AccountManagementSource;
+
+  columnsToDisplay = ['userName', 'credit', 'creationDate', 'lastActivity', 'active', 'settings'];
 
   constructor(private injector: Injector) { }
 
   ngOnInit() {
-    console.log("ACCOUNT");
+    this.dataSource = new AccountManagementSource(this.paginator, this.sort);
   }
+
 
   editAccount(account) {
     console.log("EDIT");
@@ -40,13 +33,11 @@ export class AccountManagementComponent implements OnInit {
     (<AccountModalComponent>modalRef.content).showEditModal(account);
     modalRef.content.onClose.subscribe(result => {
       this.updateData(result.account, result.id);
-      // this.dataSource._updateChangeSubscription(); // gar nicht notwendig??
     });
   }
 
   updateData(newAccount, id) {
-    // ACCOUNTS updaten
-    for (let account of ACCOUNTS) {
+    for (let account of this.dataSource.data) {
       if (account.id === id) {
         account.name = newAccount.name;
         account.active = newAccount.active;
@@ -60,6 +51,7 @@ export class AccountManagementComponent implements OnInit {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(AccountModalComponent);
     (<AccountModalComponent>modalRef.content).showCreationModal();
+    console.log(modalRef.content);
     modalRef.content.onClose.subscribe(result => {
       const data: Account = {
         id: 1,
@@ -69,16 +61,30 @@ export class AccountManagementComponent implements OnInit {
         lastActivity: 'heute',
         active: result.account.active,
       }
-      ACCOUNTS.push(data);
-      this.dataSource._updateChangeSubscription();
+      this.dataSource.data.push(data);
+      console.log(this.dataSource);
+      this.dataSource.connect(); // updaten
     });
   }
 
   deleteAccount(account) {
-    const index = ACCOUNTS.indexOf(account);
+    const index = this.dataSource.data.indexOf(account);
     if (account.id > -1) {
-      ACCOUNTS.splice(index, 1);
-      this.dataSource._updateChangeSubscription();
+      let deleteAccount;
+      const modalService: BsModalService = this.injector.get(BsModalService);
+      const modalRef = modalService.show(DeleteAccountModalComponent);
+      (<DeleteAccountModalComponent>modalRef.content).show();
+      console.log(modalRef.content);
+      modalRef.content.onClose.subscribe(result => {
+        console.log(result);
+        deleteAccount = result;
+        if (deleteAccount) {
+          this.dataSource.data.splice(index, 1);
+          this.dataSource.connect(); // updaten
+        }
+      });
+
+
     }
   }
 }
