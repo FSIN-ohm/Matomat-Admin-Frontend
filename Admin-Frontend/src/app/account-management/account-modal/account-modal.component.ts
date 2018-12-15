@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
@@ -37,7 +37,6 @@ export class AccountModalComponent implements OnInit {
   }
 
   show() {
-
   }
 
   showEditModal(account) {
@@ -61,16 +60,37 @@ export class AccountModalComponent implements OnInit {
       console.log("Valid");
       if (this.creationModal) {
         // add account
-        this.toastr.success('Success', 'added account successfully!');
+        this.toastr.success('Success', 'added account successfully!', {
+          positionClass: 'toast-top-right',
+          timeOut: 6000
+        });
       } else {
         // edit account
-        this.toastr.success('Success', 'edited account successfully!');
+        this.toastr.success('Success', 'edited account successfully!', {
+          positionClass: 'toast-top-right',
+          timeOut: 6000
+        });
         this.accountForm.value.id = this.account.id;
       }
       this.onClose.next(this.accountForm.value);
       this.bsModal.hide();
     } else {
-      console.log("Felder füllen");
+      this.findInvalidControls(this.accountForm);
+      this.toastr.error('Error', 'please fill in missing fields!', {
+        positionClass: 'toast-top-right',
+        timeOut: 6000
+      });
     }
+  }
+
+  findInvalidControls(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.findInvalidControls(control);
+      }
+    })
   }
 }

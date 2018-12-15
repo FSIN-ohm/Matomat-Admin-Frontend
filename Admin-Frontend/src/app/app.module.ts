@@ -4,8 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule, MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatCardModule, MatDialogModule, MatTableModule,
-         MatMenuModule, MatProgressSpinnerModule } from '@angular/material';
+import {
+  MatSidenavModule, MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatCardModule, MatDialogModule, MatTableModule,
+  MatMenuModule, MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatSelectModule
+} from '@angular/material';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -25,6 +27,9 @@ import { AccountModalComponent } from './account-management/account-modal/accoun
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { UserPageComponent } from './user-page/user-page.component';
+import { ProductModalComponent } from './products/product-modal/product-modal.component';
+import { DeleteAccountModalComponent } from './account-management/delete-account-modal/delete-account-modal.component';
+import { DeleteProductModalComponent } from './products/delete-product-modal/delete-product-modal.component';
 
 
 @NgModule({
@@ -40,7 +45,10 @@ import { UserPageComponent } from './user-page/user-page.component';
     TransactionsComponent,
     SalesStatisticsComponent,
     AccountModalComponent,
-    UserPageComponent
+    DeleteAccountModalComponent,
+    UserPageComponent,
+    ProductModalComponent,
+    DeleteProductModalComponent
   ],
   imports: [
     BrowserModule,
@@ -59,13 +67,13 @@ import { UserPageComponent } from './user-page/user-page.component';
     MatInputModule,
     ToastrModule.forRoot(),
     FormsModule,
-    MatCardModule, 
-    MatDialogModule, 
+    MatCardModule,
+    MatDialogModule,
     MatTableModule,
-    MatMenuModule, 
-    MatProgressSpinnerModule
+    MatMenuModule,
+    MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatSelectModule,
   ],
-  entryComponents: [AccountModalComponent],
+  entryComponents: [AccountModalComponent, DeleteAccountModalComponent, ProductModalComponent, DeleteProductModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
