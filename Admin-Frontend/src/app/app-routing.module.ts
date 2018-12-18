@@ -18,7 +18,7 @@ const internalSiteRoutes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'stock', component: InventoryListComponent},
   {path: 'login', component: LoginPageComponent},
-  {path: 'products', component: ProductsComponent},
+  {path: 'product-management', component: ProductsComponent},
   {path: 'statistics', component: SalesStatisticsComponent},
   {path: 'settings', component: SettingsComponent},
   {path: 'transactions', component: TransactionsComponent},
