@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "@material/fab": "^0.43.0",
     "angular-material": "^1.1.10",
     "core-js": "^2.6.0",
     "material-design-icons": "^3.0.1",
@@ -49,6 +50,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.1.6"
+    "typescript": "~3.1.6",
+    "webpack": "^4.28.4"
   }
 }

@@ -11,18 +11,15 @@
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
-          <mat-select placeholder="Kategorie" formControlName="category" [ngModel]="product.category">
-            <mat-option *ngFor="let category of categories" [value]="category.value">
-              {{category.viewValue}}
-            </mat-option>
-          </mat-select>
+          <input class="readonly" matInput placeholder="Bestand" formControlName="amount" [ngModel]="product.amount" readonly>
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Anzahl" formControlName="amount" [ngModel]="product.amount">
+          <input matInput placeholder="Meldebestand" formControlName="reorderLevel" [ngModel]="product.reorderLevel">
         </mat-form-field>
+
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Beschreibung" formControlName="description" [ngModel]="product.description">
+          <input matInput placeholder="Kosten" formControlName="costs" [ngModel]="product.costs">
         </mat-form-field>
       </div>
     </div>

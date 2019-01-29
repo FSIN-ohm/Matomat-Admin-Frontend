@@ -30,6 +30,8 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { ProductModalComponent } from './products/product-modal/product-modal.component';
 import { DeleteAccountModalComponent } from './account-management/delete-account-modal/delete-account-modal.component';
 import { DeleteProductModalComponent } from './products/delete-product-modal/delete-product-modal.component';
+import { OrderModalComponent } from './products/order-modal/order-modal.component';
+import { SelectProductsModalComponent } from './products/select-products-modal/select-products-modal.component';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { DeleteProductModalComponent } from './products/delete-product-modal/del
     DeleteAccountModalComponent,
     UserPageComponent,
     ProductModalComponent,
-    DeleteProductModalComponent
+    DeleteProductModalComponent,
+    OrderModalComponent,
+    SelectProductsModalComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +77,7 @@ import { DeleteProductModalComponent } from './products/delete-product-modal/del
     MatMenuModule,
     MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatSelectModule,
   ],
-  entryComponents: [AccountModalComponent, DeleteAccountModalComponent, ProductModalComponent, DeleteProductModalComponent],
+  entryComponents: [AccountModalComponent, DeleteAccountModalComponent, ProductModalComponent, DeleteProductModalComponent, OrderModalComponent, SelectProductsModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

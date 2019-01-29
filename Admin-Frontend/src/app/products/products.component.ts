@@ -7,6 +7,7 @@ import { ProductsSource } from '../products/products-source';
 import { ProductModalComponent } from './product-modal/product-modal.component';
 import { Product } from './product';
 import { DeleteProductModalComponent } from './delete-product-modal/delete-product-modal.component';
+import { OrderModalComponent } from './order-modal/order-modal.component';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +19,7 @@ export class ProductsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: ProductsSource;
 
-  columnsToDisplay = ['productName', 'category', 'amount', 'description', 'settings'];
+  columnsToDisplay = ['productName', 'amount', 'reorderLevel', 'costs', 'settings'];
 
   constructor(private injector: Injector) { }
 
@@ -47,6 +48,16 @@ export class ProductsComponent implements OnInit {
         return;
       }
     }
+  }
+
+  orderStuff() {
+    // let config = {
+    //   backdrop: false,
+    //   ignoreBackdropClick: true
+    // };
+    const modalService: BsModalService = this.injector.get(BsModalService);
+    const modalRef = modalService.show(OrderModalComponent);
+    (<OrderModalComponent>modalRef.content).show();
   }
 
   addProduct() {

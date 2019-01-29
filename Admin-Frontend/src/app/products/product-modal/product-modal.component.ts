@@ -16,11 +16,6 @@ export class ProductModalComponent implements OnInit {
   header: string;
   onClose: Subject<any>;
 
-  categories: any[] = [
-    { value: 'drinks', viewValue: 'Getränke' },
-    { value: 'snacks', viewValue: 'Snacks' },
-  ];
-
   constructor(public bsModal: BsModalRef, private formBuilder: FormBuilder, private toastr: ToastrService) {
     this.productForm = this.createFormGroup(formBuilder);
     this.onClose = new Subject();
@@ -35,8 +30,8 @@ export class ProductModalComponent implements OnInit {
       product: formBuilder.group({
         name: ['', Validators.required],
         amount: [''],
-        category: [''],
-        description: ['']
+        reorderLevel: [''],
+        costs: ['']
       })
     });
   }
@@ -62,9 +57,6 @@ export class ProductModalComponent implements OnInit {
 
   onSubmit() {
     if (this.productForm.valid) {
-      console.log(this.productForm.value.product);
-      this.findViewValueOfCategory(this.productForm.value.product.category);
-      console.log(this.productForm.value.product);
       if (this.creationModal) {
         // add product
         this.toastr.success('Erfolg', 'Produkt wurde erfolgreich hinzugefügt!', {
@@ -87,14 +79,6 @@ export class ProductModalComponent implements OnInit {
         positionClass: 'toast-top-right',
         timeOut: 6000
       });
-    }
-  }
-
-  findViewValueOfCategory(selectedValue) {
-    for (let category of this.categories) {
-      if (selectedValue === category.value) {
-        this.productForm.value.product.category = category.viewValue;
-      }
     }
   }
 

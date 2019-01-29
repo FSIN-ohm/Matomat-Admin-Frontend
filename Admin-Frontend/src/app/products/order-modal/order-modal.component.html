@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h3 class="modal-title">Bestellung</h3>
+</div>
+
+<div class="modal-body">
+  <mat-form-field class="col-md-12">
+    <mat-select placeholder="Firma auswählen">
+      <mat-option *ngFor="let company of companies" [value]="company.value">
+        {{company.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngIf="!selectedProducts" class="col-md-12">
+    <p>Bitte Produkte zum Warenkorb hinzufügen</p>
+  </div>
+  <div *ngIf="selectedProducts" class="col-md-12">
+    Tabelle
+  </div>
+
+  <button mat-fab color="primary" class="add" (click)="addProduct()">
+    <i class="material-icons md-48">add</i>
+  </button>
+
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-default" (click)="onCancel()">cancel</button>
+  <button class="btn btn-success" type="submit">save</button>
+</div>

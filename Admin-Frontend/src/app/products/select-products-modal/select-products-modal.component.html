@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h3 class="modal-title">Produkte auswählen</h3>
+</div>
+
+<div class="modal-body">
+
+  <div class="mat-elevation-z8 data-table">
+    <mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+      <ng-container matColumnDef="productName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Produktname </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Bestand </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.amount}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="reorderLevel">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Meldebestand </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.reorderLevel}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="costs">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Kosten </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.costs}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="50" [pageSizeOptions]="[25, 50, 100, 250]">
+    </mat-paginator>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-default" (click)="onCancel()">cancel</button>
+  <button class="btn btn-success" type="submit">save</button>
+</div>

@@ -1,5 +1,13 @@
+<!-- <button class="mdc-fab" aria-label="Favorite">
+  <span class="mdc-fab__icon material-icons">favorite</span>
+</button> -->
+
 <button mat-fab color="primary" class="add" (click)="addProduct()">
   <i class="material-icons md-48">add</i>
+</button>
+
+<button mat-fab color="primary" class="add" (click)="orderStuff()">
+  <i class="material-icons md-48">add_shopping_cart</i>
 </button>
 
 <div class="mat-elevation-z8 data-table">
@@ -9,19 +17,19 @@
       <mat-cell *matCellDef="let product"> {{product.name}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="category">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Kategorie </mat-header-cell>
-      <mat-cell *matCellDef="let product"> {{product.category}} </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Anzahl </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Bestand </mat-header-cell>
       <mat-cell *matCellDef="let product"> {{product.amount}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Beschreibung </mat-header-cell>
-      <mat-cell *matCellDef="let product"> {{product.description}} </mat-cell>
+    <ng-container matColumnDef="reorderLevel">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Meldebestand </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{product.reorderLevel}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="costs">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kosten </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{product.costs}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="settings">
