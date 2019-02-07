@@ -1,13 +1,10 @@
 import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { MatPaginator, MatSort } from '@angular/material';
-import { AccountManagementSource } from '../account-management/account-management-source';
-import { Account } from '../account-management/account';
 import { ProductsSource } from '../products/products-source';
 import { ProductModalComponent } from './product-modal/product-modal.component';
 import { Product } from './product';
-import { DeleteProductModalComponent } from './delete-product-modal/delete-product-modal.component';
 import { OrderModalComponent } from './order-modal/order-modal.component';
+import { DataTableComponent } from '../data-table/data-table.component';
 
 @Component({
   selector: 'app-products',
@@ -15,16 +12,14 @@ import { OrderModalComponent } from './order-modal/order-modal.component';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(DataTableComponent) table;
   dataSource: ProductsSource;
 
-  columnsToDisplay = ['productName', 'amount', 'reorderLevel', 'costs', 'settings'];
+  columnsToDisplay = ['name', 'amount', 'category', 'description'];
 
   constructor(private injector: Injector) { }
 
   ngOnInit() {
-    this.dataSource = new ProductsSource(this.paginator, this.sort);
   }
 
 
@@ -39,7 +34,7 @@ export class ProductsComponent implements OnInit {
   }
 
   updateData(newProduct, id) {
-    for (let product of this.dataSource.data) {
+    for (let product of this.table.dataSource.data) {
       if (product.id === id) {
         product.name = newProduct.name;
         product.amount = newProduct.amount;
@@ -51,13 +46,16 @@ export class ProductsComponent implements OnInit {
   }
 
   orderStuff() {
+    console.log("order");
+    // TODO: Logic
+
     // let config = {
     //   backdrop: false,
     //   ignoreBackdropClick: true
     // };
-    const modalService: BsModalService = this.injector.get(BsModalService);
-    const modalRef = modalService.show(OrderModalComponent);
-    (<OrderModalComponent>modalRef.content).show();
+    // const modalService: BsModalService = this.injector.get(BsModalService);
+    // const modalRef = modalService.show(OrderModalComponent);
+    // (<OrderModalComponent>modalRef.content).show();
   }
 
   addProduct() {
@@ -73,26 +71,18 @@ export class ProductsComponent implements OnInit {
         category: result.product.category,
         description: result.product.description
       }
-      this.dataSource.data.push(data);
-      console.log(this.dataSource);
-      this.dataSource.connect(); // updaten
+      this.table.dataSource.data.push(data);
+      this.table.dataSource.connect(); // updaten
     });
   }
 
   deleteProduct(product) {
-    const index = this.dataSource.data.indexOf(product);
-    if (product.id > -1) {
-      let deleteProduct;
-      const modalService: BsModalService = this.injector.get(BsModalService);
-      const modalRef = modalService.show(DeleteProductModalComponent);
-      (<DeleteProductModalComponent>modalRef.content).show();
-      modalRef.content.onClose.subscribe(result => {
-        deleteProduct = result;
-        if (deleteProduct) {
-          this.dataSource.data.splice(index, 1);
-          this.dataSource.connect(); // updaten
-        }
-      });
+    if (confirm("Wollen Sie dieses Produkt endgültig löschen?")) {
+      const index = this.table.dataSource.data.indexOf(product);
+      if (product.id > -1) {
+        this.table.dataSource.data.splice(index, 1);
+        this.table.dataSource.connect(); // updaten
+      }
     }
   }
 }

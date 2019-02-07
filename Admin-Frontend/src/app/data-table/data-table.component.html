@@ -1,0 +1,36 @@
+<button mat-fab color="primary" class="add" (click)="addData()">
+  <i class="material-icons md-48">add</i>
+</button>
+
+<button *ngIf="isProduct" mat-fab color="primary" class="add" (click)="orderStuff()">
+  <i class="material-icons md-48">add_shopping_cart</i>
+</button>
+
+<div class="mat-elevation-z8 data-table">
+  <mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+
+    <ng-container *ngFor="let disCol of dataColumns; let colIndex = index" matColumnDef="{{disCol}}">
+      <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
+      <mat-cell *matCellDef="let element "> {{element[disCol]}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="settings">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let data">
+        <button mat-button color="basic" (click)="editData(data)">
+          <i class="material-icons">edit</i>
+        </button>
+        <button mat-button color="warn" (click)="deleteData(data)">
+          <i class="material-icons">delete</i>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="50" [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>

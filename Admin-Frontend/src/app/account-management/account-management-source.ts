@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge, Subject } from 'rxjs';
 import { Account } from '../account-management/account';
 
+/* TODO: Get data from HTTP Request */
 const ACCOUNTS: Account[] = [
   { id: 1, name: 'PersonA', credit: 3, creationDate: '21.11.2018', lastActivity: '23.11.2018', active: true },
   { id: 2, name: 'PersonB', credit: 5, creationDate: '15.11.2018', lastActivity: '20.11.2018', active: true },
@@ -73,6 +74,7 @@ export class AccountManagementSource extends DataSource<Account> {
       return data;
     }
 
+    /* TODO: add sorting field dynamically */
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {

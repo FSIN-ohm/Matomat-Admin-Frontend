@@ -12,12 +12,9 @@ import { MainNavigationComponent } from './main-navigation/main-navigation.compo
 import { LayoutModule } from '@angular/cdk/layout';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { SettingsComponent } from './settings/settings.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountManagementComponent } from './account-management/account-management.component';
 import { ProductsComponent } from './products/products.component';
-import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { TransactionsComponent } from './transactions/transactions.component';
-import { SalesStatisticsComponent } from './sales-statistics/sales-statistics.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -26,12 +23,10 @@ import { MatInputModule } from '@angular/material/input';
 import { AccountModalComponent } from './account-management/account-modal/account-modal.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
-import { UserPageComponent } from './user-page/user-page.component';
 import { ProductModalComponent } from './products/product-modal/product-modal.component';
-import { DeleteAccountModalComponent } from './account-management/delete-account-modal/delete-account-modal.component';
-import { DeleteProductModalComponent } from './products/delete-product-modal/delete-product-modal.component';
 import { OrderModalComponent } from './products/order-modal/order-modal.component';
 import { SelectProductsModalComponent } from './products/select-products-modal/select-products-modal.component';
+import { DataTableComponent } from './data-table/data-table.component';
 
 
 @NgModule({
@@ -40,19 +35,14 @@ import { SelectProductsModalComponent } from './products/select-products-modal/s
     MainNavigationComponent,
     LoginPageComponent,
     SettingsComponent,
-    DashboardComponent,
     AccountManagementComponent,
     ProductsComponent,
-    InventoryListComponent,
     TransactionsComponent,
-    SalesStatisticsComponent,
     AccountModalComponent,
-    DeleteAccountModalComponent,
-    UserPageComponent,
     ProductModalComponent,
-    DeleteProductModalComponent,
     OrderModalComponent,
-    SelectProductsModalComponent
+    SelectProductsModalComponent,
+    DataTableComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +67,7 @@ import { SelectProductsModalComponent } from './products/select-products-modal/s
     MatMenuModule,
     MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatSelectModule,
   ],
-  entryComponents: [AccountModalComponent, DeleteAccountModalComponent, ProductModalComponent, DeleteProductModalComponent, OrderModalComponent, SelectProductsModalComponent],
+  entryComponents: [AccountModalComponent, ProductModalComponent, OrderModalComponent, SelectProductsModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -51,21 +51,21 @@ export class ProductModalComponent implements OnInit {
     this.creationModal = true;
   }
 
-  onCancel() {
+  cancel() {
     this.bsModal.hide();
   }
 
-  onSubmit() {
+  save() {
     if (this.productForm.valid) {
       if (this.creationModal) {
         // add product
-        this.toastr.success('Erfolg', 'Produkt wurde erfolgreich hinzugefügt!', {
+        this.toastr.success('Produkt wurde erfolgreich hinzugefügt!', 'Erfolg', {
           positionClass: 'toast-top-right',
           timeOut: 6000
         });
       } else {
         // edit product
-        this.toastr.success('Erfolg', 'Produkt wurde erfolgreich bearbeitet!', {
+        this.toastr.success('Produkt wurde erfolgreich bearbeitet!', 'Erfolg', {
           positionClass: 'toast-top-right',
           timeOut: 6000
         });
@@ -75,7 +75,7 @@ export class ProductModalComponent implements OnInit {
       this.bsModal.hide();
     } else {
       this.findInvalidControls(this.productForm);
-      this.toastr.error('Error', 'Bitte füllen Sie die fehlenden Felder aus!', {
+      this.toastr.error('Bitte füllen Sie die fehlenden Felder aus!', 'Error', {
         positionClass: 'toast-top-right',
         timeOut: 6000
       });

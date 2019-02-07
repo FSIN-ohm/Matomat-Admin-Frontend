@@ -1,4 +1,4 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="productForm">
   <div class="modal-header">
     <h3 class="modal-title">{{header}}</h3>
   </div>
@@ -26,7 +26,7 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-default" (click)="onCancel()">cancel</button>
-    <button class="btn btn-success" type="submit">save</button>
+    <button class="btn btn-default" (click)="cancel()">cancel</button>
+    <button class="btn btn-success" (click)="save()">save</button>
   </div>
 </form>
