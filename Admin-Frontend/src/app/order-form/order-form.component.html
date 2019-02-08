@@ -1,0 +1,21 @@
+<div *ngIf="products.length > 0">
+  <h3>Warenkorb</h3>
+  <div class="col-md-12">
+    <div *ngFor="let product of products">
+      {{ products | json}}
+      <!-- entfernen Button md-2 -->
+      
+      <!-- Produktname md-4 -->
+      <!-- <mat-form-field class="col-md-4">
+          <input matInput formControlName="reorderLevel" [ngModel]="product.reorderLevel">
+        </mat-form-field> -->
+
+      <!-- Anzahl, verstellbar (mind 1) md-3 -->
+      <!-- Preis md-3 -->
+    </div>
+    <!-- Total md-9 -->
+    <!-- Gesamtpreis md-3 -->
+
+    <!-- Button bestellen -->
+  </div>
+</div>

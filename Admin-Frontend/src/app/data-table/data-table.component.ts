@@ -45,7 +45,7 @@ export class DataTableComponent implements OnInit {
     this.add.emit();
   }
 
-  orderStuff() {
-    this.order.emit();
+  orderStuff(data) {
+    this.order.emit(data);
   }
 }

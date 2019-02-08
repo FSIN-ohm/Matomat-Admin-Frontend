@@ -1,2 +1,4 @@
-<app-data-table #table [dataColumns]="columnsToDisplay" [dataSource]="dataSource" [isProduct]="true" (edit)="editProduct($event)" (delete)="deleteProduct($event)"
-  (add)="addProduct()" (order)="orderStuff()"></app-data-table>
+<app-data-table #table [dataColumns]="columnsToDisplay" [dataSource]="dataSource" [isProduct]="true" (edit)="editProduct($event)"
+  (delete)="deleteProduct($event)" (add)="addProduct()" (order)="orderStuff($event)"></app-data-table>
+
+<app-order-form #order></app-order-form>

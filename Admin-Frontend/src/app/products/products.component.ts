@@ -5,6 +5,7 @@ import { ProductModalComponent } from './product-modal/product-modal.component';
 import { Product } from './product';
 import { OrderModalComponent } from './order-modal/order-modal.component';
 import { DataTableComponent } from '../data-table/data-table.component';
+import { OrderFormComponent } from '../order-form/order-form.component';
 
 @Component({
   selector: 'app-products',
@@ -12,10 +13,11 @@ import { DataTableComponent } from '../data-table/data-table.component';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  @ViewChild(DataTableComponent) table;
+  @ViewChild(DataTableComponent) table: DataTableComponent;
+  @ViewChild(OrderFormComponent) order: OrderFormComponent;
   dataSource: ProductsSource;
 
-  columnsToDisplay = ['name', 'amount', 'category', 'description'];
+  columnsToDisplay = ['name', 'amount', 'reorderLevel', 'costs'];
 
   constructor(private injector: Injector) { }
 
@@ -28,7 +30,6 @@ export class ProductsComponent implements OnInit {
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showEditModal(product);
     modalRef.content.onClose.subscribe(result => {
-      console.log(result);
       this.updateData(result.product, result.id);
     });
   }
@@ -38,15 +39,17 @@ export class ProductsComponent implements OnInit {
       if (product.id === id) {
         product.name = newProduct.name;
         product.amount = newProduct.amount;
-        product.category = newProduct.category;
-        product.description = newProduct.description;
+        product.reorderLevel = newProduct.reorderLevel;
+        product.costs = newProduct.costs;
         return;
       }
     }
   }
 
-  orderStuff() {
+  orderStuff(product) {
     console.log("order");
+    console.log(product);
+    this.order.addProduct(product);
     // TODO: Logic
 
     // let config = {
@@ -68,8 +71,8 @@ export class ProductsComponent implements OnInit {
         id: 1,
         name: result.product.name,
         amount: result.product.amount,
-        category: result.product.category,
-        description: result.product.description
+        reorderLevel: result.product.reorderLevel,
+        costs: result.product.costs
       }
       this.table.dataSource.data.push(data);
       this.table.dataSource.connect(); // updaten

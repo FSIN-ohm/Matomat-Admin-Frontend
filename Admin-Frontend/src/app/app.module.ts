@@ -27,6 +27,7 @@ import { ProductModalComponent } from './products/product-modal/product-modal.co
 import { OrderModalComponent } from './products/order-modal/order-modal.component';
 import { SelectProductsModalComponent } from './products/select-products-modal/select-products-modal.component';
 import { DataTableComponent } from './data-table/data-table.component';
+import { OrderFormComponent } from './order-form/order-form.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { DataTableComponent } from './data-table/data-table.component';
     ProductModalComponent,
     OrderModalComponent,
     SelectProductsModalComponent,
-    DataTableComponent
+    DataTableComponent,
+    OrderFormComponent
   ],
   imports: [
     BrowserModule,

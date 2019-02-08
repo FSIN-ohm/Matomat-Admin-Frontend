@@ -5,8 +5,8 @@ import { Observable, of as observableOf, merge, Subject } from 'rxjs';
 import { Product } from './product';
 
 const PRODUCTS: Product[] = [
-  { id: 1, name: 'Bier', amount: 3, category: 'Getränke' },
-  { id: 2, name: 'Snickers', amount: 5, category: 'Essen' },
+  { id: 1, name: 'Bier', amount: 13, reorderLevel: 5, costs: 3.5 },
+  { id: 2, name: 'Snickers', amount: 15, reorderLevel: 5, costs: 1.5 },
 ];
 
 /**
