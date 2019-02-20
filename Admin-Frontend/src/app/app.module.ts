@@ -31,6 +31,9 @@ import { ProductModalComponent } from './products/product-modal/product-modal.co
 import { DeleteAccountModalComponent } from './account-management/delete-account-modal/delete-account-modal.component';
 import { DeleteProductModalComponent } from './products/delete-product-modal/delete-product-modal.component';
 
+import { AlertComponent } from './directives';
+import { AuthGuard, AlertService, AuthenticationService, UserService } from './auth';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,8 @@ import { DeleteProductModalComponent } from './products/delete-product-modal/del
     DeleteAccountModalComponent,
     UserPageComponent,
     ProductModalComponent,
-    DeleteProductModalComponent
+    DeleteProductModalComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -72,9 +76,15 @@ import { DeleteProductModalComponent } from './products/delete-product-modal/del
     MatTableModule,
     MatMenuModule,
     MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatSelectModule,
+    HttpClientModule,
   ],
+  
   entryComponents: [AccountModalComponent, DeleteAccountModalComponent, ProductModalComponent, DeleteProductModalComponent],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
