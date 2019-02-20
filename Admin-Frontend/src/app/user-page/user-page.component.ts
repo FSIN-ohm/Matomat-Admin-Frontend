@@ -13,8 +13,8 @@ import { AlertService, UserService } from '../auth';
 
 export class UserPageComponent implements OnInit {
   registerForm: FormGroup;
-  loading: false;
-  submitted: false;
+  loading = false;
+  submitted = false;
 
   constructor(
    private formBuilder: FormBuilder,

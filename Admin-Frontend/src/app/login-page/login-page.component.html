@@ -1,46 +1,27 @@
 <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <table class="login-full-width" cellspacing="0">
-              <tr>
-                <td>
-                  <mat-form-field class="login-full-width">
-                    <input matInput placeholder="Username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                      <div *ngIf="submitted && !!f.username?.errors" class="invalid-feedback">
-                        <div *ngIf="!!f.username?.errors.required">Username is required</div>
-                      </div>
-                  </mat-form-field>
-                </td>
-              </tr>
-            </table> 
-        </div>
-        <div class="form-group">
-          <table class="login-full-width" cellspacing="0">
-            <tr>
-              <td>
-                <mat-form-field class="login-full-width">
-                  <input matInput placeholder="Password" type="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                    <div *ngIf="submitted && !!!f.password?.errors" class="invalid-feedback">
-                      <div *ngIf="!!f.password?.errors.required">Password is required</div>
-                    </div>
-                </mat-form-field>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </form>
-    </mat-card-content>
-    <div class="form-group">
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="loginForm">
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Username" formControlName="username" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Password" formControlName="password" type="password" />
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+  <div>
     <mat-card-actions>
-        <button mat-raised-button [disabled]="loading" class= "btn btn-primary">Login</button>
-        <button mat-raised-button><a [routerLink]="['/user']" class="btn btn-link">Register</a></button>
+      <button mat-raised-button (click)="onSubmit()" class="btn btn-primary">Login</button>
     </mat-card-actions>
   </div>
-  </mat-card>
+</mat-card>
 
 
 

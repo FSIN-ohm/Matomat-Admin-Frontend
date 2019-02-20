@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AlertService, AuthenticationService } from '../auth';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-page',
@@ -18,6 +19,7 @@ export class LoginPageComponent implements OnInit {
   returnUrl: string;
 
   constructor(
+    private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -41,6 +43,10 @@ export class LoginPageComponent implements OnInit {
     this.submitted = true;
 
     if(this.loginForm.invalid){
+       this.toastr.error('Der Benutzername und das Passwort stimmen nicht überein.', 'Error!', {
+        positionClass: 'toast-top-right',
+        timeOut: 6000
+      });
       return;
     }
 
