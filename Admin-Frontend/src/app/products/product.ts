@@ -4,4 +4,5 @@ export interface Product {
     amount: number;
     reorderLevel: number;
     costs: number;
+    img: string;
 }

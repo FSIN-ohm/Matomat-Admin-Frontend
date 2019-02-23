@@ -3,7 +3,6 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { ProductsSource } from '../products/products-source';
 import { ProductModalComponent } from './product-modal/product-modal.component';
 import { Product } from './product';
-import { OrderModalComponent } from './order-modal/order-modal.component';
 import { DataTableComponent } from '../data-table/data-table.component';
 import { OrderFormComponent } from '../order-form/order-form.component';
 
@@ -51,14 +50,11 @@ export class ProductsComponent implements OnInit {
     console.log(product);
     this.order.addProduct(product);
     // TODO: Logic
+    /*
+      Funktion: Prüft ob Produkt bereits im Warenkorb, wenn nicht, hinzufügen, wenn schon, dann Anzahl erhöhen
+      Design: Img, Name, +/- Button mit Anzahl in Mitte, Mülleimer, Preis; Unten dick Gesamtsumme, zur Kasse gehen
 
-    // let config = {
-    //   backdrop: false,
-    //   ignoreBackdropClick: true
-    // };
-    // const modalService: BsModalService = this.injector.get(BsModalService);
-    // const modalRef = modalService.show(OrderModalComponent);
-    // (<OrderModalComponent>modalRef.content).show();
+    */
   }
 
   addProduct() {
@@ -72,7 +68,8 @@ export class ProductsComponent implements OnInit {
         name: result.product.name,
         amount: result.product.amount,
         reorderLevel: result.product.reorderLevel,
-        costs: result.product.costs
+        costs: result.product.costs,
+        img: 'https://www.freeiconspng.com/uploads/no-image-icon-15.png'
       }
       this.table.dataSource.data.push(data);
       this.table.dataSource.connect(); // updaten

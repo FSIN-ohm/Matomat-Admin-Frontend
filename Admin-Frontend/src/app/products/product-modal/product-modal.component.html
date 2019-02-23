@@ -6,20 +6,22 @@
   <div class="modal-body">
     <div formGroupName="product">
       <div class="fields-container">
+        <input type="file" (change)="changeImage($event)" formControlName="img">
+
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Produktname" formControlName="name" [ngModel]="product.name">
+          <input matInput placeholder="Produktname" formControlName="name">
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
-          <input class="readonly" matInput placeholder="Bestand" formControlName="amount" [ngModel]="product.amount" readonly>
+          <input class="readonly" matInput placeholder="Bestand" formControlName="amount" readonly>
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Meldebestand" formControlName="reorderLevel" [ngModel]="product.reorderLevel">
+          <input matInput placeholder="Meldebestand" formControlName="reorderLevel">
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Kosten" formControlName="costs" [ngModel]="product.costs">
+          <input matInput placeholder="Kosten" formControlName="costs">
         </mat-form-field>
       </div>
     </div>

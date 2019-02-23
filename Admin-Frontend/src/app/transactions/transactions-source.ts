@@ -2,11 +2,11 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge, Subject } from 'rxjs';
-import { Product } from './product';
+import { Transaction } from './transaction';
 
-const PRODUCTS: Product[] = [
-  { id: 1, name: 'Bier', amount: 13, reorderLevel: 5, costs: 3.5, img: 'https://www.clubmate.de/tl_files/content/images/products/club_mate_33.png' },
-  { id: 2, name: 'Snickers', amount: 15, reorderLevel: 5, costs: 1.5, img: 'https://banner2.kisspng.com/20180805/zx/-5b73b01cb89112.4053589215343083807569710.jpg' },
+const TRANSACTIONS: Transaction[] = [
+  { id: 1, name: 'Bier', amount: 2, date: '12.02.1993' },
+  { id: 2, name: 'Snickers', amount: 1, date: '16.02.1993' },
 ];
 
 /**
@@ -14,8 +14,8 @@ const PRODUCTS: Product[] = [
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class ProductsSource extends DataSource<Product> {
-  data: Product[] = PRODUCTS;
+export class TransactionSource extends DataSource<Transaction> {
+  data: Transaction[] = TRANSACTIONS;
   recordChange$ = new Subject();
 
   constructor(private paginator: MatPaginator, private sort: MatSort) {
@@ -27,7 +27,7 @@ export class ProductsSource extends DataSource<Product> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<Product[]> {
+  connect(): Observable<Transaction[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
 
@@ -59,7 +59,7 @@ export class ProductsSource extends DataSource<Product> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: Product[]) {
+  private getPagedData(data: Transaction[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -68,7 +68,7 @@ export class ProductsSource extends DataSource<Product> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: Product[]) {
+  private getSortedData(data: Transaction[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }

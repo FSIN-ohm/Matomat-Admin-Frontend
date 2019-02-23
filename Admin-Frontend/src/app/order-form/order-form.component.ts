@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-form.component.scss']
 })
 export class OrderFormComponent implements OnInit {
-  // TODO: Input id, name, costs, amountGewünscht
+  // TODO: Input id, name, costs
   products: any[] = [];
   constructor() { }
 
@@ -18,10 +18,9 @@ export class OrderFormComponent implements OnInit {
       id: product.id,
       name: product.name,
       costs: product.costs,
-      count: product.amount // TODO: nicht amount, sondern count als Output von Modal
+      count: 1
     }
     this.products.push(data);
     console.log(this.products);
   }
-
 }

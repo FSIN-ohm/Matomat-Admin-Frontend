@@ -29,12 +29,23 @@ export class AccountModalComponent implements OnInit {
   createFormGroup(formBuilder: FormBuilder) {
     return formBuilder.group({
       account: formBuilder.group({
+        role: ['Admin'],
         name: ['', Validators.required],
         credit: [''],
         active: ['']
       })
     });
   }
+
+
+  initWithData(account) {
+    this.accountForm.controls.account.patchValue({
+      name: account.name,
+      credit: account.credit,
+      active: account.active,
+    });
+  }
+
 
   show() {
   }
@@ -43,6 +54,7 @@ export class AccountModalComponent implements OnInit {
     this.header = 'Account bearbeiten';
     if (account != null) {
       this.account = account;
+      this.initWithData(account);
     }
   }
 

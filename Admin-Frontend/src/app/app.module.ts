@@ -24,10 +24,10 @@ import { AccountModalComponent } from './account-management/account-modal/accoun
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { ProductModalComponent } from './products/product-modal/product-modal.component';
-import { OrderModalComponent } from './products/order-modal/order-modal.component';
-import { SelectProductsModalComponent } from './products/select-products-modal/select-products-modal.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { OrderFormComponent } from './order-form/order-form.component';
+import { HttpClientModule } from '@angular/common/http'
+
 
 
 @NgModule({
@@ -41,14 +41,13 @@ import { OrderFormComponent } from './order-form/order-form.component';
     TransactionsComponent,
     AccountModalComponent,
     ProductModalComponent,
-    OrderModalComponent,
-    SelectProductsModalComponent,
     DataTableComponent,
     OrderFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     LayoutModule,
@@ -69,7 +68,7 @@ import { OrderFormComponent } from './order-form/order-form.component';
     MatMenuModule,
     MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatSelectModule,
   ],
-  entryComponents: [AccountModalComponent, ProductModalComponent, OrderModalComponent, SelectProductsModalComponent],
+  entryComponents: [AccountModalComponent, ProductModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

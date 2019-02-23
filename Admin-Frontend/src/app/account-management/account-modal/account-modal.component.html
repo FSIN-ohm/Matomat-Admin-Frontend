@@ -6,14 +6,17 @@
   <div class="modal-body">
     <div formGroupName="account">
       <div class="fields-container">
-        <mat-form-field class="col-md-12">
-          <input matInput placeholder="Name" formControlName="name" [ngModel]="account.name">
+        <mat-form-field *ngIf="creationModal" class="col-md-12">
+          <input matInput placeholder="Rolle" formControlName="role" readonly>
         </mat-form-field>
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Credit" formControlName="credit" [ngModel]="account.credit">
+          <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Active" formControlName="active" [ngModel]="account.active">
+          <input matInput placeholder="Credit" formControlName="credit">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Active" formControlName="active">
         </mat-form-field>
       </div>
     </div>

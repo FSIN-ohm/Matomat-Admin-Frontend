@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angu
 import { MatPaginator, MatSort } from '@angular/material';
 import { AccountManagementSource } from '../account-management/account-management-source';
 import { ProductsSource } from '../products/products-source';
+import { TransactionSource } from '../transactions/transactions-source';
 
 @Component({
   selector: 'app-data-table',
@@ -13,8 +14,10 @@ export class DataTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   @Input() dataColumns: any[] = [];
-  @Input() isProduct: boolean;
-  @Input() dataSource;
+  @Input() enableOrder: boolean;
+  @Input() dataSource: any;
+  @Input() showImage: any;
+  @Input() readonly: boolean;
   @Output() edit = new EventEmitter();
   @Output() delete = new EventEmitter();
   @Output() add = new EventEmitter();
@@ -25,11 +28,18 @@ export class DataTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.columnsToDisplay = this.dataColumns.concat(['settings']);
-    if (this.isProduct) {
+    // this.columnsToDisplay = this.columnsToDisplay.concat(['image']).concat(this.dataColumns.concat(['settings']));
+
+    // TODO: dynamische Data Source
+    if (this.enableOrder) {
       this.dataSource = new ProductsSource(this.paginator, this.sort);
+      this.columnsToDisplay = this.columnsToDisplay.concat(['image']).concat(this.dataColumns.concat(['settings']));
+    } else if (this.readonly) {
+      this.dataSource = new TransactionSource(this.paginator, this.sort);
+      this.columnsToDisplay = this.dataColumns;
     } else {
       this.dataSource = new AccountManagementSource(this.paginator, this.sort);
+      this.columnsToDisplay = this.columnsToDisplay.concat(this.dataColumns.concat(['settings']));
     }
   }
 
