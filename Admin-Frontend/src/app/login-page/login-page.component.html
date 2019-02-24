@@ -6,12 +6,12 @@
     <form [formGroup]="loginForm">
       <div>
         <mat-form-field>
-          <input matInput placeholder="Username" formControlName="username" />
+          <input matInput placeholder="Username" formControlName="username" required/>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
-          <input matInput placeholder="Password" formControlName="password" type="password" />
+          <input matInput placeholder="Password" formControlName="password" type="password" required/>
         </mat-form-field>
       </div>
     </form>
@@ -22,32 +22,3 @@
     </mat-card-actions>
   </div>
 </mat-card>
-
-
-
-<!-- <mat-card class="login-card">
-  <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form class="login-form">
-      <table class="login-full-width" cellspacing="0">
-        <tr>
-          <td>
-            <mat-form-field class="login-full-width">
-            <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-        <td><mat-form-field class="login-full-width">
-          <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
-        </mat-form-field></td>
-      </tr></table>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="login()">Login</button>
-    <button mat-raised-button><a [routerLink]="['/user']">Register</a></button>
-  </mat-card-actions>
-</mat-card> -->

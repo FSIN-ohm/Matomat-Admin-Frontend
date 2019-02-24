@@ -26,13 +26,11 @@ import { MatInputModule } from '@angular/material/input';
 import { AccountModalComponent } from './account-management/account-modal/account-modal.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
-import { UserPageComponent } from './user-page/user-page.component';
 import { ProductModalComponent } from './products/product-modal/product-modal.component';
 import { DeleteAccountModalComponent } from './account-management/delete-account-modal/delete-account-modal.component';
 import { DeleteProductModalComponent } from './products/delete-product-modal/delete-product-modal.component';
 
-import { AlertComponent } from './directives';
-import { AuthGuard, AlertService, AuthenticationService, UserService } from './auth';
+import { AuthGuard, AuthenticationService, UserService } from './auth';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
@@ -49,10 +47,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     SalesStatisticsComponent,
     AccountModalComponent,
     DeleteAccountModalComponent,
-    UserPageComponent,
     ProductModalComponent,
     DeleteProductModalComponent,
-    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +78,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
   entryComponents: [AccountModalComponent, DeleteAccountModalComponent, ProductModalComponent, DeleteProductModalComponent],
   providers: [
     AuthGuard,
-    AlertService,
     AuthenticationService,
     UserService],
   bootstrap: [AppComponent]

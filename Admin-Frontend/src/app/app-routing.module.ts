@@ -9,7 +9,6 @@ import { ProductsComponent} from './products/products.component';
 import { SalesStatisticsComponent} from './sales-statistics/sales-statistics.component';
 import { SettingsComponent} from './settings/settings.component';
 import { TransactionsComponent} from './transactions/transactions.component';
-import { UserPageComponent } from './user-page/user-page.component';
 
 // internalSiteRoutes declares all Routes that can be visited on our Project-page:
 // NOTE: internalSiteRoutes must be inserted top to bottom and from most specific to least specific.
@@ -22,7 +21,6 @@ const internalSiteRoutes: Routes = [
   {path: 'statistics', component: SalesStatisticsComponent},
   {path: 'settings', component: SettingsComponent},
   {path: 'transactions', component: TransactionsComponent},
-  {path: 'user', component: UserPageComponent },
   {path : '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
-import {MatDialog} from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
 import {FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
 
-import { AlertService, AuthenticationService } from '../auth';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../auth';
 
 @Component({
   selector: 'app-login-page',
@@ -23,8 +21,7 @@ export class LoginPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private alertService: AlertService) { }
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -37,29 +34,24 @@ export class LoginPageComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  get f() {return this.loginForm.controls;}
-
   onSubmit() {
     this.submitted = true;
-
-    if(this.loginForm.invalid){
-       this.toastr.error('Der Benutzername und das Passwort stimmen nicht überein.', 'Error!', {
-        positionClass: 'toast-top-right',
-        timeOut: 6000
-      });
-      return;
-    }
-
-    this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.alertService.error(error);
-          this.loading = false;
+    if(this.authenticationService.login(this.loginForm.value)){
+      if(this.loginForm.valid) {
+          this.toastr.success('Du bist erfolgreich eingeloggt.', 'Erfolg!', {
+          positionClass: 'toast-top-right',
+          timeOut: 6000
         });
+        this.router.navigate(["product-management"]);
+        return;
+      }
+    } 
+    if(this.loginForm.invalid){
+    this.toastr.error('Der Benutzername und das Passwort stimmen nicht überein.', 'Error!', {
+      positionClass: 'toast-top-right',
+      timeOut: 6000
+    });
+    return;
+    }
   }
 }

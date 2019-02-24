@@ -6,8 +6,8 @@ import { map } from 'rxjs/operators';
 export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`/users/authenticate`, { username: username, password: password })
+    login(user) {
+        return this.http.post<any>(`/users/authenticate`, { username: user.username, password: user.password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
