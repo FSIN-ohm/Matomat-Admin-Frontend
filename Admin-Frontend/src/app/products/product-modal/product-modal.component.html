@@ -1,4 +1,4 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="productForm">
   <div class="modal-header">
     <h3 class="modal-title">{{header}}</h3>
   </div>
@@ -6,30 +6,29 @@
   <div class="modal-body">
     <div formGroupName="product">
       <div class="fields-container">
+        <input type="file" (change)="changeImage($event)" formControlName="img">
+
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Produktname" formControlName="name" [ngModel]="product.name">
+          <input matInput placeholder="Produktname" formControlName="name">
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
-          <mat-select placeholder="Kategorie" formControlName="category" [ngModel]="product.category">
-            <mat-option *ngFor="let category of categories" [value]="category.value">
-              {{category.viewValue}}
-            </mat-option>
-          </mat-select>
+          <input class="readonly" matInput placeholder="Bestand" formControlName="amount" readonly>
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Anzahl" formControlName="amount" [ngModel]="product.amount">
+          <input matInput placeholder="Meldebestand" formControlName="reorderLevel">
         </mat-form-field>
+
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Beschreibung" formControlName="description" [ngModel]="product.description">
+          <input matInput placeholder="Kosten" formControlName="costs">
         </mat-form-field>
       </div>
     </div>
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-default" (click)="onCancel()">cancel</button>
-    <button class="btn btn-success" type="submit">save</button>
+    <button class="btn btn-default" (click)="cancel()">cancel</button>
+    <button class="btn btn-success" (click)="save()">save</button>
   </div>
 </form>

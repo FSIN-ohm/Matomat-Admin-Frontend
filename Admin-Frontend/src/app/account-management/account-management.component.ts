@@ -1,10 +1,9 @@
 import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AccountModalComponent } from './account-modal/account-modal.component';
-import { MatPaginator, MatSort } from '@angular/material';
 import { AccountManagementSource } from '../account-management/account-management-source';
 import { Account } from '../account-management/account';
-import { DeleteAccountModalComponent } from './delete-account-modal/delete-account-modal.component';
+import { DataTableComponent } from '../data-table/data-table.component';
 
 @Component({
   selector: 'app-account-management',
@@ -13,21 +12,17 @@ import { DeleteAccountModalComponent } from './delete-account-modal/delete-accou
 })
 
 export class AccountManagementComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(DataTableComponent) table;
   dataSource: AccountManagementSource;
 
-  columnsToDisplay = ['userName', 'credit', 'creationDate', 'lastActivity', 'active', 'settings'];
+  columnsToDisplay = ['name', 'credit', 'creationDate', 'lastActivity', 'active'];
 
   constructor(private injector: Injector) { }
 
   ngOnInit() {
-    this.dataSource = new AccountManagementSource(this.paginator, this.sort);
   }
 
-
   editAccount(account) {
-    console.log("EDIT");
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(AccountModalComponent);
     (<AccountModalComponent>modalRef.content).showEditModal(account);
@@ -37,7 +32,7 @@ export class AccountManagementComponent implements OnInit {
   }
 
   updateData(newAccount, id) {
-    for (let account of this.dataSource.data) {
+    for (let account of this.table.dataSource.data) {
       if (account.id === id) {
         account.name = newAccount.name;
         account.active = newAccount.active;
@@ -51,7 +46,6 @@ export class AccountManagementComponent implements OnInit {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(AccountModalComponent);
     (<AccountModalComponent>modalRef.content).showCreationModal();
-    console.log(modalRef.content);
     modalRef.content.onClose.subscribe(result => {
       const data: Account = {
         id: 1,
@@ -61,30 +55,18 @@ export class AccountManagementComponent implements OnInit {
         lastActivity: 'heute',
         active: result.account.active,
       }
-      this.dataSource.data.push(data);
-      console.log(this.dataSource);
-      this.dataSource.connect(); // updaten
+      this.table.dataSource.data.push(data);
+      this.table.dataSource.connect(); // updaten
     });
   }
 
   deleteAccount(account) {
-    const index = this.dataSource.data.indexOf(account);
-    if (account.id > -1) {
-      let deleteAccount;
-      const modalService: BsModalService = this.injector.get(BsModalService);
-      const modalRef = modalService.show(DeleteAccountModalComponent);
-      (<DeleteAccountModalComponent>modalRef.content).show();
-      console.log(modalRef.content);
-      modalRef.content.onClose.subscribe(result => {
-        console.log(result);
-        deleteAccount = result;
-        if (deleteAccount) {
-          this.dataSource.data.splice(index, 1);
-          this.dataSource.connect(); // updaten
-        }
-      });
-
-
+    if (confirm("Wollen Sie diesen Account endgültig löschen?")) {
+      const index = this.table.dataSource.data.indexOf(account);
+      if (account.id > -1) {
+        this.table.dataSource.data.splice(index, 1);
+        this.table.dataSource.connect(); // updaten
+      }
     }
   }
 }

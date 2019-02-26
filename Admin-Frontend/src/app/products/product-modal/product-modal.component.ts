@@ -3,25 +3,29 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { DataService } from 'src/app/data.service';
+
+class ImageSnippet {
+  constructor(public src: string, public file: File) { }
+}
 
 @Component({
   selector: 'app-product-modal',
   templateUrl: './product-modal.component.html',
-  styleUrls: ['./product-modal.component.scss']
+  styleUrls: ['./product-modal.component.scss'],
+  providers: [DataService]
 })
 export class ProductModalComponent implements OnInit {
+  selectedFile: ImageSnippet;
+
   product: any;
   productForm: FormGroup;
   creationModal: boolean = false;
   header: string;
   onClose: Subject<any>;
 
-  categories: any[] = [
-    { value: 'drinks', viewValue: 'Getränke' },
-    { value: 'snacks', viewValue: 'Snacks' },
-  ];
-
-  constructor(public bsModal: BsModalRef, private formBuilder: FormBuilder, private toastr: ToastrService) {
+  constructor(public bsModal: BsModalRef, private formBuilder: FormBuilder, private toastr: ToastrService, private dataService: DataService) {
+    console.log("CONSTRUCTOR");
     this.productForm = this.createFormGroup(formBuilder);
     this.onClose = new Subject();
   }
@@ -35,9 +39,41 @@ export class ProductModalComponent implements OnInit {
       product: formBuilder.group({
         name: ['', Validators.required],
         amount: [''],
-        category: [''],
-        description: ['']
+        reorderLevel: [''],
+        costs: [''],
+        img: ['']
       })
+    });
+  }
+
+  changeImage(imageInput) {
+    console.log(imageInput);
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      this.dataService.uploadImage(this.selectedFile.file).subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          console.log(err);
+        })
+    });
+
+    reader.readAsDataURL(file);
+  }
+
+  initWithData(product) {
+    this.productForm.controls.product.patchValue({
+      name: product.name,
+      amount: product.amount,
+      reorderLevel: product.reorderLevel,
+      costs: product.costs,
+      // img: product.img,
     });
   }
 
@@ -48,6 +84,7 @@ export class ProductModalComponent implements OnInit {
     this.header = "Produkt bearbeiten";
     if (product != null) {
       this.product = product;
+      this.initWithData(product);
     }
   }
 
@@ -56,24 +93,21 @@ export class ProductModalComponent implements OnInit {
     this.creationModal = true;
   }
 
-  onCancel() {
+  cancel() {
     this.bsModal.hide();
   }
 
-  onSubmit() {
+  save() {
     if (this.productForm.valid) {
-      console.log(this.productForm.value.product);
-      this.findViewValueOfCategory(this.productForm.value.product.category);
-      console.log(this.productForm.value.product);
       if (this.creationModal) {
         // add product
-        this.toastr.success('Erfolg', 'Produkt wurde erfolgreich hinzugefügt!', {
+        this.toastr.success('Produkt wurde erfolgreich hinzugefügt!', 'Erfolg', {
           positionClass: 'toast-top-right',
           timeOut: 6000
         });
       } else {
         // edit product
-        this.toastr.success('Erfolg', 'Produkt wurde erfolgreich bearbeitet!', {
+        this.toastr.success('Produkt wurde erfolgreich bearbeitet!', 'Erfolg', {
           positionClass: 'toast-top-right',
           timeOut: 6000
         });
@@ -83,18 +117,10 @@ export class ProductModalComponent implements OnInit {
       this.bsModal.hide();
     } else {
       this.findInvalidControls(this.productForm);
-      this.toastr.error('Error', 'Bitte füllen Sie die fehlenden Felder aus!', {
+      this.toastr.error('Bitte füllen Sie die fehlenden Felder aus!', 'Error', {
         positionClass: 'toast-top-right',
         timeOut: 6000
       });
-    }
-  }
-
-  findViewValueOfCategory(selectedValue) {
-    for (let category of this.categories) {
-      if (selectedValue === category.value) {
-        this.productForm.value.product.category = category.viewValue;
-      }
     }
   }
 

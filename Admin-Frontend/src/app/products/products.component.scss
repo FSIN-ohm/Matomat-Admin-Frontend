@@ -6,11 +6,21 @@
     box-shadow: none;
   }
 
-  data-table {
-    margin: 20px auto;
+  .order {
+    padding: 10px;
   }
 
   .add {
     margin-top: 10px;
     margin-left: 10px;
   }
+
+  // @media (min-width: 800px) {
+  //   .table {
+  //     max-width: 60%;
+  //     float: left;
+  //   }
+  //   .order {
+  //     max-width: 40%;
+  //   }
+  // }
