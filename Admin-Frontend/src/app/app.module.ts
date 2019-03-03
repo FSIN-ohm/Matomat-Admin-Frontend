@@ -29,6 +29,8 @@ import { OrderFormComponent } from './order-form/order-form.component';
 import { HttpClientModule } from '@angular/common/http'
 
 
+import { AuthGuard, AuthenticationService, UserService } from './auth';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -67,9 +69,13 @@ import { HttpClientModule } from '@angular/common/http'
     MatTableModule,
     MatMenuModule,
     MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatSelectModule,
+    HttpClientModule,
   ],
   entryComponents: [AccountModalComponent, ProductModalComponent],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthenticationService,
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
