@@ -29,6 +29,7 @@ export class AccountModalComponent implements OnInit {
   createFormGroup(formBuilder: FormBuilder) {
     return formBuilder.group({
       account: formBuilder.group({
+        role: ['Admin'],
         name: ['', Validators.required],
         credit: [''],
         active: ['']
@@ -36,37 +37,48 @@ export class AccountModalComponent implements OnInit {
     });
   }
 
+
+  initWithData(account) {
+    this.accountForm.controls.account.patchValue({
+      name: account.name,
+      credit: account.credit,
+      active: account.active,
+    });
+  }
+
+
   show() {
   }
 
   showEditModal(account) {
-    this.header = "Edit Account";
+    this.header = 'Account bearbeiten';
     if (account != null) {
       this.account = account;
+      this.initWithData(account);
     }
   }
 
   showCreationModal() {
-    this.header = "Create Account";
+    this.header = 'Account erstellen';
     this.creationModal = true;
   }
 
-  onCancel() {
+  cancel() {
     this.bsModal.hide();
   }
 
-  onSubmit() {
+  submit() {
     if (this.accountForm.valid) {
       console.log("Valid");
       if (this.creationModal) {
         // add account
-        this.toastr.success('Success', 'added account successfully!', {
+        this.toastr.success('Account wurde erfolgreich erstellt!', 'Erfolg', {
           positionClass: 'toast-top-right',
           timeOut: 6000
         });
       } else {
         // edit account
-        this.toastr.success('Success', 'edited account successfully!', {
+        this.toastr.success('Account wurde erfolgreich bearbeitet!', 'Erfolg', {
           positionClass: 'toast-top-right',
           timeOut: 6000
         });
@@ -76,7 +88,7 @@ export class AccountModalComponent implements OnInit {
       this.bsModal.hide();
     } else {
       this.findInvalidControls(this.accountForm);
-      this.toastr.error('Error', 'please fill in missing fields!', {
+      this.toastr.error('Bitte befülle die erforderlichen Felder!', 'Error', {
         positionClass: 'toast-top-right',
         timeOut: 6000
       });

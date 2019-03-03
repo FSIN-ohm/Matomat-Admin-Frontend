@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DeleteAccountModalComponent } from './delete-account-modal.component';
 
+import { OrderFormComponent } from './order-form.component';
 
-describe('DeleteAccountModalComponent', () => {
-  let component: DeleteAccountModalComponent;
-  let fixture: ComponentFixture<DeleteAccountModalComponent>;
+describe('OrderFormComponent', () => {
+  let component: OrderFormComponent;
+  let fixture: ComponentFixture<OrderFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteAccountModalComponent ]
+      declarations: [ OrderFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteAccountModalComponent);
+    fixture = TestBed.createComponent(OrderFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,12 +1,10 @@
 import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { MatPaginator, MatSort } from '@angular/material';
-import { AccountManagementSource } from '../account-management/account-management-source';
-import { Account } from '../account-management/account';
 import { ProductsSource } from '../products/products-source';
 import { ProductModalComponent } from './product-modal/product-modal.component';
 import { Product } from './product';
-import { DeleteProductModalComponent } from './delete-product-modal/delete-product-modal.component';
+import { DataTableComponent } from '../data-table/data-table.component';
+import { OrderFormComponent } from '../order-form/order-form.component';
 
 @Component({
   selector: 'app-products',
@@ -14,16 +12,15 @@ import { DeleteProductModalComponent } from './delete-product-modal/delete-produ
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(DataTableComponent) table: DataTableComponent;
+  @ViewChild(OrderFormComponent) order: OrderFormComponent;
   dataSource: ProductsSource;
 
-  columnsToDisplay = ['productName', 'category', 'amount', 'description', 'settings'];
+  columnsToDisplay = ['name', 'amount', 'reorderLevel', 'costs'];
 
   constructor(private injector: Injector) { }
 
   ngOnInit() {
-    this.dataSource = new ProductsSource(this.paginator, this.sort);
   }
 
 
@@ -32,21 +29,32 @@ export class ProductsComponent implements OnInit {
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showEditModal(product);
     modalRef.content.onClose.subscribe(result => {
-      console.log(result);
       this.updateData(result.product, result.id);
     });
   }
 
   updateData(newProduct, id) {
-    for (let product of this.dataSource.data) {
+    for (let product of this.table.dataSource.data) {
       if (product.id === id) {
         product.name = newProduct.name;
         product.amount = newProduct.amount;
-        product.category = newProduct.category;
-        product.description = newProduct.description;
+        product.reorderLevel = newProduct.reorderLevel;
+        product.costs = newProduct.costs;
         return;
       }
     }
+  }
+
+  orderStuff(product) {
+    console.log("order");
+    console.log(product);
+    this.order.addProduct(product);
+    // TODO: Logic
+    /*
+      Funktion: Prüft ob Produkt bereits im Warenkorb, wenn nicht, hinzufügen, wenn schon, dann Anzahl erhöhen
+      Design: Img, Name, +/- Button mit Anzahl in Mitte, Mülleimer, Preis; Unten dick Gesamtsumme, zur Kasse gehen
+
+    */
   }
 
   addProduct() {
@@ -59,29 +67,22 @@ export class ProductsComponent implements OnInit {
         id: 1,
         name: result.product.name,
         amount: result.product.amount,
-        category: result.product.category,
-        description: result.product.description
+        reorderLevel: result.product.reorderLevel,
+        costs: result.product.costs,
+        img: 'https://www.freeiconspng.com/uploads/no-image-icon-15.png'
       }
-      this.dataSource.data.push(data);
-      console.log(this.dataSource);
-      this.dataSource.connect(); // updaten
+      this.table.dataSource.data.push(data);
+      this.table.dataSource.connect(); // updaten
     });
   }
 
   deleteProduct(product) {
-    const index = this.dataSource.data.indexOf(product);
-    if (product.id > -1) {
-      let deleteProduct;
-      const modalService: BsModalService = this.injector.get(BsModalService);
-      const modalRef = modalService.show(DeleteProductModalComponent);
-      (<DeleteProductModalComponent>modalRef.content).show();
-      modalRef.content.onClose.subscribe(result => {
-        deleteProduct = result;
-        if (deleteProduct) {
-          this.dataSource.data.splice(index, 1);
-          this.dataSource.connect(); // updaten
-        }
-      });
+    if (confirm("Wollen Sie dieses Produkt endgültig löschen?")) {
+      const index = this.table.dataSource.data.indexOf(product);
+      if (product.id > -1) {
+        this.table.dataSource.data.splice(index, 1);
+        this.table.dataSource.connect(); // updaten
+      }
     }
   }
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteProductModalComponent } from './delete-product-modal.component';
+import { DataTableComponent } from './data-table.component';
 
-describe('DeleteProductModalComponent', () => {
-  let component: DeleteProductModalComponent;
-  let fixture: ComponentFixture<DeleteProductModalComponent>;
+describe('DataTableComponent', () => {
+  let component: DataTableComponent;
+  let fixture: ComponentFixture<DataTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteProductModalComponent ]
+      declarations: [ DataTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteProductModalComponent);
+    fixture = TestBed.createComponent(DataTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
