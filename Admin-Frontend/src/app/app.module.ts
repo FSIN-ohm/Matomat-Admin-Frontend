@@ -20,16 +20,18 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
+
 import { AccountModalComponent } from './account-management/account-modal/account-modal.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { ProductModalComponent } from './products/product-modal/product-modal.component';
 import { DataTableComponent } from './data-table/data-table.component';
-import { OrderFormComponent } from './order-form/order-form.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 
 import { AuthGuard, AuthenticationService, UserService } from './auth';
+import { OrderModalComponent } from './products/order-modal/order-modal.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { AuthGuard, AuthenticationService, UserService } from './auth';
     AccountModalComponent,
     ProductModalComponent,
     DataTableComponent,
-    OrderFormComponent
+    OrderModalComponent
   ],
   imports: [
     BrowserModule,
@@ -67,10 +69,11 @@ import { AuthGuard, AuthenticationService, UserService } from './auth';
     MatDialogModule,
     MatTableModule,
     MatMenuModule,
+    MatRadioModule,
     MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatSelectModule,
     HttpClientModule,
   ],
-  entryComponents: [AccountModalComponent, ProductModalComponent],
+  entryComponents: [AccountModalComponent, ProductModalComponent, OrderModalComponent],
   providers: [
     AuthGuard,
     AuthenticationService,

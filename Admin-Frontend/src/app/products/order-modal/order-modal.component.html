@@ -1,0 +1,30 @@
+<form [formGroup]="orderForm">
+  <div class="modal-header">
+    <h3 class="modal-title">{{product.name}} "bestellen"</h3>
+  </div>
+
+  <div class="modal-body">
+    <div formGroupName="order">
+      <div class="fields-container">
+
+        <mat-radio-group class="radio-group col-md-12" (change)="changedSelection($event)">
+          <mat-radio-button checked="true" value="buy">Einkaufen</mat-radio-button>
+          <mat-radio-button value="sell">Verkaufen</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field class="col-md-6">
+          <input type="number" matInput placeholder="Menge" formControlName="amount">
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+          <input matInput placeholder="Gesamtkosten" formControlName="costs">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-default" (click)="cancel()">cancel</button>
+    <button class="btn btn-success" (click)="save()">save</button>
+  </div>
+</form>

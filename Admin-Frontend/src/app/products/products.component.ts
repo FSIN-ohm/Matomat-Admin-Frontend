@@ -4,7 +4,7 @@ import { ProductsSource } from '../products/products-source';
 import { ProductModalComponent } from './product-modal/product-modal.component';
 import { Product } from './product';
 import { DataTableComponent } from '../data-table/data-table.component';
-import { OrderFormComponent } from '../order-form/order-form.component';
+import { OrderModalComponent } from './order-modal/order-modal.component';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +13,6 @@ import { OrderFormComponent } from '../order-form/order-form.component';
 })
 export class ProductsComponent implements OnInit {
   @ViewChild(DataTableComponent) table: DataTableComponent;
-  @ViewChild(OrderFormComponent) order: OrderFormComponent;
   dataSource: ProductsSource;
 
   columnsToDisplay = ['name', 'amount', 'reorderLevel', 'costs'];
@@ -45,23 +44,18 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  orderStuff(product) {
+  orderProduct(product) {
     console.log("order");
     console.log(product);
-    this.order.addProduct(product);
-    // TODO: Logic
-    /*
-      Funktion: Prüft ob Produkt bereits im Warenkorb, wenn nicht, hinzufügen, wenn schon, dann Anzahl erhöhen
-      Design: Img, Name, +/- Button mit Anzahl in Mitte, Mülleimer, Preis; Unten dick Gesamtsumme, zur Kasse gehen
-
-    */
+    const modalService: BsModalService = this.injector.get(BsModalService);
+    const modalRef = modalService.show(OrderModalComponent);
+    (<OrderModalComponent>modalRef.content).show(product);
   }
 
   addProduct() {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showCreationModal();
-    console.log(modalRef.content);
     modalRef.content.onClose.subscribe(result => {
       const data: Product = {
         id: 1,
