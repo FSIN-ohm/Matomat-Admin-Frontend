@@ -5,6 +5,7 @@ import { ProductModalComponent } from './product-modal/product-modal.component';
 import { Product } from './product';
 import { DataTableComponent } from '../data-table/data-table.component';
 import { OrderModalComponent } from './order-modal/order-modal.component';
+import { OrderFormComponent } from '../order-form/order-form.component';
 
 @Component({
   selector: 'app-products',
@@ -13,6 +14,7 @@ import { OrderModalComponent } from './order-modal/order-modal.component';
 })
 export class ProductsComponent implements OnInit {
   @ViewChild(DataTableComponent) table: DataTableComponent;
+  @ViewChild(OrderFormComponent) order: OrderFormComponent;
   dataSource: ProductsSource;
 
   columnsToDisplay = ['name', 'amount', 'reorderLevel', 'costs'];
@@ -45,11 +47,10 @@ export class ProductsComponent implements OnInit {
   }
 
   orderProduct(product) {
-    console.log("order");
-    console.log(product);
-    const modalService: BsModalService = this.injector.get(BsModalService);
-    const modalRef = modalService.show(OrderModalComponent);
-    (<OrderModalComponent>modalRef.content).show(product);
+    // console.log("order");
+    // console.log(product);
+    this.order.addProduct(product);
+    // TODO: Logic
   }
 
   addProduct() {

@@ -32,6 +32,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { AuthGuard, AuthenticationService, UserService } from './auth';
 import { OrderModalComponent } from './products/order-modal/order-modal.component';
+import { OrderFormComponent } from './order-form/order-form.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { OrderModalComponent } from './products/order-modal/order-modal.componen
     AccountModalComponent,
     ProductModalComponent,
     DataTableComponent,
-    OrderModalComponent
+    OrderModalComponent,
+    OrderFormComponent
   ],
   imports: [
     BrowserModule,
