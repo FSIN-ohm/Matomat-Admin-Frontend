@@ -26,8 +26,6 @@ import { FormsModule } from '@angular/forms';
 import { ProductModalComponent } from './products/product-modal/product-modal.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { OrderFormComponent } from './order-form/order-form.component';
-import { HttpClientModule } from '@angular/common/http'
-
 
 import { AuthGuard, AuthenticationService, UserService } from './auth';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
