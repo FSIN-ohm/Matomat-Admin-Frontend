@@ -9,8 +9,18 @@ img {
 
 .footer {
   position: fixed;
+
+  width: 100%;
+  height: 80px;
+  right: 0px;
+  bottom: 0px;
+
+  background: #FAFAFA;
+}
+
+.stick-right{
+  position: fixed;
   right: 16px;
   bottom: 16px;
-  padding: 8px 0px;
 }
 
