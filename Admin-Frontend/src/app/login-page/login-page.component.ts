@@ -22,8 +22,30 @@ export class LoginPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService) { }
-
-  ngOnInit() {
+  
+  username: string;
+  password: string;
+    
+  ngOnInit(){}
+  
+    login() : void {
+    if(this.username == 'admin' && this.password == 'admin'){
+      this.toastr.success('Du bist erfolgreich eingeloggt.', 'Erfolg!', {
+        positionClass: 'toast-top-right',
+        timeOut: 6000
+      });
+      this.router.navigate(["product-management"]);
+      return;
+    }else {
+      this.toastr.error('Der Benutzername und das Passwort stimmen nicht überein.', 'Error!', {
+        positionClass: 'toast-top-right',
+        timeOut: 6000
+      });
+      return;
+    }
+  }
+  
+  /* ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['',Validators.required],
       password: ['',Validators.required]
@@ -32,7 +54,7 @@ export class LoginPageComponent implements OnInit {
     this.authenticationService.logout();
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
+  } 
 
   onSubmit() {
     this.submitted = true;
@@ -53,5 +75,5 @@ export class LoginPageComponent implements OnInit {
     });
     return;
     }
-  }
+  } */
 }
