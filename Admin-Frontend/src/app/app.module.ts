@@ -31,7 +31,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 
 import { AuthGuard, AuthenticationService, UserService } from './auth';
-import { OrderModalComponent } from './products/order-modal/order-modal.component';
 import { OrderFormComponent } from './order-form/order-form.component';
 
 @NgModule({
@@ -46,7 +45,6 @@ import { OrderFormComponent } from './order-form/order-form.component';
     AccountModalComponent,
     ProductModalComponent,
     DataTableComponent,
-    OrderModalComponent,
     OrderFormComponent
   ],
   imports: [
@@ -75,7 +73,7 @@ import { OrderFormComponent } from './order-form/order-form.component';
     MatProgressSpinnerModule, MatPaginatorModule, MatSortModule, MatSelectModule,
     HttpClientModule,
   ],
-  entryComponents: [AccountModalComponent, ProductModalComponent, OrderModalComponent],
+  entryComponents: [AccountModalComponent, ProductModalComponent],
   providers: [
     AuthGuard,
     AuthenticationService,

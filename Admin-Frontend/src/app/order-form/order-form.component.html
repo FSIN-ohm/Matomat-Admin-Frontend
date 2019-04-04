@@ -1,13 +1,13 @@
 <div *ngIf="products.length > 0">
   <h3>Warenkorb</h3>
   <div class="col-md-12">
-    <mat-radio-group class="radio-group col-md-12" (change)="changedSelection($event)">
-      <mat-radio-button checked="true" value="buy">Einkaufen</mat-radio-button>
-      <mat-radio-button value="sell">Verkaufen</mat-radio-button>
+    <mat-radio-group class="radio-group" (change)="changedSelection($event)">
+      <mat-radio-button class="col-md-12" checked="true" value="buy">Einkaufen</mat-radio-button>
+      <mat-radio-button class="col-md-12" value="sell">Verkaufen</mat-radio-button>
     </mat-radio-group>
 
     <div *ngFor="let product of products">
-      <mat-form-field class="col-md-8">
+      <mat-form-field class="col-md-7">
         <input matInput placeholder="Name" [value]="product.name">
       </mat-form-field>
 
@@ -26,7 +26,7 @@
 
   </div>
   <div class="col-md-12">
-    <button class="col-md-2 btn btn-default" (click)="cancel()">Abbrechen</button>
-    <button class="col-md-2 btn btn-success" (click)="save()">Einkaufen</button>
+    <button class="col-md-6 btn btn-default" (click)="cancel()">Abbrechen</button>
+    <button class="col-md-6 btn btn-success" (click)="save()">Einkaufen</button>
   </div>
 </div>

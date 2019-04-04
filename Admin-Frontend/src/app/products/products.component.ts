@@ -4,7 +4,6 @@ import { ProductsSource } from '../products/products-source';
 import { ProductModalComponent } from './product-modal/product-modal.component';
 import { Product } from './product';
 import { DataTableComponent } from '../data-table/data-table.component';
-import { OrderModalComponent } from './order-modal/order-modal.component';
 import { OrderFormComponent } from '../order-form/order-form.component';
 
 @Component({
@@ -16,6 +15,7 @@ export class ProductsComponent implements OnInit {
   @ViewChild(DataTableComponent) table: DataTableComponent;
   @ViewChild(OrderFormComponent) order: OrderFormComponent;
   dataSource: ProductsSource;
+  openOrderSideBar: boolean = false;
 
   columnsToDisplay = ['name', 'amount', 'reorderLevel', 'costs'];
 
@@ -49,6 +49,7 @@ export class ProductsComponent implements OnInit {
   orderProduct(product) {
     // console.log("order");
     // console.log(product);
+    this.openOrderSideBar = true;
     this.order.addProduct(product);
     // TODO: Logic
   }

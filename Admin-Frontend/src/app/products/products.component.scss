@@ -15,6 +15,10 @@
     margin-left: 10px;
   }
 
+  ::ng-deep .mat-drawer-container {
+    height: 100%;
+  }
+
   // .table {
   //   max-width: 70%;
   //   float: left;
@@ -23,3 +27,11 @@
   //   max-width: 30%;
   // }
   
+  ::ng-deep .mat-drawer-content {
+    overflow: hidden;
+  }
+
+  ::ng-deep .mat-drawer.mat-sidenav.mat-drawer-end {
+    width: 300px;
+    height: 100%;
+  }

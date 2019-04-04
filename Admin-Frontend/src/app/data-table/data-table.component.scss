@@ -7,3 +7,14 @@ img {
     margin-right: auto;
   }
 
+::ng-deep .mat-elevation-z8.data-table {
+  box-shadow: none;
+}
+
+::ng-deep .mat-table {
+  background-color: #fafafa;
+}
+
+::ng-deep .mat-paginator {
+  background-color: #fafafa;
+}
