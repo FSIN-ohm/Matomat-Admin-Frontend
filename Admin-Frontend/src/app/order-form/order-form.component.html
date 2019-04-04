@@ -7,7 +7,7 @@
     </mat-radio-group>
 
     <div *ngFor="let product of products">
-      <mat-form-field class="col-md-7">
+      <mat-form-field class="col-md-6">
         <input matInput placeholder="Name" [value]="product.name">
       </mat-form-field>
 
@@ -25,7 +25,7 @@
     </mat-form-field>
 
   </div>
-  <div class="col-md-12">
+  <div class="footer col-md-12">
     <button class="col-md-6 btn btn-default" (click)="cancel()">Abbrechen</button>
     <button class="col-md-6 btn btn-success" (click)="save()">Einkaufen</button>
   </div>
