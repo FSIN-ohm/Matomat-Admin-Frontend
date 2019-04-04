@@ -1,5 +1,6 @@
 h3 {
     text-align: center;
+    padding-bottom: 20px;
 }
 
 ::ng-deep .mat-button.mat-warn {
@@ -10,4 +11,8 @@ h3 {
     position: absolute;
     right: 0;
     bottom: 70px;
+}
+
+.btn {
+    margin-right: 10px;
 }

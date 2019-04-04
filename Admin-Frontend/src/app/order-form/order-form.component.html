@@ -21,12 +21,12 @@
     </div>
 
     <mat-form-field *ngIf="selectedValue === 'buy'" class="col-md-12">
-      <input matInput placeholder="Gesamtkosten">
+      <input matInput placeholder="Einkaufspreis">
     </mat-form-field>
 
   </div>
-  <div class="footer col-md-12">
-    <button class="col-md-6 btn btn-default" (click)="cancel()">Abbrechen</button>
-    <button class="col-md-6 btn btn-success" (click)="save()">Einkaufen</button>
+  <div class="footer col-md-11">
+    <button class="col-md-5 btn btn-default" (click)="cancel()">Abbrechen</button>
+    <button class="col-md-5 btn btn-success" (click)="save()">Einkaufen</button>
   </div>
 </div>
