@@ -31,8 +31,7 @@ export class AccountModalComponent implements OnInit {
       account: formBuilder.group({
         role: ['Admin'],
         name: ['', Validators.required],
-        credit: [''],
-        active: ['']
+        balance: ['']
       })
     });
   }
@@ -41,8 +40,7 @@ export class AccountModalComponent implements OnInit {
   initWithData(account) {
     this.accountForm.controls.account.patchValue({
       name: account.name,
-      credit: account.credit,
-      active: account.active,
+      balance: account.balance,
     });
   }
 

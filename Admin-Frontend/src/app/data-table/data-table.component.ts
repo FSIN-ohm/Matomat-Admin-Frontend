@@ -10,8 +10,8 @@ import { TransactionSource } from '../transactions/transactions-source';
   styleUrls: ['./data-table.component.scss']
 })
 export class DataTableComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
+  // @ViewChild(MatSort) sort: MatSort;
 
   @Input() dataColumns: any[] = [];
   @Input() enableOrder: boolean;
@@ -29,16 +29,17 @@ export class DataTableComponent implements OnInit {
 
   ngOnInit() {
     // this.columnsToDisplay = this.columnsToDisplay.concat(['image']).concat(this.dataColumns.concat(['settings']));
-
+    console.log(this.dataSource);
+    console.log(this.dataColumns);
     // TODO: dynamische Data Source
     if (this.enableOrder) {
-      this.dataSource = new ProductsSource(this.paginator, this.sort);
+      // this.dataSource = new ProductsSource(this.paginator, this.sort);
       this.columnsToDisplay = this.columnsToDisplay.concat(['image']).concat(this.dataColumns.concat(['settings']));
     } else if (this.readonly) {
-      this.dataSource = new TransactionSource(this.paginator, this.sort);
+      // this.dataSource = new TransactionSource(this.paginator, this.sort);
       this.columnsToDisplay = this.dataColumns;
     } else {
-      this.dataSource = new AccountManagementSource(this.paginator, this.sort);
+      // this.dataSource = new AccountManagementSource(this.paginator, this.sort);
       this.columnsToDisplay = this.columnsToDisplay.concat(this.dataColumns.concat(['settings']));
     }
   }

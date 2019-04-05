@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
+  mockUp = "http://127.0.0.1:5000/v1/";
 
   constructor(private http: HttpClient) { } // richtiger Client?
 
@@ -14,5 +15,25 @@ export class DataService {
     formData.append('image', image);
 
     return this.http.post('/api/v1/image-upload', formData); // TODO: DB Anbindung
+  }
+
+  public getUsers() {
+    return this.http.get(this.mockUp + 'users');
+  }
+
+  public getUserById(id: number) {
+    return this.http.get(this.mockUp + 'users/' + id);
+  }
+
+  public addUser(user: any) {
+    return this.http.post(this.mockUp + 'users/', user);
+  }
+
+  public editUser(user: any) {
+    return this.http.patch(this.mockUp + 'users', user)
+  }
+
+  public deleteUser(id: number) {
+    return this.http.delete(this.mockUp + 'users/' + id);
   }
 }

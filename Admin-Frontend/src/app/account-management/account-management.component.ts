@@ -4,6 +4,7 @@ import { AccountModalComponent } from './account-modal/account-modal.component';
 import { AccountManagementSource } from '../account-management/account-management-source';
 import { Account } from '../account-management/account';
 import { DataTableComponent } from '../data-table/data-table.component';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-account-management',
@@ -14,12 +15,20 @@ import { DataTableComponent } from '../data-table/data-table.component';
 export class AccountManagementComponent implements OnInit {
   @ViewChild(DataTableComponent) table;
   dataSource: AccountManagementSource;
+  users: any;
+  columnsToDisplay = ['name', 'balance', 'last_seen'];
 
-  columnsToDisplay = ['name', 'credit', 'creationDate', 'lastActivity', 'active'];
-
-  constructor(private injector: Injector) { }
+  constructor(private injector: Injector, private service: DataService) { }
 
   ngOnInit() {
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.service.getUsers().subscribe(users => {
+      this.users = users;
+      console.log(this.users);
+    });
   }
 
   editAccount(account) {
@@ -32,6 +41,10 @@ export class AccountManagementComponent implements OnInit {
   }
 
   updateData(newAccount, id) {
+    this.service.editUser(newAccount).subscribe(res => {
+      console.log(res);
+    });
+    // noch notwendig?
     for (let account of this.table.dataSource.data) {
       if (account.id === id) {
         account.name = newAccount.name;
@@ -55,16 +68,22 @@ export class AccountManagementComponent implements OnInit {
         lastActivity: 'heute',
         active: result.account.active,
       }
-      this.table.dataSource.data.push(data);
+      this.service.addUser(data).subscribe(res => {
+        console.log(res);
+      });
+      // this.table.dataSource.data.push(data);
       this.table.dataSource.connect(); // updaten
     });
   }
 
   deleteAccount(account) {
     if (confirm("Wollen Sie diesen Account endgültig löschen?")) {
-      const index = this.table.dataSource.data.indexOf(account);
+      // const index = this.table.dataSource.data.indexOf(account);
       if (account.id > -1) {
-        this.table.dataSource.data.splice(index, 1);
+        this.service.deleteUser(account.id).subscribe(res => {
+          console.log(res);
+        });
+        // this.table.dataSource.data.splice(index, 1);
         this.table.dataSource.connect(); // updaten
       }
     }
