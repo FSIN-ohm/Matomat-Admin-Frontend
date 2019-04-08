@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-order-form',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderFormComponent implements OnInit {
   // TODO: Input id, name, costs, amountGewünscht
+  @Output() closeSidaBar = new EventEmitter<boolean>();
   products: any[] = [];
   selectedValue = 'buy';
 
@@ -45,12 +46,16 @@ export class OrderFormComponent implements OnInit {
 
   cancel() {
     if (confirm("Wollen Sie den Einkauf abbrechen?")) {
+      console.log("Cancel");
+      this.closeSidaBar.emit(true);
       this.products = [];
     }
   }
 
   save() {
     console.log("Erfolgreich bestellt");
+    this.closeSidaBar.emit(true);
+    this.products = [];
   }
 
   findDuplicateProduct(id) {
