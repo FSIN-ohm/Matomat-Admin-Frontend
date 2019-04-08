@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-form',
@@ -11,7 +12,7 @@ export class OrderFormComponent implements OnInit {
   products: any[] = [];
   selectedValue = 'buy';
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -53,9 +54,15 @@ export class OrderFormComponent implements OnInit {
   }
 
   save() {
-    console.log("Erfolgreich bestellt");
-    this.closeSidaBar.emit(true);
-    this.products = [];
+    if (confirm("Möchten sie den Einkauf jetzt einbuchen?")) {
+      console.log("Erfolgreich bestellt");
+      this.closeSidaBar.emit(true);
+      this.products = [];
+      this.toastr.success('Bestellung war erfolgreich!', 'Erfolg', {
+        positionClass: 'toast-top-right',
+        timeOut: 6000
+      });
+    }
   }
 
   findDuplicateProduct(id) {
