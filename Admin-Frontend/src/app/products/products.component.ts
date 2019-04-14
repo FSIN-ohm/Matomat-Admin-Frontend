@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, ViewChild } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ProductsSource } from '../products/products-source';
 import { ProductModalComponent } from './product-modal/product-modal.component';
@@ -13,12 +13,14 @@ import { OrderFormComponent } from '../order-form/order-form.component';
 })
 export class ProductsComponent implements OnInit {
   @ViewChild(DataTableComponent) table: DataTableComponent;
-  @ViewChild(OrderFormComponent) order: OrderFormComponent;
+  @ViewChild('order') order: OrderFormComponent;
+
   dataSource: ProductsSource;
+  sideBarVisible: boolean = false;
 
   columnsToDisplay = ['name', 'amount', 'reorderLevel', 'costs'];
 
-  constructor(private injector: Injector) { }
+  constructor(private injector: Injector, private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
@@ -45,23 +47,16 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  orderStuff(product) {
-    console.log("order");
-    console.log(product);
+  orderProduct(product) {
+    this.sideBarVisible = true;
+    this.changeDetector.detectChanges();
     this.order.addProduct(product);
-    // TODO: Logic
-    /*
-      Funktion: Prüft ob Produkt bereits im Warenkorb, wenn nicht, hinzufügen, wenn schon, dann Anzahl erhöhen
-      Design: Img, Name, +/- Button mit Anzahl in Mitte, Mülleimer, Preis; Unten dick Gesamtsumme, zur Kasse gehen
-
-    */
   }
 
   addProduct() {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showCreationModal();
-    console.log(modalRef.content);
     modalRef.content.onClose.subscribe(result => {
       const data: Product = {
         id: 1,
@@ -84,5 +79,16 @@ export class ProductsComponent implements OnInit {
         this.table.dataSource.connect(); // updaten
       }
     }
+  }
+
+  closeSideBar(close) {
+    if (close) {
+      this.sideBarVisible = false;
+    }
+  }
+
+  toggleSideBar() {
+    this.sideBarVisible = !this.sideBarVisible;
+    this.table.orderSideBarVisible = this.sideBarVisible;
   }
 }

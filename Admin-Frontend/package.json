@@ -25,13 +25,13 @@
     "core-js": "^2.6.0",
     "material-design-icons": "^3.0.1",
     "ngx-bootstrap": "^3.2.0",
-    "ngx-toastr": "^9.1.2",
+    "ngx-toastr": "^9.2.0",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.2",
-    "@angular/compiler-cli": "^7.2.5",
+    "@angular-devkit/build-angular": "^0.13.7",
+    "@angular/compiler-cli": "^7.2.11",
     "@angular/language-service": "~7.0.0",
     "@types/jasmine": "^2.8.12",
     "@types/jasminewd2": "~2.0.3",
@@ -47,7 +47,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.1.6",
-    "webpack": "^4.29.5"
+    "typescript": "^3.1.6",
+    "webpack": "^4.29.6"
   }
 }

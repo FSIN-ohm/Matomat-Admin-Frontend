@@ -1,0 +1,20 @@
+h4 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+::ng-deep .mat-button.mat-warn {
+    padding: 0px;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 70px;
+}
+
+.infotext {
+    // text-align: center;
+    color: grey;
+    padding: 15px;
+}

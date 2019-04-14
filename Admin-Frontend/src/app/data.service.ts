@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-  constructor(private http: HttpClient) { } // richtiger Client?
-
+  constructor(private http: HttpClient) { } 
+  
   public uploadImage(image: File): Observable<Object> {
     const formData = new FormData();
     formData.append('image', image);

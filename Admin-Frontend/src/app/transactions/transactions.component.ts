@@ -8,7 +8,7 @@ import { TransactionSource } from './transactions-source';
 })
 export class TransactionsComponent implements OnInit {
   dataSource: TransactionSource;
-  columnsToDisplay = ['name', 'amount', 'date', 'description'];
+  columnsToDisplay = ['user', 'product', 'amount', 'date', 'description'];
 
   constructor() { }
 

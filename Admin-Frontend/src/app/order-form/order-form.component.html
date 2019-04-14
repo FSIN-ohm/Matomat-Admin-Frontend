@@ -1,32 +1,38 @@
-<div *ngIf="products.length > 0">
-  <h3>Warenkorb</h3>
-
-
-  <!-- <app-data-table [dataColumns]="" [dataSource]="dataSource" showImage="true"></app-data-table> -->
-
-
-
-
-
-
-
+<div>
+  <h4>Warenkorb</h4>
   <div class="col-md-12">
-    <div *ngFor="let product of products">
-      <!-- entfernen Button md-2 -->
-      <mat-list>
-        <mat-list-item> {{product.name}} {{product.costs}} </mat-list-item>
-      </mat-list>
-      <!-- Produktname md-4 -->
-      <!-- <mat-form-field class="col-md-4">
-        <input matInput formControlName="name">
-      </mat-form-field> -->
+    <mat-radio-group class="radio-group" (change)="changedSelection($event)">
+      <mat-radio-button class="col-md-12" checked="true" value="buy">Einkaufen</mat-radio-button>
+      <mat-radio-button class="col-md-12" value="sell">Verkaufen</mat-radio-button>
+    </mat-radio-group>
 
-      <!-- Anzahl, verstellbar (mind 1) md-3 -->
-      <!-- Preis md-3 -->
+    <div *ngIf="products.length > 0">
+      <div *ngFor="let product of products">
+        <mat-form-field class="col-md-6">
+          <input matInput placeholder="Name" [value]="product.name">
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <input type="number" matInput placeholder="Anzahl" [value]="product.count">
+        </mat-form-field>
+
+        <button class="col-md-1" mat-button color="warn" (click)="deleteProduct(product)">
+          <i class="material-icons">delete</i>
+        </button>
+      </div>
     </div>
-    <!-- Total md-9 -->
-    <!-- Gesamtpreis md-3 -->
 
-    <!-- Button bestellen -->
+    <div class="infotext" *ngIf="products.length === 0">
+      <i>Bitte fügen sie dem Warenkorb Produkte hinzu.</i>
+    </div>
+
+    <mat-form-field *ngIf="selectedValue === 'buy'" class="col-md-12">
+      <input matInput placeholder="Einkaufspreis">
+    </mat-form-field>
+
+  </div>
+  <div class="footer col-md-12">
+    <button class="col-md-6 btn btn-default" (click)="cancel()">Abbrechen</button>
+    <button class="col-md-6 btn btn-success" (click)="save()">Einkaufen</button>
   </div>
 </div>

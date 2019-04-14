@@ -23,7 +23,8 @@ export class DataTableComponent implements OnInit {
   @Output() add = new EventEmitter();
   @Output() order = new EventEmitter();
   columnsToDisplay: any[] = [];
-
+  orderSideBarVisible: boolean;
+  test = true;
   constructor() {
   }
 
