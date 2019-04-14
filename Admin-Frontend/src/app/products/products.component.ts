@@ -13,7 +13,7 @@ import { OrderFormComponent } from '../order-form/order-form.component';
 })
 export class ProductsComponent implements OnInit {
   @ViewChild(DataTableComponent) table: DataTableComponent;
-  @ViewChild(OrderFormComponent) order: OrderFormComponent;
+  @ViewChild('order') order: OrderFormComponent;
 
   dataSource: ProductsSource;
   sideBarVisible: boolean = false;

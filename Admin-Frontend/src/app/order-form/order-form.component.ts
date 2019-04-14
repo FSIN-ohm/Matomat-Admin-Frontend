@@ -31,8 +31,7 @@ export class OrderFormComponent implements OnInit {
       }
       this.products.push(data);
     } else {
-      console.log("INCREASE");
-      this.increaseNumber(foundProduct);
+      foundProduct.count = foundProduct.count + 1;
     }
   }
 
@@ -74,7 +73,7 @@ export class OrderFormComponent implements OnInit {
     return null;
   }
 
-  increaseNumber(product) {
-    product.count = product.count + 1;
-  }
+  // increaseNumber(product) {
+  //   product.count = product.count + 1;
+  // }
 }
