@@ -5,8 +5,8 @@ import { Observable, of as observableOf, merge, Subject } from 'rxjs';
 import { Transaction } from './transaction';
 
 const TRANSACTIONS: Transaction[] = [
-  { id: 1, name: 'Bier', amount: 2, date: '12.02.1993' },
-  { id: 2, name: 'Snickers', amount: 1, date: '16.02.1993' },
+  { id: 1, user: 'PersonA', product: 'Bier', amount: 2, date: '12.02.1993', description: 'Kauf' },
+  { id: 2, user: 'PersonB', product: 'Snickers', amount: 1, date: '16.02.1993', description: 'Kauf' },
 ];
 
 /**
@@ -76,7 +76,7 @@ export class TransactionSource extends DataSource<Transaction> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
+        // case 'product': return compare(a.product, b.product, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
         case 'amount': return compare(+a.amount, +b.amount, isAsc);
         default: return 0;

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-form',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderFormComponent implements OnInit {
   // TODO: Input id, name, costs, amountGewünscht
+  @Output() closeSidaBar = new EventEmitter<boolean>();
   products: any[] = [];
   selectedValue = 'buy';
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -29,8 +31,7 @@ export class OrderFormComponent implements OnInit {
       }
       this.products.push(data);
     } else {
-      console.log("INCREASE");
-      this.increaseNumber(foundProduct);
+      foundProduct.count = foundProduct.count + 1;
     }
   }
 
@@ -45,12 +46,22 @@ export class OrderFormComponent implements OnInit {
 
   cancel() {
     if (confirm("Wollen Sie den Einkauf abbrechen?")) {
+      console.log("Cancel");
+      this.closeSidaBar.emit(true);
       this.products = [];
     }
   }
 
   save() {
-    console.log("Erfolgreich bestellt");
+    if (confirm("Möchten sie den Einkauf jetzt einbuchen?")) {
+      console.log("Erfolgreich bestellt");
+      this.closeSidaBar.emit(true);
+      this.products = [];
+      this.toastr.success('Bestellung war erfolgreich!', 'Erfolg', {
+        positionClass: 'toast-top-right',
+        timeOut: 6000
+      });
+    }
   }
 
   findDuplicateProduct(id) {
@@ -62,7 +73,7 @@ export class OrderFormComponent implements OnInit {
     return null;
   }
 
-  increaseNumber(product) {
-    product.count = product.count + 1;
-  }
+  // increaseNumber(product) {
+  //   product.count = product.count + 1;
+  // }
 }

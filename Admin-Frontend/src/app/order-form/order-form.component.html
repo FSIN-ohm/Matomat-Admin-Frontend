@@ -1,27 +1,33 @@
-<div *ngIf="products.length > 0">
-  <h3>Warenkorb</h3>
+<div>
+  <h4>Warenkorb</h4>
   <div class="col-md-12">
     <mat-radio-group class="radio-group" (change)="changedSelection($event)">
       <mat-radio-button class="col-md-12" checked="true" value="buy">Einkaufen</mat-radio-button>
       <mat-radio-button class="col-md-12" value="sell">Verkaufen</mat-radio-button>
     </mat-radio-group>
 
-    <div *ngFor="let product of products">
-      <mat-form-field class="col-md-6">
-        <input matInput placeholder="Name" [value]="product.name">
-      </mat-form-field>
+    <div *ngIf="products.length > 0">
+      <div *ngFor="let product of products">
+        <mat-form-field class="col-md-6">
+          <input matInput placeholder="Name" [value]="product.name">
+        </mat-form-field>
 
-      <mat-form-field class="col-md-3">
-        <input type="number" matInput placeholder="Anzahl" [value]="product.count">
-      </mat-form-field>
+        <mat-form-field class="col-md-3">
+          <input type="number" matInput placeholder="Anzahl" [value]="product.count">
+        </mat-form-field>
 
-      <button class="col-md-1" mat-button color="warn" (click)="deleteProduct(product)">
-        <i class="material-icons">delete</i>
-      </button>
+        <button class="col-md-1" mat-button color="warn" (click)="deleteProduct(product)">
+          <i class="material-icons">delete</i>
+        </button>
+      </div>
+    </div>
+
+    <div class="infotext" *ngIf="products.length === 0">
+      <i>Bitte fügen sie dem Warenkorb Produkte hinzu.</i>
     </div>
 
     <mat-form-field *ngIf="selectedValue === 'buy'" class="col-md-12">
-      <input matInput placeholder="Gesamtkosten">
+      <input matInput placeholder="Einkaufspreis">
     </mat-form-field>
 
   </div>
