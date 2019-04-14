@@ -1,5 +1,6 @@
 .mat-toolbar{
   padding: 0px 0px 0px 16px;
+  height: 48px;
 }
 
 .mat-list-base{
@@ -7,25 +8,25 @@
 }
 
 .toolbar-button{
-  height: 64px;
+  height: 48px;
   border-radius: 0;
   font-size: 18px;
   color: #FAFAFA;
 }
 
-.underline{
+.highlight{
   border-bottom: 6px solid #FAFAFA;
   background-color: #008678;
 }
 
-.example-fill-remaining-space {
+.fill-remaining-space {
   /* This fills the remaining space, by using flexbox. 
      Every toolbar row uses a flexbox row layout. */
   flex: 1 1 auto;
 }
 
 .logout{
-  width: 64px;
+  width: 48px;
 }
 
 .main{
