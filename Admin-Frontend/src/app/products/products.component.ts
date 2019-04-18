@@ -1,10 +1,9 @@
 import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { ProductsSource } from '../products/products-source';
 import { ProductModalComponent } from './product-modal/product-modal.component';
-import { Product } from './product';
 import { DataTableComponent } from '../data-table/data-table.component';
 import { OrderFormComponent } from '../order-form/order-form.component';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-products',
@@ -14,16 +13,23 @@ import { OrderFormComponent } from '../order-form/order-form.component';
 export class ProductsComponent implements OnInit {
   @ViewChild(DataTableComponent) table: DataTableComponent;
   @ViewChild(OrderFormComponent) order: OrderFormComponent;
-  dataSource: ProductsSource;
   openOrderSideBar: boolean = false;
+  products: any;
 
-  columnsToDisplay = ['name', 'amount', 'reorderLevel', 'costs'];
+  columnsToDisplay = ['thumbnail', 'name', 'price', 'reorder_point', 'is_available', 'items_per_crate'];
 
-  constructor(private injector: Injector) { }
+  constructor(private injector: Injector, private dataService: DataService) { }
 
   ngOnInit() {
+    this.getProducts();
   }
 
+  getProducts() {
+    this.dataService.getProducts().subscribe(res => {
+      this.products = res;
+      console.log(this.products);
+    })
+  }
 
   editProduct(product) {
     const modalService: BsModalService = this.injector.get(BsModalService);
@@ -59,16 +65,18 @@ export class ProductsComponent implements OnInit {
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showCreationModal();
     modalRef.content.onClose.subscribe(result => {
-      const data: Product = {
-        id: 1,
-        name: result.product.name,
-        amount: result.product.amount,
-        reorderLevel: result.product.reorderLevel,
-        costs: result.product.costs,
-        img: 'https://www.freeiconspng.com/uploads/no-image-icon-15.png'
-      }
-      this.table.dataSource.data.push(data);
-      this.table.dataSource.connect(); // updaten
+      console.log(result);
+
+      // const data: Product = {
+      //   id: 1,
+      //   name: result.product.name,
+      //   amount: result.product.amount,
+      //   reorderLevel: result.product.reorderLevel,
+      //   costs: result.product.costs,
+      //   img: 'https://www.freeiconspng.com/uploads/no-image-icon-15.png'
+      // }
+      // this.table.dataSource.data.push(data);
+      // this.table.dataSource.connect(); // updaten
     });
   }
 

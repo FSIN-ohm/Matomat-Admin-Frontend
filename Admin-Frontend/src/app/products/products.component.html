@@ -1,10 +1,10 @@
-<mat-sidenav-container class="order-container">
+<mat-sidenav-container *ngIf="products" class="order-container">
 
   <mat-sidenav opened mode="side" position="end" *ngIf="openOrderSideBar">
     <app-order-form #order class="order"></app-order-form>
   </mat-sidenav>
 
-  <app-data-table #table class="table" [dataColumns]="columnsToDisplay" [dataSource]="dataSource" [enableOrder]="true"
+  <app-data-table #table class="table" [dataColumns]="columnsToDisplay" [dataSource]="products" [enableOrder]="true"
     showImage="true" (edit)="editProduct($event)" (delete)="deleteProduct($event)" (add)="addProduct()"
     (order)="orderProduct($event)"></app-data-table>
 

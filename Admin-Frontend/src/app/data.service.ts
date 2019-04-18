@@ -36,4 +36,28 @@ export class DataService {
   public deleteUser(id: number) {
     return this.http.delete(this.mockUp + 'users/' + id);
   }
+
+  public getProducts() {
+    return this.http.get(this.mockUp + 'product_infos');
+  }
+
+  public getProductById(id: number) {
+    return this.http.get(this.mockUp + 'product_infos' + id);
+  }
+
+  public addProduct(product: any) {
+    return this.http.post(this.mockUp + 'product_infos', product);
+  }
+
+  public editProduct(product: any) {
+    return this.http.patch(this.mockUp + 'product_infos', product);
+  }
+
+  public deleteProduct(id: number) {
+    return this.http.delete(this.mockUp + 'product_infos' + id);
+  }
+
+  public getTransactions() {
+    return this.http.get(this.mockUp + 'transactions');
+  }
 }

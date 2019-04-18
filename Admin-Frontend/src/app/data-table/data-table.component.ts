@@ -1,8 +1,4 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
-import { AccountManagementSource } from '../account-management/account-management-source';
-import { ProductsSource } from '../products/products-source';
-import { TransactionSource } from '../transactions/transactions-source';
 
 @Component({
   selector: 'app-data-table',
@@ -34,7 +30,7 @@ export class DataTableComponent implements OnInit {
     // TODO: dynamische Data Source
     if (this.enableOrder) {
       // this.dataSource = new ProductsSource(this.paginator, this.sort);
-      this.columnsToDisplay = this.columnsToDisplay.concat(['image']).concat(this.dataColumns.concat(['settings']));
+      this.columnsToDisplay = this.columnsToDisplay.concat(this.dataColumns.concat(['settings']));
     } else if (this.readonly) {
       // this.dataSource = new TransactionSource(this.paginator, this.sort);
       this.columnsToDisplay = this.dataColumns;

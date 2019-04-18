@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TransactionSource } from './transactions-source';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-transactions',
@@ -7,12 +7,20 @@ import { TransactionSource } from './transactions-source';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
-  dataSource: TransactionSource;
-  columnsToDisplay = ['name', 'amount', 'date', 'description'];
+  transactions: any;
+  columnsToDisplay = ['date', 'sender', 'receiver', 'amount', 'transaction_type'];
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.getTransactions();
+  }
+
+  getTransactions() {
+    this.dataService.getTransactions().subscribe(res => {
+      console.log(res);
+      this.transactions = res;
+    });
   }
 
 }
