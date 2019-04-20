@@ -12,31 +12,23 @@ export class DataTableComponent implements OnInit {
   @Input() dataColumns: any[] = [];
   @Input() enableOrder: boolean;
   @Input() dataSource: any;
-  @Input() showImage: any;
+  // @Input() showImage: any;
   @Input() readonly: boolean;
   @Output() edit = new EventEmitter();
   @Output() delete = new EventEmitter();
   @Output() add = new EventEmitter();
   @Output() order = new EventEmitter();
   columnsToDisplay: any[] = [];
-  test = true;
+  
   constructor() {
   }
 
   ngOnInit() {
-    // this.columnsToDisplay = this.columnsToDisplay.concat(['image']).concat(this.dataColumns.concat(['settings']));
-    console.log(this.dataSource);
-    console.log(this.dataColumns);
-    // TODO: dynamische Data Source
-    if (this.enableOrder) {
+    if (!this.readonly) {
       // this.dataSource = new ProductsSource(this.paginator, this.sort);
       this.columnsToDisplay = this.columnsToDisplay.concat(this.dataColumns.concat(['settings']));
-    } else if (this.readonly) {
-      // this.dataSource = new TransactionSource(this.paginator, this.sort);
-      this.columnsToDisplay = this.dataColumns;
     } else {
-      // this.dataSource = new AccountManagementSource(this.paginator, this.sort);
-      this.columnsToDisplay = this.columnsToDisplay.concat(this.dataColumns.concat(['settings']));
+      this.columnsToDisplay = this.dataColumns;
     }
   }
 

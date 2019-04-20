@@ -38,11 +38,12 @@ export class DataService {
   }
 
   public getProducts() {
+    console.log(this.mockUp + 'product_infos');
     return this.http.get(this.mockUp + 'product_infos');
   }
 
   public getProductById(id: number) {
-    return this.http.get(this.mockUp + 'product_infos' + id);
+    return this.http.get(this.mockUp + 'product_infos/' + id);
   }
 
   public addProduct(product: any) {
@@ -54,7 +55,7 @@ export class DataService {
   }
 
   public deleteProduct(id: number) {
-    return this.http.delete(this.mockUp + 'product_infos' + id);
+    return this.http.delete(this.mockUp + 'product_infos/' + id);
   }
 
   public getTransactions() {
