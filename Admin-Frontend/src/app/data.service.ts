@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 export class DataService {
   mockUp = "http://127.0.0.1:5000/v1/";
 
-  constructor(private http: HttpClient) { } // richtiger Client?
-
+  constructor(private http: HttpClient) { } 
+  
   public uploadImage(image: File): Observable<Object> {
     const formData = new FormData();
     formData.append('image', image);

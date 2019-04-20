@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, ViewChild } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ProductModalComponent } from './product-modal/product-modal.component';
 import { DataTableComponent } from '../data-table/data-table.component';
@@ -12,13 +12,16 @@ import { DataService } from '../data.service';
 })
 export class ProductsComponent implements OnInit {
   @ViewChild(DataTableComponent) table: DataTableComponent;
-  @ViewChild(OrderFormComponent) order: OrderFormComponent;
+  @ViewChild('order') order: OrderFormComponent;
+
   openOrderSideBar: boolean = false;
   products: any;
 
+  sideBarVisible: boolean = false;
+
   columnsToDisplay = ['thumbnail', 'name', 'price', 'reorder_point', 'is_available', 'items_per_crate'];
 
-  constructor(private injector: Injector, private dataService: DataService) { }
+  constructor(private injector: Injector, private dataService: DataService, private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.getProducts();
@@ -55,11 +58,9 @@ export class ProductsComponent implements OnInit {
   }
 
   orderProduct(product) {
-    // console.log("order");
-    // console.log(product);
-    this.openOrderSideBar = true;
+    this.sideBarVisible = true;
+    this.changeDetector.detectChanges();
     this.order.addProduct(product);
-    // TODO: Logic
   }
 
   addProduct() {
@@ -90,5 +91,16 @@ export class ProductsComponent implements OnInit {
         this.table.dataSource.connect(); // updaten
       }
     }
+  }
+
+  closeSideBar(close) {
+    if (close) {
+      this.sideBarVisible = false;
+    }
+  }
+
+  toggleSideBar() {
+    this.sideBarVisible = !this.sideBarVisible;
+    this.table.orderSideBarVisible = this.sideBarVisible;
   }
 }

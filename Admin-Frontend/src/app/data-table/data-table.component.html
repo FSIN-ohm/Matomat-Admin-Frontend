@@ -41,7 +41,7 @@
 </div>
 
 <footer class="footer">
-  <button mat-fab color="primary" class="add stick-right" (click)="addData()">
+  <button [ngStyle]="{'right':sideBarVisible === true ? '300px' : '16px'}" mat-fab color="primary" class="stick-right" (click)="addData()">
     <i class="material-icons md-48">add</i>
   </button>
 </footer>
