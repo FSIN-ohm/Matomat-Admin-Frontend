@@ -1,7 +1,6 @@
 import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AccountModalComponent } from './account-modal/account-modal.component';
-import { AccountManagementSource } from '../account-management/account-management-source';
 import { Account } from '../account-management/account';
 import { DataTableComponent } from '../data-table/data-table.component';
 import { DataService } from '../data.service';
@@ -14,7 +13,6 @@ import { DataService } from '../data.service';
 
 export class AccountManagementComponent implements OnInit {
   @ViewChild(DataTableComponent) table;
-  dataSource: AccountManagementSource;
   users: any;
   columnsToDisplay = ['name', 'balance', 'last_seen'];
 
