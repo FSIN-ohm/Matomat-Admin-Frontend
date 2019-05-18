@@ -1,6 +1,11 @@
 .mat-toolbar{
-  padding: 0px 0px 0px 16px;
+  padding: 0px 20% 0px 20%;
   height: 48px;
+}
+
+#logo{
+  padding-top: 20px;
+  background-color: #00796B;
 }
 
 .mat-list-base{
@@ -8,28 +13,46 @@
 }
 
 .toolbar-button{
-  height: 48px;
-  border-radius: 0;
   font-size: 16px;
-  color: #FAFAFA;
+}
+
+.toolbar-button:focus{
+  outline: none;
 }
 
 .highlight{
-  border-bottom: 6px solid #FAFAFA;
-  background-color: #008678;
+  background-color: #00796B;
+  //box-shadow: 0 4px 20px 0 rgba(0,0,0,.14),0 7px 10px -5px rgba(244,67,54,.4);
 }
 
-.fill-remaining-space {
+.fill-remaining-space{
   /* This fills the remaining space, by using flexbox. 
      Every toolbar row uses a flexbox row layout. */
   flex: 1 1 auto;
 }
 
-.logout{
-  width: 48px;
+.icon-description{
+  padding-left: 8px;
 }
 
 .main{
-  padding: 16px;
-  background-color: #FAFAFA;
+  padding: 16px 20% 0px 20%;
+}
+
+@media screen and (max-width: 1600px) {
+  .mat-toolbar {
+    padding: 0px 17.5% 0px 17.5%;;
+  }
+  .main{
+    padding: 16px 17.5% 0px 17.5%;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .mat-toolbar {
+    padding: 0px 15% 0px 15%;;
+  }
+  .main{
+    padding: 16px 15% 0px 15%;
+  }
 }

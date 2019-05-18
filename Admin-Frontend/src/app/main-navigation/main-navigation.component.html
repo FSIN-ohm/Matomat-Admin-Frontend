@@ -1,24 +1,29 @@
 <mat-toolbar color="primary">
-  <span>Matohmat</span>
+   <figure id="logo">
+    <img src="assets\img\logo-wh-55px-transparent.png">
+  </figure> 
 
   <mat-list class="button-list">
-    <button mat-flat-button class="toolbar-button" color="primary" routerLink="/login" routerLinkActive="highlight" [routerLinkActiveOptions]="{exact:
-      true}">Account Settings</button>
-    <button mat-flat-button class="toolbar-button" color="primary" routerLink="transactions" routerLinkActive="highlight"
-    [routerLinkActiveOptions]="{exact: true}">Transactions</button>
     <button mat-flat-button class="toolbar-button" color="primary" routerLink="acc-management" routerLinkActive="highlight"
     [routerLinkActiveOptions]="{exact: true}">Accountmanagement</button>
+    <button mat-flat-button class="toolbar-button" color="primary" routerLink="transactions" routerLinkActive="highlight"
+    [routerLinkActiveOptions]="{exact: true}">Transactions</button>
     <button mat-flat-button class="toolbar-button" color="primary" routerLink="product-management" routerLinkActive="highlight"
     [routerLinkActiveOptions]="{exact: true}">Productmanagement</button>  
   </mat-list>
-  
+
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
-
-  <button mat-button class="toolbar-button logout">
-    <mat-icon>power_settings_new</mat-icon>
+  <button mat-flat-button class="toolbar-button" color="primary" routerLink="/login" routerLinkActive="highlight" 
+  [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon>account_circle</mat-icon>
+      <span class="icon-description">Account Settings</span>
+  </button>
+  <button mat-button class="toolbar-button">
+      <span class="icon-description">Log out</span>
   </button>
 </mat-toolbar>
+
 <main class="main">
   <router-outlet></router-outlet>
 </main>
