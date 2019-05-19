@@ -1,29 +1,68 @@
-<mat-toolbar color="primary">
-   <figure id="logo">
-    <img src="assets\img\logo-wh-55px-transparent.png">
-  </figure> 
+<mat-drawer-container [hasBackdrop]=true>
+    <mat-drawer #drawer [mode]=over class="sidenav">
+        <mat-toolbar color="primary">
 
-  <mat-list class="button-list">
-    <button mat-flat-button class="toolbar-button" color="primary" routerLink="acc-management" routerLinkActive="highlight"
-    [routerLinkActiveOptions]="{exact: true}">Accountmanagement</button>
-    <button mat-flat-button class="toolbar-button" color="primary" routerLink="transactions" routerLinkActive="highlight"
-    [routerLinkActiveOptions]="{exact: true}">Transactions</button>
-    <button mat-flat-button class="toolbar-button" color="primary" routerLink="product-management" routerLinkActive="highlight"
-    [routerLinkActiveOptions]="{exact: true}">Productmanagement</button>  
-  </mat-list>
+            <button mat-button id="burger" (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span class="icon-description">Matohmmat</span>
 
-  <!-- This fills the remaining space of the current row -->
-  <span class="fill-remaining-space"></span>
-  <button mat-flat-button class="toolbar-button" color="primary" routerLink="/login" routerLinkActive="highlight" 
-  [routerLinkActiveOptions]="{exact: true}">
-      <mat-icon>account_circle</mat-icon>
-      <span class="icon-description">Account Settings</span>
-  </button>
-  <button mat-button class="toolbar-button">
-      <span class="icon-description">Log out</span>
-  </button>
-</mat-toolbar>
+        </mat-toolbar>
+        <ol class="sidenav-list">
+            <button mat-flat-button class="sidenav-button" (click)="drawer.close()" routerLink="acc-management" routerLinkActive=""
+            [routerLinkActiveOptions]="{exact: true}">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+            <span class="icon-description">Accountmanagement</span>
+          </button>
+            <button mat-flat-button class="sidenav-button" (click)="drawer.close()" routerLink="transactions" routerLinkActive=""
+            [routerLinkActiveOptions]="{exact: true}">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+            <span class="icon-description">Transactions</span>
+          </button>
+            <button mat-flat-button class="sidenav-button" (click)="drawer.close()" routerLink="product-management" routerLinkActive=""
+            [routerLinkActiveOptions]="{exact: true}">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+            <span class="icon-description">Productmanagement</span>
+          </button>
+        </ol>
 
-<main class="main">
-  <router-outlet></router-outlet>
-</main>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-toolbar color="primary">
+  
+            <figure id="logo">
+              <img src="assets\img\logo-wh-55px-transparent.png">
+            </figure>
+          
+            <button mat-button id="burger" (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+          
+            <mat-list>
+              <button mat-flat-button class="toolbar-button" color="primary" routerLink="acc-management" routerLinkActive="highlight"
+              [routerLinkActiveOptions]="{exact: true}">Accountmanagement</button>
+              <button mat-flat-button class="toolbar-button" color="primary" routerLink="transactions" routerLinkActive="highlight"
+              [routerLinkActiveOptions]="{exact: true}">Transactions</button>
+              <button mat-flat-button class="toolbar-button" color="primary" routerLink="product-management" routerLinkActive="highlight"
+              [routerLinkActiveOptions]="{exact: true}">Productmanagement</button>  
+            </mat-list>
+          
+            <!-- This fills the remaining space of the current row -->
+            <span class="fill-remaining-space"></span>
+            <button mat-flat-button class="toolbar-button" color="primary" routerLink="/login" routerLinkActive="highlight" 
+            [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>account_circle</mat-icon>
+                <span class="icon-description">Settings</span>
+            </button>
+            <button mat-button class="toolbar-button">
+                <span class="icon-description">Log out</span>
+            </button>
+            
+          </mat-toolbar>
+          
+          <main class="main">
+            <router-outlet></router-outlet>
+          </main>
+          
+    </mat-drawer-content>
+  </mat-drawer-container>
