@@ -1,30 +1,27 @@
+//scss classes used in main-navigation.component.html:
+
 .mat-toolbar{
   padding: 0px 20% 0px 20%;
   height: 48px;
 }
 
-#logo{
-  padding-top: 20px;
-  background-color: #00796B;
-}
-
-#burger{
-  background-color: #00796B;
-  display: none;
-}
-
 .mat-list-base{
-  padding: 0px 8px;}
+  padding: 0px 6px;}
+
+.mat-flat-button{
+  min-width: 36px;
+}
 
 .toolbar-button{
-  font-size: 16px;}
+  font-size: 16px;
+  margin: 0px 2px;
+}
 
 .toolbar-button:focus{
   outline: none;}
 
-.highlight{
-  background-color: #00796B;
-  //box-shadow: 0 4px 20px 0 rgba(0,0,0,.14),0 7px 10px -5px rgba(244,67,54,.4);
+.toolbar-icon-button{
+  width: 56px;
 }
 
 .fill-remaining-space{
@@ -37,12 +34,30 @@
   padding-left: 8px;
 }
 
-/*.drawer-buttons{
-  padding: 0px 2% 0px 2%;
-}*/
+.highlight-toolbar-button{
+  background-color: #00796B;
+  //box-shadow: 0 4px 20px 0 rgba(0,0,0,.14),0 7px 10px -5px rgba(244,67,54,.4);
+}
 
 .main{
-  padding: 16px 20% 0px 20%;}
+  height: 100%;
+  padding: 16px 20% 0px 20%;
+  background-color: #eaeaea;
+}
+
+//scss id's used in main-navigation.component.html:
+
+#logo{
+  padding-top: 20px;
+  background-color: #00796B;
+}
+
+#burger{
+  background-color: #00796B;
+  display: none;
+}
+
+//scss for responsive behaviour of main-navigation.component.html:
 
 @media screen and (max-width: 1600px) {
   
@@ -103,12 +118,13 @@
 
   .sidenav-list{
     padding: 16px 4px;
+    margin: 0px;
   }
 
   .sidenav-button{
-    width: 208px;
+    width: 216px;
     text-align: left;
-    margin-bottom: 8px;
+    margin: 4px 0px;
     border-radius: 0px;
     background-color: #fafafa;
     font-size: 16px;
@@ -116,4 +132,8 @@
 
   .sidenav-button:focus{
     outline: none;}
+
+  .highlight-navdrawer-button{
+    background-color: #b2dfdb;
+  }
 }
