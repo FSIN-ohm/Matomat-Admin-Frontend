@@ -11,6 +11,7 @@ export class DataTableComponent implements OnInit {
 
   @Input() dataColumns: any[] = [];
   @Input() enableOrder: boolean;
+  @Input() enableAddButton: boolean;
   @Input() dataSource: any;
   // @Input() showImage: any;
   @Input() readonly: boolean;
@@ -24,11 +25,15 @@ export class DataTableComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.add);
+
     if (!this.readonly) {
       // this.dataSource = new ProductsSource(this.paginator, this.sort);
       this.columnsToDisplay = this.columnsToDisplay.concat(this.dataColumns.concat(['settings']));
+
     } else {
       this.columnsToDisplay = this.dataColumns;
+      console.log(this.columnsToDisplay);
     }
   }
 

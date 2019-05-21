@@ -5,6 +5,7 @@
 <div class="mat-elevation-z8 data-table">
   <mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
     <ng-container *ngFor="let disCol of dataColumns; let colIndex = index" matColumnDef="{{disCol}}">
+      {{disCol |json }}
       <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
       <mat-cell *matCellDef="let element "> 
         <span *ngIf="disCol !== 'thumbnail'">
@@ -41,7 +42,7 @@
 </div>
 
 <footer class="footer">
-  <button [ngStyle]="{'right':sideBarVisible === true ? '300px' : '16px'}" mat-fab color="primary" class="stick-right" (click)="addData()">
+  <button *ngIf="enableAddButton" [ngStyle]="{'right':sideBarVisible === true ? '300px' : '16px'}" mat-fab color="primary" class="stick-right" (click)="addData()">
     <i class="material-icons md-48">add</i>
   </button>
 </footer>

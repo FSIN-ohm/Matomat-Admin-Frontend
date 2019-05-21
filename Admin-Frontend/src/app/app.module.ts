@@ -16,14 +16,17 @@ import { AccountManagementComponent } from './account-management/account-managem
 import { ProductsComponent } from './products/products.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AccountModalComponent } from './account-management/account-modal/account-modal.component';
 import { ToastrModule } from 'ngx-toastr';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
+
 import { FormsModule } from '@angular/forms';
 import { ProductModalComponent } from './products/product-modal/product-modal.component';
 import { DataTableComponent } from './data-table/data-table.component';
@@ -64,6 +67,7 @@ import { OrderFormComponent } from './order-form/order-form.component';
     MatFormFieldModule,
     MatInputModule,
     ToastrModule.forRoot(),
+    TabsModule.forRoot(),
     FormsModule,
     MatCardModule,
     MatDialogModule,

@@ -1,64 +1,83 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  mockUp = "http://127.0.0.1:5000/v1/";
+  private _productsUrl = environment.URL + 'products';
+  private _transactionsUrl = environment.URL + 'transactions';
+  private _usersUrl = environment.URL + 'users';
+  private _adminUrl = environment.URL + 'admins'
 
-  constructor(private http: HttpClient) { } 
-  
-  public uploadImage(image: File): Observable<Object> {
-    const formData = new FormData();
-    formData.append('image', image);
+  constructor(private http: HttpClient) { }
 
-    return this.http.post('/api/v1/image-upload', formData); // TODO: DB Anbindung
-  }
+  // public uploadImage(image: File): Observable<Object> {
+  //   const formData = new FormData();
+  //   formData.append('image', image);
+
+  //   return this.http.post('/api/v1/image-upload', formData); // TODO: DB Anbindung
+  // }
 
   public getUsers() {
-    return this.http.get(this.mockUp + 'users');
+    return this.http.get(this._usersUrl);
   }
 
   public getUserById(id: number) {
-    return this.http.get(this.mockUp + 'users/' + id);
+    return this.http.get(this._usersUrl + '/' + id);
   }
 
-  public addUser(user: any) {
-    return this.http.post(this.mockUp + 'users/', user);
-  }
-
-  public editUser(user: any) {
-    return this.http.patch(this.mockUp + 'users', user)
+  public editUser(user: any, id: number) {
+    return this.http.patch(this._usersUrl + '/' + id, user)
   }
 
   public deleteUser(id: number) {
-    return this.http.delete(this.mockUp + 'users/' + id);
+    return this.http.delete(this._usersUrl + '/' + id);
+  }
+
+  public getAdmins() {
+    return this.http.get(this._adminUrl);
+  }
+
+  public getAdminById(id: number) {
+    return this.http.get(this._adminUrl + '/' + id);
+  }
+
+  public addAdmin(admin: any) {
+    return this.http.post(this._adminUrl, admin);
+  }
+
+  public editAdmin(admin: any, id: number) {
+    return this.http.patch(this._adminUrl + '/' + id, admin);
+  }
+
+  public deleteAdmin(id: number) {
+    return this.http.delete(this._adminUrl + '/' + id);
   }
 
   public getProducts() {
-    console.log(this.mockUp + 'product_infos');
-    return this.http.get(this.mockUp + 'product_infos');
+    return this.http.get(this._productsUrl);
   }
 
   public getProductById(id: number) {
-    return this.http.get(this.mockUp + 'product_infos/' + id);
+    return this.http.get(this._productsUrl + '/' + id);
   }
 
   public addProduct(product: any) {
-    return this.http.post(this.mockUp + 'product_infos', product);
+    return this.http.post(this._productsUrl, product);
   }
 
-  public editProduct(product: any) {
-    return this.http.patch(this.mockUp + 'product_infos', product);
+  public editProduct(product: any, id: number) {
+    return this.http.patch(this._productsUrl + '/' + id, product);
   }
 
   public deleteProduct(id: number) {
-    return this.http.delete(this.mockUp + 'product_infos/' + id);
-  }
+    return this.http.delete(this._productsUrl + '/' + id);
+  } 
 
   public getTransactions() {
-    return this.http.get(this.mockUp + 'transactions');
+    return this.http.get(this._transactionsUrl);
   }
 }

@@ -40,8 +40,11 @@ export class ProductsComponent implements OnInit {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showEditModal(product);
-    modalRef.content.onClose.subscribe(result => {
-      this.updateData(result.product, result.id);
+    modalRef.content.onClose.subscribe(product => {
+      this.dataService.editProduct(product, product.id).subscribe((res) => {
+        console.log(res);
+      })
+      // this.updateData(result.product, result.id);
     });
   }
 
@@ -67,10 +70,12 @@ export class ProductsComponent implements OnInit {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showCreationModal();
-    modalRef.content.onClose.subscribe(result => {
-      console.log(result);
-
-      // const data: Product = {
+    modalRef.content.onClose.subscribe(product => {
+      console.log(product);
+      this.dataService.addProduct(product).subscribe((res) => {
+        console.log(res);
+      })
+            // const data: Product = {
       //   id: 1,
       //   name: result.product.name,
       //   amount: result.product.amount,
@@ -85,11 +90,14 @@ export class ProductsComponent implements OnInit {
 
   deleteProduct(product) {
     if (confirm("Wollen Sie dieses Produkt endgültig löschen?")) {
-      const index = this.table.dataSource.data.indexOf(product);
-      if (product.id > -1) {
-        this.table.dataSource.data.splice(index, 1);
-        this.table.dataSource.connect(); // updaten
-      }
+      // const index = this.table.dataSource.data.indexOf(product);
+      // if (product.id > -1) {
+      //   this.table.dataSource.data.splice(index, 1);
+      //   this.table.dataSource.connect(); // updaten
+      // }
+      // this.dataService.deleteProduct(product.id).subscribe(res => {
+      //   console.log(res);
+      // });
     }
   }
 

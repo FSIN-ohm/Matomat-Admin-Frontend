@@ -41,31 +41,32 @@ export class ProductModalComponent implements OnInit {
         amount: [''],
         reorderLevel: [''],
         costs: [''],
+        items_per_crate: [''],
         img: ['']
       })
     });
   }
 
-  changeImage(imageInput) {
-    console.log(imageInput);
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
+  // changeImage(imageInput) {
+  //   console.log(imageInput);
+  //   const file: File = imageInput.files[0];
+  //   const reader = new FileReader();
 
-    reader.addEventListener('load', (event: any) => {
+  //   reader.addEventListener('load', (event: any) => {
 
-      this.selectedFile = new ImageSnippet(event.target.result, file);
+  //     this.selectedFile = new ImageSnippet(event.target.result, file);
 
-      this.dataService.uploadImage(this.selectedFile.file).subscribe(
-        (res) => {
-          console.log(res);
-        },
-        (err) => {
-          console.log(err);
-        })
-    });
+  //     this.dataService.uploadImage(this.selectedFile.file).subscribe(
+  //       (res) => {
+  //         console.log(res);
+  //       },
+  //       (err) => {
+  //         console.log(err);
+  //       })
+  //   });
 
-    reader.readAsDataURL(file);
-  }
+  //   reader.readAsDataURL(file);
+  // }
 
   initWithData(product) {
     this.productForm.controls.product.patchValue({
