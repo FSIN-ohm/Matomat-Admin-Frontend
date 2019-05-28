@@ -1,0 +1,57 @@
+.container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.login-card {
+    background: #ffffff;
+    margin: auto;
+    // width: 50%;
+    padding: 0px;
+
+    @media(min-width: 0px) {
+        width: 100%;
+    }
+    @media (min-width: 576px) {
+        width: 50%;
+    }
+    @media(min-width: 768px) {
+        width: 40%;
+    }
+    @media(min-width: 992px) {
+        width: 30%;
+    }
+    @media(min-width: 1200px) {
+        width: 20%;
+    }
+}
+
+.card-header {
+    background: rgb(0, 150, 136);
+    color: #ffffff;
+    padding-bottom: 0px;
+}
+
+.card-content {
+    padding-top: 10px;
+    margin-bottom: 0px;
+}
+
+.mat-card-actions {
+    padding-bottom: 15px;
+}
+
+.btn {
+    background: rgb(0, 150, 136);
+    color: #FFFFFF;   
+    &:hover {
+        background:#298780;
+    }
+    &:active {
+        background: #298780;
+    }
+}
+
+::ng-deep .mat-form-field {
+    width: 80%;
+}

@@ -32,9 +32,9 @@ import { ProductModalComponent } from './products/product-modal/product-modal.co
 import { DataTableComponent } from './data-table/data-table.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
-
-import { AuthGuard, AuthenticationService, UserService } from './auth';
 import { OrderFormComponent } from './order-form/order-form.component';
+import { BasicAuthInterceptor } from './basic-auth-interceptor';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -79,9 +79,8 @@ import { OrderFormComponent } from './order-form/order-form.component';
   ],
   entryComponents: [AccountModalComponent, ProductModalComponent],
   providers: [
-    AuthGuard,
-    AuthenticationService,
-    UserService],
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
