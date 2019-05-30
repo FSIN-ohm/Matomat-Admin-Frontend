@@ -1,22 +1,25 @@
-<mat-toolbar role="heading" color="primary" class="mat-elevation-z4">
-  <mat-toolbar-row>
-    <button mat-button class="toolbar-button" (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
+<mat-toolbar color="primary">
+  <span>Matohmat</span>
 
-    <span>Application Title</span>
+  <mat-list class="button-list">
+    <button mat-flat-button class="toolbar-button" color="primary" routerLink="/login" routerLinkActive="highlight" [routerLinkActiveOptions]="{exact:
+      true}">Account Settings</button>
+    <button mat-flat-button class="toolbar-button" color="primary" routerLink="transactions" routerLinkActive="highlight"
+    [routerLinkActiveOptions]="{exact: true}">Transactions</button>
+    <button mat-flat-button class="toolbar-button" color="primary" routerLink="acc-management" routerLinkActive="highlight"
+    [routerLinkActiveOptions]="{exact: true}">Accountmanagement</button>
+    <button mat-flat-button class="toolbar-button" color="primary" routerLink="product-management" routerLinkActive="highlight"
+    [routerLinkActiveOptions]="{exact: true}">Productmanagement</button>  
+  </mat-list>
+  
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
 
-    <!-- This fills the remaining space of the current row -->
-    <span class="fill-remaining-space"></span>
-
-    <button mat-button class="toolbar-button">
-      <mat-icon>power_settings_new</mat-icon>
-    </button>
-  </mat-toolbar-row>
-  <mat-toolbar-row>
-    <!-- empty second row, could be used for error messages or for displaying loading state -->
-  </mat-toolbar-row>
+  <button mat-button class="toolbar-button logout">
+    <mat-icon>power_settings_new</mat-icon>
+  </button>
 </mat-toolbar>
+<<<<<<< HEAD
 
 <mat-sidenav-container class="sidenav-container mat-elevation-z2" [hasBackdrop]="false">
   <mat-sidenav #drawer [mode]="'side'" [opened]="true">
@@ -53,3 +56,8 @@ true}">Productmanagement</a>
 
   </mat-sidenav-content>
 </mat-sidenav-container>
+=======
+<main class="main">
+  <router-outlet></router-outlet>
+</main>
+>>>>>>> d8a495127361f00e3b838fca3163fcd8aecbe432
