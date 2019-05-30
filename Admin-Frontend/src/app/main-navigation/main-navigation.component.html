@@ -2,7 +2,7 @@
   <span>Matohmat</span>
 
   <mat-list class="button-list">
-    <button mat-flat-button class="toolbar-button" color="primary" routerLink="/login" routerLinkActive="highlight" [routerLinkActiveOptions]="{exact:
+    <button mat-flat-button class="toolbar-button" color="primary" routerLink="settings" routerLinkActive="highlight" [routerLinkActiveOptions]="{exact:
       true}">Account Settings</button>
     <button mat-flat-button class="toolbar-button" color="primary" routerLink="transactions" routerLinkActive="highlight"
     [routerLinkActiveOptions]="{exact: true}">Transactions</button>
@@ -15,7 +15,7 @@
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
 
-  <button mat-button class="toolbar-button logout">
+  <button mat-button class="toolbar-button logout" (click)="logout()">
     <mat-icon>power_settings_new</mat-icon>
   </button>
 </mat-toolbar>

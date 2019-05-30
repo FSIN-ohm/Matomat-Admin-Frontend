@@ -12,8 +12,8 @@ export class DataTableComponent implements OnInit {
   @Input() dataColumns: any[] = [];
   @Input() enableOrder: boolean;
   @Input() enableAddButton: boolean;
+  @Input() enableDeleteButton: boolean;
   @Input() dataSource: any;
-  // @Input() showImage: any;
   @Input() readonly: boolean;
   @Output() edit = new EventEmitter();
   @Output() delete = new EventEmitter();

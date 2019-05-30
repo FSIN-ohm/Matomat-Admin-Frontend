@@ -27,6 +27,7 @@ export class ProductModalComponent implements OnInit {
   constructor(public bsModal: BsModalRef, private formBuilder: FormBuilder, private toastr: ToastrService, private dataService: DataService) {
     console.log("CONSTRUCTOR");
     this.productForm = this.createFormGroup(formBuilder);
+    console.log(this.productForm);
     this.onClose = new Subject();
   }
 
@@ -38,43 +39,23 @@ export class ProductModalComponent implements OnInit {
     return formBuilder.group({
       product: formBuilder.group({
         name: ['', Validators.required],
-        amount: [''],
-        reorderLevel: [''],
-        costs: [''],
-        items_per_crate: [''],
-        img: ['']
+        reorder_point: 0,
+        price: 0,
+        items_per_crate: 0,
+        thumbnail: [''],
+        is_available: false
       })
     });
   }
 
-  // changeImage(imageInput) {
-  //   console.log(imageInput);
-  //   const file: File = imageInput.files[0];
-  //   const reader = new FileReader();
-
-  //   reader.addEventListener('load', (event: any) => {
-
-  //     this.selectedFile = new ImageSnippet(event.target.result, file);
-
-  //     this.dataService.uploadImage(this.selectedFile.file).subscribe(
-  //       (res) => {
-  //         console.log(res);
-  //       },
-  //       (err) => {
-  //         console.log(err);
-  //       })
-  //   });
-
-  //   reader.readAsDataURL(file);
-  // }
-
   initWithData(product) {
     this.productForm.controls.product.patchValue({
       name: product.name,
-      amount: product.amount,
-      reorderLevel: product.reorderLevel,
-      costs: product.costs,
-      // img: product.img,
+      items_per_crate: product.items_per_crate,
+      reorder_point: product.reorder_point,
+      price: product.price,
+      thumbnail: product.thumbnail,
+      is_available: product.is_available
     });
   }
 
@@ -99,6 +80,7 @@ export class ProductModalComponent implements OnInit {
   }
 
   save() {
+    console.log(this.productForm);
     if (this.productForm.valid) {
       if (this.creationModal) {
         // add product
@@ -114,6 +96,7 @@ export class ProductModalComponent implements OnInit {
         });
         this.productForm.value.id = this.product.id;
       }
+      console.log(this.productForm.value);
       this.onClose.next(this.productForm.value);
       this.bsModal.hide();
     } else {

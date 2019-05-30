@@ -19,6 +19,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 
 import { AccountModalComponent } from './account-management/account-modal/account-modal.component';
@@ -30,7 +31,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
 import { ProductModalComponent } from './products/product-modal/product-modal.component';
 import { DataTableComponent } from './data-table/data-table.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { OrderFormComponent } from './order-form/order-form.component';
 import { DataService } from './data.service';
@@ -59,6 +60,7 @@ import { DataService } from './data.service';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatCheckboxModule,
     MatListModule,
     MatGridListModule,
     ModalModule.forRoot(),
@@ -77,7 +79,9 @@ import { DataService } from './data.service';
     HttpClientModule,
   ],
   entryComponents: [AccountModalComponent, ProductModalComponent],
-  providers: [DataService],
+  providers: [
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

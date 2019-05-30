@@ -72,10 +72,12 @@ export class ProductsComponent implements OnInit {
     (<ProductModalComponent>modalRef.content).showCreationModal();
     modalRef.content.onClose.subscribe(product => {
       console.log(product);
-      this.dataService.addProduct(product).subscribe((res) => {
-        console.log(res);
-      })
-            // const data: Product = {
+      this.dataService.addProduct(product).subscribe(
+        res => {
+          console.log(res); },
+        error => { console.log(error);}
+        );
+      // const data: Product = {
       //   id: 1,
       //   name: result.product.name,
       //   amount: result.product.amount,
@@ -86,19 +88,6 @@ export class ProductsComponent implements OnInit {
       // this.table.dataSource.data.push(data);
       // this.table.dataSource.connect(); // updaten
     });
-  }
-
-  deleteProduct(product) {
-    if (confirm("Wollen Sie dieses Produkt endgültig löschen?")) {
-      // const index = this.table.dataSource.data.indexOf(product);
-      // if (product.id > -1) {
-      //   this.table.dataSource.data.splice(index, 1);
-      //   this.table.dataSource.connect(); // updaten
-      // }
-      // this.dataService.deleteProduct(product.id).subscribe(res => {
-      //   console.log(res);
-      // });
-    }
   }
 
   closeSideBar(close) {

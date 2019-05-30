@@ -45,8 +45,6 @@ export class AccountManagementComponent implements OnInit {
         }
       }
     }, 200);
-    
-
   }
 
   getUsers() {

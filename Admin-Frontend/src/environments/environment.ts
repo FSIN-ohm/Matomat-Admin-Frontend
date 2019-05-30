@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  URL: 'http://127.0.0.1:5000/v1/'
+  URL: 'https://api.matohmat.fachschaft.in/v1/'
+  // URL: 'http://127.0.0.1:5000/v1/'
 };
 
 /*
