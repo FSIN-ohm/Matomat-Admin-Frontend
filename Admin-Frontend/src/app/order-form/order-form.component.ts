@@ -76,4 +76,8 @@ export class OrderFormComponent implements OnInit {
   // increaseNumber(product) {
   //   product.count = product.count + 1;
   // }
+
+  onKey(event) {
+    console.log(event);
+  }
 }
