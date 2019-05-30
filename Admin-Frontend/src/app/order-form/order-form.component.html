@@ -11,9 +11,8 @@
         <mat-form-field class="col-md-6">
           <input matInput placeholder="Name" [value]="product.name">
         </mat-form-field>
-
         <mat-form-field class="col-md-3">
-          <input type="number" matInput placeholder="Anzahl" [value]="product.count" (keyup)="onKey($event)">
+          <input type="number" matInput placeholder="Anzahl" [value]="product.count" [(ngModel)]="count[product.id]">
         </mat-form-field>
 
         <button class="col-md-1" mat-button color="warn" (click)="deleteProduct(product)">

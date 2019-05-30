@@ -11,6 +11,7 @@ export class OrderFormComponent implements OnInit {
   @Output() closeSidaBar = new EventEmitter<boolean>();
   products: any[] = [];
   selectedValue = 'buy';
+  count: number[] = [];
 
   constructor(private toastr: ToastrService) { }
 
@@ -27,11 +28,13 @@ export class OrderFormComponent implements OnInit {
       let data = {
         id: product.id,
         name: product.name,
-        count: +1
+        count: this.count[product.id]
       }
+      this.count[product.id] = 1;
       this.products.push(data);
     } else {
-      foundProduct.count = foundProduct.count + 1;
+      this.count[product.id] += 1;
+      foundProduct.count = this.count[product.id];
     }
   }
 
@@ -71,13 +74,5 @@ export class OrderFormComponent implements OnInit {
       }
     }
     return null;
-  }
-
-  // increaseNumber(product) {
-  //   product.count = product.count + 1;
-  // }
-
-  onKey(event) {
-    console.log(event);
   }
 }
