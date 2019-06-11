@@ -6,14 +6,14 @@
   <div class="modal-body">
     <div formGroupName="account">
       <div class="fields-container">
-        <mat-form-field *ngIf="creationModal" class="col-md-12">
-          <input matInput placeholder="Rolle" formControlName="role" readonly>
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Name *" formControlName="user_name" readonly>
         </mat-form-field>
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Name" formControlName="name">
+          <input matInput placeholder="Passwort *" formControlName="password">
         </mat-form-field>
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Guthaben" formControlName="balance">
+          <input matInput placeholder="Email *" formControlName="email">
         </mat-form-field>
       </div>
     </div>

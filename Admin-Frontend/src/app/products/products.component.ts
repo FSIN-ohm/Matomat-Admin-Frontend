@@ -4,6 +4,7 @@ import { ProductModalComponent } from './product-modal/product-modal.component';
 import { DataTableComponent } from '../data-table/data-table.component';
 import { OrderFormComponent } from '../order-form/order-form.component';
 import { DataService } from '../data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,7 @@ export class ProductsComponent implements OnInit {
 
   columnsToDisplay = ['thumbnail', 'name', 'price', 'reorder_point', 'is_available', 'items_per_crate'];
 
-  constructor(private injector: Injector, private dataService: DataService, private changeDetector: ChangeDetectorRef) { }
+  constructor(private injector: Injector, private toastr: ToastrService, private dataService: DataService, private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.getProducts();
@@ -40,9 +41,17 @@ export class ProductsComponent implements OnInit {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showEditModal(product);
-    modalRef.content.onClose.subscribe(product => {
-      this.dataService.editProduct(product, product.id).subscribe((res) => {
-        console.log(res);
+    modalRef.content.onClose.subscribe(newProduct => {
+      console.log(newProduct);
+      console.log(product.id);
+      this.dataService.editProduct(newProduct, product.id).subscribe((res) => {
+        this.toastr.success('Produkt wurde erfolgreich bearbeitet!', 'Erfolg', {
+          positionClass: 'toast-top-right',
+          timeOut: 6000
+        });
+        this.dataService.getProducts().subscribe(res => {
+          this.products = res;
+        });
       })
       // this.updateData(result.product, result.id);
     });
@@ -74,9 +83,14 @@ export class ProductsComponent implements OnInit {
       console.log(product);
       this.dataService.addProduct(product).subscribe(
         res => {
-          console.log(res); },
-        error => { console.log(error);}
-        );
+          console.log(res);
+          this.toastr.success('Produkt wurde erfolgreich hinzugefügt!', 'Erfolg', {
+            positionClass: 'toast-top-right',
+            timeOut: 6000
+          });
+        },
+        error => { console.log(error); }
+      );
       // const data: Product = {
       //   id: 1,
       //   name: result.product.name,

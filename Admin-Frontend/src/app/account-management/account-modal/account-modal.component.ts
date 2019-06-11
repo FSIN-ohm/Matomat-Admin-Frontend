@@ -29,9 +29,9 @@ export class AccountModalComponent implements OnInit {
   createFormGroup(formBuilder: FormBuilder) {
     return formBuilder.group({
       account: formBuilder.group({
-        role: ['Admin'],
-        name: ['', Validators.required],
-        balance: ['']
+        user_name: ['', Validators.required],
+        password: ['', Validators.required],
+        email: ['', Validators.required]
       })
     });
   }
@@ -39,8 +39,9 @@ export class AccountModalComponent implements OnInit {
 
   initWithData(account) {
     this.accountForm.controls.account.patchValue({
-      name: account.name,
-      balance: account.balance,
+      user_name: account.name,
+      password: account.password,
+      email: account.email
     });
   }
 
@@ -57,7 +58,7 @@ export class AccountModalComponent implements OnInit {
   }
 
   showCreationModal() {
-    this.header = 'Account erstellen';
+    this.header = 'Admin erstellen';
     this.creationModal = true;
   }
 
