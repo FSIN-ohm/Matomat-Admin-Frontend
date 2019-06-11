@@ -15,6 +15,10 @@ img {
   background-color: #fafafa;
 }
 
+.mat-cell, mat-footer-cell, mat-header-cell{
+  overflow: visible;
+}
+
 .table-paginator{
   padding-bottom: 64px;
 }
