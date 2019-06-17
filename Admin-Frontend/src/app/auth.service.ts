@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -9,16 +10,15 @@ export class AuthService {
     user: string;
     password: string;
     isAuthorized = false;
+    private url = environment.URL + 'admins/me'
 
     constructor(private http: HttpClient) { }
 
     login(username: string, password: string) {
-        console.log(username);
-        console.log(password);
         this.user = username;
         this.password = password;
         const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-        return this.http.get('https://api.matohmat.fachschaft.in', { responseType: 'text', observe: 'response', headers: headers });
+        return this.http.get(this.url, { responseType: 'text', observe: 'response', headers: headers });
     }
 
     logout() {

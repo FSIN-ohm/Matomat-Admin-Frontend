@@ -22,6 +22,7 @@ export class ProductModalComponent implements OnInit {
   productForm: FormGroup;
   header: string;
   onClose: Subject<any>;
+  patchProduct = false;
 
   constructor(public bsModal: BsModalRef, private formBuilder: FormBuilder, private toastr: ToastrService) {
     this.productForm = this.createFormGroup(formBuilder);
@@ -61,6 +62,7 @@ export class ProductModalComponent implements OnInit {
   }
 
   showEditModal(product) {
+    this.patchProduct = true;
     this.header = "Produkt bearbeiten";
     if (product != null) {
       this.mapProduct(product);

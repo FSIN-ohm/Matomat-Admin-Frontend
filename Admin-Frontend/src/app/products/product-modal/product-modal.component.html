@@ -30,7 +30,7 @@
           <input matInput type="barcode" placeholder="Barcode" formControlName="barcode">
         </mat-form-field>
 
-        <div class="col-md-12">
+        <div *ngIf="patchProduct" class="col-md-12">
           <mat-checkbox  formControlName="is_available">Produkt vorhanden</mat-checkbox>
         </div>
       </div>

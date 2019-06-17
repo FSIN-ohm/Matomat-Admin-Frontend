@@ -53,20 +53,7 @@ export class ProductsComponent implements OnInit {
           this.products = res;
         });
       })
-      // this.updateData(result.product, result.id);
     });
-  }
-
-  updateData(newProduct, id) {
-    for (let product of this.table.dataSource.data) {
-      if (product.id === id) {
-        product.name = newProduct.name;
-        product.amount = newProduct.amount;
-        product.reorderLevel = newProduct.reorderLevel;
-        product.costs = newProduct.costs;
-        return;
-      }
-    }
   }
 
   orderProduct(product) {
@@ -88,19 +75,12 @@ export class ProductsComponent implements OnInit {
             positionClass: 'toast-top-right',
             timeOut: 6000
           });
+          this.dataService.getProducts().subscribe(res => {
+            this.products = res;
+          });
         },
         error => { console.log(error); }
       );
-      // const data: Product = {
-      //   id: 1,
-      //   name: result.product.name,
-      //   amount: result.product.amount,
-      //   reorderLevel: result.product.reorderLevel,
-      //   costs: result.product.costs,
-      //   img: 'https://www.freeiconspng.com/uploads/no-image-icon-15.png'
-      // }
-      // this.table.dataSource.data.push(data);
-      // this.table.dataSource.connect(); // updaten
     });
   }
 

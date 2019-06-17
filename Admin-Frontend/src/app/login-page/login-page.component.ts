@@ -52,13 +52,13 @@ export class LoginPageComponent implements OnInit {
 
     this.authService.login(user, password).subscribe(
       res => {
-        this.authService.isAuthorized = true;
-        this.router.navigate(['/acc-management'])
+          this.authService.isAuthorized = true;
+          this.router.navigate(['/product-management'])
       },
-      error => { 
+      error => {
         this.error = error;
         this.toastr.error("Falsche Logindaten", "Error");
-       }
+      }
     );
     console.log(localStorage);
   }
