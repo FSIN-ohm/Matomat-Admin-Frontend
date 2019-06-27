@@ -14,12 +14,37 @@ import { DataService } from '../data.service';
 export class AccountManagementComponent implements OnInit {
   @ViewChild(DataTableComponent) table;
   users: any;
-  columnsToDisplay = ['name', 'balance', 'last_seen'];
+  admins: any;
+  columnsToDisplay = ['name', 'balance', 'last_seen', 'admin'];
 
   constructor(private injector: Injector, private service: DataService) { }
 
   ngOnInit() {
+    console.log(this.users);
     this.getUsers();
+    this.getAdmins();
+    this.checkForAdminRole();
+  }
+
+  checkForAdminRole() {
+    setTimeout(() => {
+      if (typeof(this.admins) === 'undefined' || typeof(this.users) === 'undefined') {
+        this.checkForAdminRole();
+        return;
+      } else {
+        console.log("fertig");
+        console.log(this.users);
+        for(let user of this.users) {
+          console.log(user);
+          for(let admin of this.admins) {
+            console.log(admin);
+            if(user.id === admin.id) {
+              user.admin = true;
+            }
+          }
+        }
+      }
+    }, 200);
   }
 
   getUsers() {
@@ -27,6 +52,13 @@ export class AccountManagementComponent implements OnInit {
       this.users = users;
       console.log(this.users);
     });
+  }
+
+  getAdmins() {
+    this.service.getAdmins().subscribe(admins => {
+      this.admins = admins;
+      console.log(this.admins);
+    })
   }
 
   editAccount(account) {
@@ -39,7 +71,7 @@ export class AccountManagementComponent implements OnInit {
   }
 
   updateData(newAccount, id) {
-    this.service.editUser(newAccount).subscribe(res => {
+    this.service.editUser(newAccount, newAccount.id).subscribe(res => {
       console.log(res);
     });
     // noch notwendig?
@@ -66,7 +98,7 @@ export class AccountManagementComponent implements OnInit {
         lastActivity: 'heute',
         active: result.account.active,
       }
-      this.service.addUser(data).subscribe(res => {
+      this.service.addAdmin(data).subscribe(res => {
         console.log(res);
       });
       // this.table.dataSource.data.push(data);

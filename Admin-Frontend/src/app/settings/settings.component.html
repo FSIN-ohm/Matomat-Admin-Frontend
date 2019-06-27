@@ -1,3 +1,45 @@
-<p>
-  settings works!
-</p>
+<form [formGroup]="settingsForm">
+  <tabset>
+    <tab heading="Passwort ändern" id="passwordTab">
+        <div formGroupName="password">
+          <div class="fields-container">
+            <mat-form-field class="col-md-12">
+              <input matInput placeholder="Aktuelles Passwort *" formControlName="old_password" type="password">
+            </mat-form-field>
+      
+            <mat-form-field class="col-md-12">
+              <input matInput placeholder="Neues Passwort *" formControlName="new_password" type="password">
+            </mat-form-field>
+      
+            <mat-form-field class="col-md-12">
+              <input matInput placeholder="Neues Passwort bestätigen *" formControlName="new_password_confirm" type="password">
+            </mat-form-field>
+          </div>
+          <button class="btn btn-success" (click)="changePassword()">Passwort ändern</button>
+        </div>
+    </tab>
+    <tab heading="E-Mail ändern" id="emailTab">
+        <div formGroupName="email">
+          <div class="fields-container">
+      
+            <mat-form-field class="col-md-12">
+              <input matInput placeholder="Aktuelle Email *" formControlName="old_email" type="email">
+            </mat-form-field>
+      
+            <mat-form-field class="col-md-12">
+              <input matInput placeholder="Neue Email *" formControlName="new_email" type="email">
+            </mat-form-field>
+      
+            <mat-form-field class="col-md-12">
+              <input matInput placeholder="Neue Email bestätigen *" formControlName="new_email_confirm" type="email">
+            </mat-form-field>
+          </div>
+          <button class="btn btn-success" (click)="changeMail()">E-Mail ändern</button>
+        </div>
+    </tab>
+  </tabset>
+
+
+
+
+</form>

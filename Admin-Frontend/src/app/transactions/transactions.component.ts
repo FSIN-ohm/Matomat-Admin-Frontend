@@ -10,6 +10,12 @@ export class TransactionsComponent implements OnInit {
   transactions: any;
   columnsToDisplay = ['date', 'sender', 'receiver', 'amount', 'transaction_type'];
 
+  // columnsToDisplay = [{ 'key': 'date', 'value': 'Datum' },
+  // { 'key': 'sender', 'value': 'Sender' },
+  // { 'key': 'receiver', 'value': 'Empfänger' },
+  // { 'key': 'amount', 'value': 'Anzahl' },
+  // { 'key': 'transaction_type', 'value': 'Transaktionstyp' }];
+
   constructor(private dataService: DataService) { }
 
   ngOnInit() {

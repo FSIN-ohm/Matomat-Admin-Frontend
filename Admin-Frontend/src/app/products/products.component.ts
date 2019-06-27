@@ -4,6 +4,7 @@ import { ProductModalComponent } from './product-modal/product-modal.component';
 import { DataTableComponent } from '../data-table/data-table.component';
 import { OrderFormComponent } from '../order-form/order-form.component';
 import { DataService } from '../data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,7 @@ export class ProductsComponent implements OnInit {
 
   columnsToDisplay = ['thumbnail', 'name', 'price', 'reorder_point', 'is_available', 'items_per_crate'];
 
-  constructor(private injector: Injector, private dataService: DataService, private changeDetector: ChangeDetectorRef) { }
+  constructor(private injector: Injector, private toastr: ToastrService, private dataService: DataService, private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.getProducts();
@@ -40,21 +41,19 @@ export class ProductsComponent implements OnInit {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showEditModal(product);
-    modalRef.content.onClose.subscribe(result => {
-      this.updateData(result.product, result.id);
+    modalRef.content.onClose.subscribe(newProduct => {
+      console.log(newProduct);
+      console.log(product.id);
+      this.dataService.editProduct(newProduct, product.id).subscribe((res) => {
+        this.toastr.success('Produkt wurde erfolgreich bearbeitet!', 'Erfolg', {
+          positionClass: 'toast-top-right',
+          timeOut: 6000
+        });
+        this.dataService.getProducts().subscribe(res => {
+          this.products = res;
+        });
+      })
     });
-  }
-
-  updateData(newProduct, id) {
-    for (let product of this.table.dataSource.data) {
-      if (product.id === id) {
-        product.name = newProduct.name;
-        product.amount = newProduct.amount;
-        product.reorderLevel = newProduct.reorderLevel;
-        product.costs = newProduct.costs;
-        return;
-      }
-    }
   }
 
   orderProduct(product) {
@@ -67,30 +66,22 @@ export class ProductsComponent implements OnInit {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showCreationModal();
-    modalRef.content.onClose.subscribe(result => {
-      console.log(result);
-
-      // const data: Product = {
-      //   id: 1,
-      //   name: result.product.name,
-      //   amount: result.product.amount,
-      //   reorderLevel: result.product.reorderLevel,
-      //   costs: result.product.costs,
-      //   img: 'https://www.freeiconspng.com/uploads/no-image-icon-15.png'
-      // }
-      // this.table.dataSource.data.push(data);
-      // this.table.dataSource.connect(); // updaten
+    modalRef.content.onClose.subscribe(product => {
+      console.log(product);
+      this.dataService.addProduct(product).subscribe(
+        res => {
+          console.log(res);
+          this.toastr.success('Produkt wurde erfolgreich hinzugefügt!', 'Erfolg', {
+            positionClass: 'toast-top-right',
+            timeOut: 6000
+          });
+          this.dataService.getProducts().subscribe(res => {
+            this.products = res;
+          });
+        },
+        error => { console.log(error); }
+      );
     });
-  }
-
-  deleteProduct(product) {
-    if (confirm("Wollen Sie dieses Produkt endgültig löschen?")) {
-      const index = this.table.dataSource.data.indexOf(product);
-      if (product.id > -1) {
-        this.table.dataSource.data.splice(index, 1);
-        this.table.dataSource.connect(); // updaten
-      }
-    }
   }
 
   closeSideBar(close) {
