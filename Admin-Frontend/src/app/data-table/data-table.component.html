@@ -2,7 +2,7 @@
   <i class="material-icons md-48">add_shopping_cart</i>
 </button> -->
 
-<div class="mat-elevation-z8 data-table">
+<section class="data-table">
   <mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
 
     <ng-container matColumnDef="image">
@@ -11,7 +11,6 @@
         <img [src]="data.img" />
       </mat-cell>
     </ng-container>
-
 
     <ng-container *ngFor="let disCol of dataColumns; let colIndex = index" matColumnDef="{{disCol}}">
       <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
@@ -38,13 +37,13 @@
     <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
   </mat-table>
 
-  <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="50"
+  <mat-paginator #paginator class="table-paginator" [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="50"
     [pageSizeOptions]="[25, 50, 100, 250]">
   </mat-paginator>
-</div>
+</section>
 
-<footer class="footer">
-  <button [ngStyle]="{'right':sideBarVisible === true ? '300px' : '16px'}" mat-fab color="primary" class="stick-right" (click)="addData()">
-    <i class="material-icons md-48">add</i>
+<section class="bottom-toolbar">
+  <button [ngStyle]="{'right':sideBarVisible === true ? '300px' : '16px'}" mat-fab color="primary" class="bot-toolbar-button" (click)="addData()">
+    <mat-icon>add</mat-icon>
   </button>
-</footer>
+</section>

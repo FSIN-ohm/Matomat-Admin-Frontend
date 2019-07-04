@@ -4,12 +4,10 @@
     <app-order-form class="order" #order class="order" (closeSidaBar)="closeSideBar($event)"></app-order-form>
   </mat-sidenav>
 
-  <div class="footer">
-    <button [ngStyle]="{'right':sideBarVisible === true ? '380px' : '80px'}" mat-fab color="primary" class="stick-right"
-      (click)="toggleSideBar()">
-      <i class="material-icons md-48">shopping_cart</i>
-    </button>
-  </div>
+  <!--<button [ngStyle]="{'right':sideBarVisible === true ? '380px' : '80px'}" mat-fab color="primary" class="bot-toolbar-button"
+    (click)="toggleSideBar()">
+    <i class="material-icons md-48">shopping_cart</i>
+  </button>-->
 
   <app-data-table #table class="table" [dataColumns]="columnsToDisplay" [dataSource]="dataSource" [enableOrder]="true"
     showImage="true" (edit)="editProduct($event)" (delete)="deleteProduct($event)" (add)="addProduct()"

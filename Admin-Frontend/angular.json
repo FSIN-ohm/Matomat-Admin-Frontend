@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/fsin-theme.scss",
               "src/styles.scss"
             ],
             "scripts": []
