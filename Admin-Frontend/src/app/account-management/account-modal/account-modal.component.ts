@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AccountModalComponent implements OnInit {
   account: any;
   accountForm: FormGroup;
-  creationModal: boolean = false;
+  addAdminModal: boolean = false;
   header: string;
   onClose: Subject<any>;
 
@@ -28,38 +28,41 @@ export class AccountModalComponent implements OnInit {
 
   createFormGroup(formBuilder: FormBuilder) {
     return formBuilder.group({
-      account: formBuilder.group({
-        user_name: ['', Validators.required],
-        password: ['', Validators.required],
-        email: ['', Validators.required]
-      })
+      user_name: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['', Validators.required]
+    });
+  }
+
+  createEditFormGroup(formBuilder:FormBuilder) {
+    return formBuilder.group({
+      user_name: ['', Validators.required],
     });
   }
 
 
   initWithData(account) {
-    this.accountForm.controls.account.patchValue({
+    this.accountForm.patchValue({
       user_name: account.name,
-      password: account.password,
-      email: account.email
     });
   }
-
 
   show() {
   }
 
   showEditModal(account) {
     this.header = 'Account bearbeiten';
+    this.accountForm = this.createEditFormGroup(this.formBuilder);
     if (account != null) {
       this.account = account;
       this.initWithData(account);
     }
+
   }
 
   showCreationModal() {
     this.header = 'Admin erstellen';
-    this.creationModal = true;
+    this.addAdminModal = true;
   }
 
   cancel() {
@@ -68,26 +71,19 @@ export class AccountModalComponent implements OnInit {
 
   submit() {
     if (this.accountForm.valid) {
-      console.log("Valid");
-      if (this.creationModal) {
-        // add account
-        this.toastr.success('Account wurde erfolgreich erstellt!', 'Erfolg', {
+      if (this.accountForm.value.password != null && this.accountForm.value.password.length < 8) {
+        this.toastr.error('Das neue Passwort muss mindestens 8 Zeichen lang sein!', 'Error', {
           positionClass: 'toast-top-right',
           timeOut: 6000
         });
       } else {
-        // edit account
-        this.toastr.success('Account wurde erfolgreich bearbeitet!', 'Erfolg', {
-          positionClass: 'toast-top-right',
-          timeOut: 6000
-        });
-        this.accountForm.value.id = this.account.id;
+        this.mapAccount(this.accountForm.value);
+        this.onClose.next(this.account);
+        this.bsModal.hide();
       }
-      this.onClose.next(this.accountForm.value);
-      this.bsModal.hide();
     } else {
       this.findInvalidControls(this.accountForm);
-      this.toastr.error('Bitte befülle die erforderlichen Felder!', 'Error', {
+      this.toastr.error('Bitte füllen Sie die fehlenden Felder aus!', 'Error', {
         positionClass: 'toast-top-right',
         timeOut: 6000
       });
@@ -103,5 +99,12 @@ export class AccountModalComponent implements OnInit {
         this.findInvalidControls(control);
       }
     })
+  }
+
+  mapAccount(accountForm) {
+    this.account.user_name = accountForm.user_name;
+    this.account.password = accountForm.password;
+    this.account.email = accountForm.email;
+    console.log(this.account);
   }
 }

@@ -15,7 +15,6 @@ export class DataService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-
   private createHeader(): HttpHeaders {
     return new HttpHeaders({ Authorization: 'Basic ' + btoa(this.authService.user + ':' + this.authService.password) });
   }

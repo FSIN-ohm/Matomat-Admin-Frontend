@@ -68,9 +68,7 @@ export class ProductsComponent implements OnInit {
             positionClass: 'toast-top-right',
             timeOut: 6000
           });
-          this.dataService.getProducts().subscribe(res => {
-            this.products = res;
-          });
+          this.getProducts();
         },
         error => { console.log(error); }
       );

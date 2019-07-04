@@ -4,18 +4,16 @@
   </div>
 
   <div class="modal-body">
-    <div formGroupName="account">
-      <div class="fields-container">
-        <mat-form-field class="col-md-12">
-          <input matInput placeholder="Name *" formControlName="user_name" readonly>
-        </mat-form-field>
-        <mat-form-field class="col-md-12">
-          <input matInput placeholder="Passwort *" formControlName="password">
-        </mat-form-field>
-        <mat-form-field class="col-md-12">
-          <input matInput placeholder="Email *" formControlName="email">
-        </mat-form-field>
-      </div>
+    <div class="fields-container">
+      <mat-form-field class="col-md-12">
+        <input matInput placeholder="Name *" formControlName="user_name">
+      </mat-form-field>
+      <mat-form-field *ngIf="addAdminModal" class="col-md-12">
+        <input matInput type="password" placeholder="Passwort *" formControlName="password">
+      </mat-form-field>
+      <mat-form-field *ngIf="addAdminModal" class="col-md-12">
+        <input matInput placeholder="Email *" formControlName="email">
+      </mat-form-field>
     </div>
   </div>
 
