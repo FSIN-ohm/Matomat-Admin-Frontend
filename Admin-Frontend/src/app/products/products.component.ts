@@ -29,11 +29,8 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    console.log("GET");
     this.dataService.getProducts().subscribe(res => {
-      console.log(res);
       this.products = res;
-      console.log(this.products);
     })
   }
 
@@ -42,8 +39,6 @@ export class ProductsComponent implements OnInit {
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showEditModal(product);
     modalRef.content.onClose.subscribe(newProduct => {
-      console.log(newProduct);
-      console.log(product.id);
       this.dataService.editProduct(newProduct, product.id).subscribe((res) => {
         this.toastr.success('Produkt wurde erfolgreich bearbeitet!', 'Erfolg', {
           positionClass: 'toast-top-right',
@@ -67,10 +62,8 @@ export class ProductsComponent implements OnInit {
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showCreationModal();
     modalRef.content.onClose.subscribe(product => {
-      console.log(product);
       this.dataService.addProduct(product).subscribe(
         res => {
-          console.log(res);
           this.toastr.success('Produkt wurde erfolgreich hinzugefügt!', 'Erfolg', {
             positionClass: 'toast-top-right',
             timeOut: 6000

@@ -44,6 +44,10 @@ export class DataService {
     return this.http.get(this._adminUrl + '/' + id, { headers: this.createHeader() });
   }
 
+  public getLoggedInAdmin() {
+    return this.http.get(this._adminUrl + '/me', { headers: this.createHeader() });
+  }
+
   public addAdmin(admin: any) {
     return this.http.post(this._adminUrl, admin, { headers: this.createHeader() });
   }
