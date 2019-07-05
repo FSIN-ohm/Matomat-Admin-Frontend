@@ -69,7 +69,7 @@ export class AccountModalComponent implements OnInit {
     this.bsModal.hide();
   }
 
-  submit() {
+  onSubmit() {
     if (this.accountForm.valid) {
       if (this.accountForm.value.password != null && this.accountForm.value.password.length < 8) {
         this.toastr.error('Das neue Passwort muss mindestens 8 Zeichen lang sein!', 'Error', {

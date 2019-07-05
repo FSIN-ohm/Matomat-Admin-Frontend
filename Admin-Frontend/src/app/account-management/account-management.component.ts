@@ -67,7 +67,7 @@ export class AccountManagementComponent implements OnInit {
     (<AccountModalComponent>modalRef.content).showEditModal(account);
     modalRef.content.onClose.subscribe(updatedAccount => {
       this.service.editAdmin(updatedAccount, account.id).subscribe(
-        res => {
+        () => {
           this.toastr.success('Account wurde erfolgreich bearbeitet!', 'Erfolg', {
             positionClass: 'toast-top-right',
             timeOut: 6000

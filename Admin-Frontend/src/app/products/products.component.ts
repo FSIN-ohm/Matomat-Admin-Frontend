@@ -39,14 +39,14 @@ export class ProductsComponent implements OnInit {
     const modalRef = modalService.show(ProductModalComponent);
     (<ProductModalComponent>modalRef.content).showEditModal(product);
     modalRef.content.onClose.subscribe(newProduct => {
-      this.dataService.editProduct(newProduct, product.id).subscribe((res) => {
+      this.dataService.editProduct(newProduct, product.id).subscribe(
+        () => {
         this.toastr.success('Produkt wurde erfolgreich bearbeitet!', 'Erfolg', {
           positionClass: 'toast-top-right',
           timeOut: 6000
         });
-        this.dataService.getProducts().subscribe(res => {
-          this.products = res;
-        });
+        this.getProducts();
+        error => { console.log(error); }
       })
     });
   }

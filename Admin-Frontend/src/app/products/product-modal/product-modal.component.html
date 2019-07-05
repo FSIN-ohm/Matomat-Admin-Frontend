@@ -4,7 +4,6 @@
   </div>
 
   <div class="modal-body">
-    <!-- <div formGroupName="product"> -->
       <div class="fields-container">
         <mat-form-field class="col-md-12">
           <input matInput placeholder="Produktname *" formControlName="name">
@@ -34,11 +33,10 @@
           <mat-checkbox  formControlName="is_available">Produkt vorhanden</mat-checkbox>
         </div>
       </div>
-    <!-- </div> -->
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-default" (click)="cancel()">cancel</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">cancel</button>
     <button class="btn btn-success" type="submit">save</button>
   </div>
 </form>
