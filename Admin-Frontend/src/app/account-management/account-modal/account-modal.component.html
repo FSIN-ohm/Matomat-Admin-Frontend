@@ -1,24 +1,29 @@
-<form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="accountForm">
   <div class="modal-header">
     <h3 class="modal-title">{{header}}</h3>
   </div>
 
   <div class="modal-body">
-    <div class="fields-container">
-      <mat-form-field class="col-md-12">
-        <input matInput placeholder="Name *" formControlName="user_name">
-      </mat-form-field>
-      <mat-form-field *ngIf="addAdminModal" class="col-md-12">
-        <input matInput type="password" placeholder="Passwort *" formControlName="password">
-      </mat-form-field>
-      <mat-form-field *ngIf="addAdminModal" class="col-md-12">
-        <input matInput placeholder="Email *" formControlName="email">
-      </mat-form-field>
+    <div formGroupName="account">
+      <div class="fields-container">
+        <mat-form-field *ngIf="creationModal" class="col-md-12">
+          <input matInput placeholder="Rolle" formControlName="role" readonly>
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Credit" formControlName="credit">
+        </mat-form-field>
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Active" formControlName="active">
+        </mat-form-field>
+      </div>
     </div>
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-default" type="button" (click)="cancel()">cancel</button>
-    <button class="btn btn-success" type="submit">save</button>
+    <button class="btn btn-default" (click)="cancel()">cancel</button>
+    <button class="btn btn-success" (click)="submit()">save</button>
   </div>
 </form>

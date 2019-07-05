@@ -20,11 +20,12 @@ export class ProductModalComponent implements OnInit {
 
   product: any;
   productForm: FormGroup;
+  creationModal: boolean = false;
   header: string;
   onClose: Subject<any>;
-  patchProduct = false;
 
-  constructor(public bsModal: BsModalRef, private formBuilder: FormBuilder, private toastr: ToastrService) {
+  constructor(public bsModal: BsModalRef, private formBuilder: FormBuilder, private toastr: ToastrService, private dataService: DataService) {
+    console.log("CONSTRUCTOR");
     this.productForm = this.createFormGroup(formBuilder);
     this.onClose = new Subject();
   }
@@ -35,26 +36,44 @@ export class ProductModalComponent implements OnInit {
 
   createFormGroup(formBuilder: FormBuilder) {
     return formBuilder.group({
-      name: ['', Validators.required],
-      reorder_point: 0,
-      price: 0,
-      items_per_crate: 0,
-      thumbnail: [''],
-      is_available: false, // nicht für post, aber für patch
-      barcode: [''] // für beides
+      product: formBuilder.group({
+        name: ['', Validators.required],
+        amount: [''],
+        reorderLevel: [''],
+        costs: [''],
+        img: ['']
+      })
     });
   }
 
+  changeImage(imageInput) {
+    console.log(imageInput);
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      this.dataService.uploadImage(this.selectedFile.file).subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          console.log(err);
+        })
+    });
+
+    reader.readAsDataURL(file);
+  }
+
   initWithData(product) {
-    console.log(product);
-    this.productForm.patchValue({
+    this.productForm.controls.product.patchValue({
       name: product.name,
-      items_per_crate: product.items_per_crate,
-      reorder_point: product.reorder_point,
-      price: product.price,
-      thumbnail: product.thumbnail,
-      is_available: product.is_available,
-      barcode: product.barcode
+      amount: product.amount,
+      reorderLevel: product.reorderLevel,
+      costs: product.costs,
+      // img: product.img,
     });
   }
 
@@ -62,28 +81,39 @@ export class ProductModalComponent implements OnInit {
   }
 
   showEditModal(product) {
-    this.patchProduct = true;
     this.header = "Produkt bearbeiten";
     if (product != null) {
-      this.mapProduct(product);
+      this.product = product;
       this.initWithData(product);
     }
   }
 
   showCreationModal() {
     this.header = "Produkt hinzufügen";
+    this.creationModal = true;
   }
 
   cancel() {
     this.bsModal.hide();
   }
 
-  onSubmit() {
+  save() {
     if (this.productForm.valid) {
-      console.log(this.productForm.value);
-      this.mapProduct(this.productForm.value);
-      this.onClose.next(this.product);
-      console.log(this.product);
+      if (this.creationModal) {
+        // add product
+        this.toastr.success('Produkt wurde erfolgreich hinzugefügt!', 'Erfolg', {
+          positionClass: 'toast-top-right',
+          timeOut: 6000
+        });
+      } else {
+        // edit product
+        this.toastr.success('Produkt wurde erfolgreich bearbeitet!', 'Erfolg', {
+          positionClass: 'toast-top-right',
+          timeOut: 6000
+        });
+        this.productForm.value.id = this.product.id;
+      }
+      this.onClose.next(this.productForm.value);
       this.bsModal.hide();
     } else {
       this.findInvalidControls(this.productForm);
@@ -92,24 +122,6 @@ export class ProductModalComponent implements OnInit {
         timeOut: 6000
       });
     }
-  }
-
-  mapProduct(productForm) {
-    console.log(this.product);
-    console.log(productForm);
-    console.log(productForm.barcode);
-    if(typeof(productForm.barcode) !== 'undefined') {
-      console.log("NOT EMPTY");
-      this.product.barcode = productForm.barcode;
-    }
-    this.product.name = productForm.name;
-    this.product.thumbnail = productForm.thumbnail;
-    this.product.reorder_point = productForm.reorder_point;
-    this.product.price = productForm.price;
-    this.product.items_per_crate = productForm.items_per_crate;
-    this.product.is_available = productForm.is_available;
-    this.product.barcode = productForm.barcode;
-    console.log(this.product);
   }
 
   findInvalidControls(formGroup: FormGroup) {

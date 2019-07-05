@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-main-navigation',
@@ -16,9 +15,6 @@ export class MainNavigationComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService:AuthService) {}
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
-  logout() {
-    this.authService.logout();
-  }
 }

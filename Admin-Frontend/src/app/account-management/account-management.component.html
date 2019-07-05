@@ -1,2 +1,2 @@
-<app-data-table *ngIf="users && admins" #table [dataColumns]="columnsToDisplay" [dataSource]="users" [enableDeleteButton]="true" [enableAddButton]="true"
-  (edit)="editAccount($event)" (delete)="deleteAccount($event)" (add)="createAccount()"></app-data-table>
+<app-data-table #table [dataColumns]="columnsToDisplay" [dataSource]="dataSource" (edit)="editAccount($event)" (delete)="deleteAccount($event)"
+  (add)="createAccount()"></app-data-table>

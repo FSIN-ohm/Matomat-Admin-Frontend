@@ -2,20 +2,21 @@
   <i class="material-icons md-48">add_shopping_cart</i>
 </button> -->
 
-<div class="mat-elevation-z8 data-table">
+<section class="data-table">
   <mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
-    <ng-container *ngFor="let disCol of dataColumns; let colIndex = index" matColumnDef="{{disCol}}">
-      {{disCol |json }}
-      <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
-      <mat-cell *matCellDef="let element "> 
-        <span *ngIf="disCol !== 'thumbnail'">
-          {{element[disCol]}}
-        </span>
-        <img *ngIf="disCol === 'thumbnail'" [src]="element[disCol]"/>
+
+    <ng-container matColumnDef="image">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let data"> 
+        <img [src]="data.img" />
       </mat-cell>
     </ng-container>
 
-
+    <ng-container *ngFor="let disCol of dataColumns; let colIndex = index" matColumnDef="{{disCol}}">
+      <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
+      <mat-cell *matCellDef="let element "> {{element[disCol]}}
+      </mat-cell>
+    </ng-container>
 
     <ng-container *ngIf="!readonly" matColumnDef="settings">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
@@ -26,7 +27,7 @@
         <button mat-button color="basic" (click)="editData(data)">
           <i class="material-icons">edit</i>
         </button>
-        <button *ngIf="enableDeleteButton" mat-button color="warn" (click)="deleteData(data)">
+        <button mat-button color="warn" (click)="deleteData(data)">
           <i class="material-icons">delete</i>
         </button>
       </mat-cell>
@@ -36,13 +37,13 @@
     <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
   </mat-table>
 
-  <!-- <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="50"
+  <mat-paginator #paginator class="table-paginator" [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="50"
     [pageSizeOptions]="[25, 50, 100, 250]">
-  </mat-paginator> -->
-</div>
+  </mat-paginator>
+</section>
 
-<footer class="footer">
-  <button *ngIf="enableAddButton" [ngStyle]="{'right':sideBarVisible === true ? '300px' : '16px'}" mat-fab color="primary" class="stick-right" (click)="addData()">
-    <i class="material-icons md-48">add</i>
+<section class="bottom-toolbar">
+  <button [ngStyle]="{'right':sideBarVisible === true ? '300px' : '16px'}" mat-fab color="primary" class="bot-toolbar-button" (click)="addData()">
+    <mat-icon>add</mat-icon>
   </button>
-</footer>
+</section>
