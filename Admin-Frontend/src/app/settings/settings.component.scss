@@ -1,0 +1,12 @@
+::ng-deep .tab-container > .nav.nav-tabs > .nav-item > .nav-link.active {
+    background-color: #fafafa;
+    border-color: #dee2e6 #dee2e6 #fafafa;
+}
+
+::ng-deep .nav-link {
+    color: #000000;
+}
+
+.fields-container {
+    padding-top: 15px;
+}

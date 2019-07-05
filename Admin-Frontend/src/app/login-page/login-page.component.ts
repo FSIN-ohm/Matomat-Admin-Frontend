@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
-import { AuthenticationService } from '../auth';
+import { DataService } from '../data.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -15,43 +16,50 @@ export class LoginPageComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  error = '';
 
   constructor(
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private dataService: DataService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['',Validators.required],
-      password: ['',Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
 
-    this.authenticationService.logout();
 
+    // reset login status
+    // this.authenticationService.logout();
+
+    // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   onSubmit() {
-    this.submitted = true;
-    if(this.authenticationService.login(this.loginForm.value)){
-      if(this.loginForm.valid) {
-          this.toastr.success('Du bist erfolgreich eingeloggt.', 'Erfolg!', {
-          positionClass: 'toast-top-right',
-          timeOut: 6000
-        });
-        this.router.navigate(["product-management"]);
-        return;
-      }
-    } 
-    if(this.loginForm.invalid){
-    this.toastr.error('Der Benutzername und das Passwort stimmen nicht überein.', 'Error!', {
-      positionClass: 'toast-top-right',
-      timeOut: 6000
-    });
-    return;
+    if (this.loginForm.invalid) {
+      this.toastr.error("Form ist invalid", "Error");
+      return;
     }
+
+    let user = this.loginForm.controls.username.value;
+    let password = this.loginForm.controls.password.value;
+
+    this.authService.login(user, password).subscribe(
+      res => {
+          this.authService.isAuthorized = true;
+          this.router.navigate(['/product-management'])
+      },
+      error => {
+        this.error = error;
+        this.toastr.error("Falsche Logindaten", "Error");
+      }
+    );
+    console.log(localStorage);
   }
 }

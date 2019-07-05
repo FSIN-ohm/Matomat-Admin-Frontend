@@ -1,1 +1,2 @@
-<app-main-navigation></app-main-navigation>
+<app-main-navigation *ngIf="authService.isAuthorized"></app-main-navigation>
+<app-login-page *ngIf="!authService.isAuthorized"></app-login-page>

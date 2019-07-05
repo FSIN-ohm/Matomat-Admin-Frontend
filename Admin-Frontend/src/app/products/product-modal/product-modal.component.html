@@ -1,34 +1,42 @@
-<form [formGroup]="productForm">
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
   <div class="modal-header">
     <h3 class="modal-title">{{header}}</h3>
   </div>
 
   <div class="modal-body">
-    <div formGroupName="product">
       <div class="fields-container">
-        <!-- <input type="file" (change)="changeImage($event)" formControlName="img"> -->
-
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Produktname" formControlName="name">
+          <input matInput placeholder="Produktname *" formControlName="name">
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
-          <input class="readonly" matInput placeholder="Bestand" formControlName="amount" readonly>
+          <input matInput placeholder="Thumbnail" formControlName="thumbnail">
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Meldebestand" formControlName="reorderLevel">
+          <input matInput type="number" placeholder="Meldebestand" formControlName="reorder_point">
         </mat-form-field>
 
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Kosten" formControlName="costs">
+          <input matInput type="number" placeholder="Preis" formControlName="price">
         </mat-form-field>
+
+        <mat-form-field class="col-md-12">
+          <input matInput type="number" placeholder="Anzahl pro Kasten" formControlName="items_per_crate">
+        </mat-form-field>
+
+        <mat-form-field class="col-md-12">
+          <input matInput type="barcode" placeholder="Barcode" formControlName="barcode">
+        </mat-form-field>
+
+        <div *ngIf="patchProduct" class="col-md-12">
+          <mat-checkbox  formControlName="is_available">Produkt vorhanden</mat-checkbox>
+        </div>
       </div>
-    </div>
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-default" (click)="cancel()">cancel</button>
-    <button class="btn btn-success" (click)="save()">save</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">cancel</button>
+    <button class="btn btn-success" type="submit">save</button>
   </div>
 </form>

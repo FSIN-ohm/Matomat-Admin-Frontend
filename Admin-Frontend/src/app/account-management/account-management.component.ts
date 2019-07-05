@@ -1,9 +1,10 @@
 import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AccountModalComponent } from './account-modal/account-modal.component';
-import { AccountManagementSource } from '../account-management/account-management-source';
 import { Account } from '../account-management/account';
 import { DataTableComponent } from '../data-table/data-table.component';
+import { DataService } from '../data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-account-management',
@@ -13,59 +14,95 @@ import { DataTableComponent } from '../data-table/data-table.component';
 
 export class AccountManagementComponent implements OnInit {
   @ViewChild(DataTableComponent) table;
-  dataSource: AccountManagementSource;
+  users: any;
+  admins: any;
+  columnsToDisplay = ['name', 'balance', 'last_seen', 'admin'];
 
-  columnsToDisplay = ['name', 'credit', 'creationDate', 'lastActivity', 'active'];
-
-  constructor(private injector: Injector) { }
+  constructor(private injector: Injector, private service: DataService, private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.getAdminsAndUsers();
+  }
+
+  getAdminsAndUsers() {
+    this.getUsers();
+    this.getAdmins();
+    this.checkForAdminRole();
+  }
+
+  checkForAdminRole() {
+    setTimeout(() => {
+      if (typeof(this.admins) === 'undefined' || typeof(this.users) === 'undefined') {
+        this.checkForAdminRole();
+        return;
+      } else {
+        for(let user of this.users) {
+          for(let admin of this.admins) {
+            if(user.id === admin.id) {
+              user.admin = true;
+            }
+          }
+        }
+      }
+    }, 200);
+  }
+
+  getUsers() {
+    this.service.getUsers().subscribe(users => {
+      this.users = users;
+      console.log(this.users);
+    });
+  }
+
+  getAdmins() {
+    this.service.getAdmins().subscribe(admins => {
+      this.admins = admins;
+      console.log(this.admins);
+    })
   }
 
   editAccount(account) {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(AccountModalComponent);
     (<AccountModalComponent>modalRef.content).showEditModal(account);
-    modalRef.content.onClose.subscribe(result => {
-      this.updateData(result.account, result.id);
+    modalRef.content.onClose.subscribe(updatedAccount => {
+      this.service.editAdmin(updatedAccount, account.id).subscribe(
+        () => {
+          this.toastr.success('Account wurde erfolgreich bearbeitet!', 'Erfolg', {
+            positionClass: 'toast-top-right',
+            timeOut: 6000
+          });
+          this.getAdminsAndUsers();
+        },
+        error => { console.log(error); }
+      );
     });
-  }
-
-  updateData(newAccount, id) {
-    for (let account of this.table.dataSource.data) {
-      if (account.id === id) {
-        account.name = newAccount.name;
-        account.active = newAccount.active;
-        account.credit = newAccount.credit;
-        return;
-      }
-    }
   }
 
   createAccount() {
     const modalService: BsModalService = this.injector.get(BsModalService);
     const modalRef = modalService.show(AccountModalComponent);
     (<AccountModalComponent>modalRef.content).showCreationModal();
-    modalRef.content.onClose.subscribe(result => {
-      const data: Account = {
-        id: 1,
-        name: result.account.name,
-        credit: result.account.credit,
-        creationDate: '01.01.2000',
-        lastActivity: 'heute',
-        active: result.account.active,
-      }
-      this.table.dataSource.data.push(data);
-      this.table.dataSource.connect(); // updaten
+    modalRef.content.onClose.subscribe(account => {
+      this.service.addAdmin(account).subscribe(
+        res => {
+          this.toastr.success('Account wurde erfolgreich erstellt!', 'Erfolg', {
+            positionClass: 'toast-top-right',
+            timeOut: 6000
+          });
+          this.getAdminsAndUsers();
+        },
+        error => { console.log(error); }
+      );
     });
   }
 
   deleteAccount(account) {
     if (confirm("Wollen Sie diesen Account endgültig löschen?")) {
-      const index = this.table.dataSource.data.indexOf(account);
       if (account.id > -1) {
-        this.table.dataSource.data.splice(index, 1);
-        this.table.dataSource.connect(); // updaten
+        this.service.deleteUser(account.id).subscribe(res => {
+          this.getAdminsAndUsers();
+        });
       }
     }
   }

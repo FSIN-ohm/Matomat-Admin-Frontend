@@ -1,8 +1,4 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
-import { AccountManagementSource } from '../account-management/account-management-source';
-import { ProductsSource } from '../products/products-source';
-import { TransactionSource } from '../transactions/transactions-source';
 
 @Component({
   selector: 'app-data-table',
@@ -10,13 +6,14 @@ import { TransactionSource } from '../transactions/transactions-source';
   styleUrls: ['./data-table.component.scss']
 })
 export class DataTableComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
+  // @ViewChild(MatSort) sort: MatSort;
 
   @Input() dataColumns: any[] = [];
   @Input() enableOrder: boolean;
+  @Input() enableAddButton: boolean;
+  @Input() enableDeleteButton: boolean;
   @Input() dataSource: any;
-  @Input() showImage: any;
   @Input() readonly: boolean;
   @Output() edit = new EventEmitter();
   @Output() delete = new EventEmitter();
@@ -24,23 +21,17 @@ export class DataTableComponent implements OnInit {
   @Output() order = new EventEmitter();
   columnsToDisplay: any[] = [];
   orderSideBarVisible: boolean;
-  test = true;
   constructor() {
   }
 
   ngOnInit() {
-    // this.columnsToDisplay = this.columnsToDisplay.concat(['image']).concat(this.dataColumns.concat(['settings']));
 
-    // TODO: dynamische Data Source
-    if (this.enableOrder) {
-      this.dataSource = new ProductsSource(this.paginator, this.sort);
-      this.columnsToDisplay = this.columnsToDisplay.concat(['image']).concat(this.dataColumns.concat(['settings']));
-    } else if (this.readonly) {
-      this.dataSource = new TransactionSource(this.paginator, this.sort);
-      this.columnsToDisplay = this.dataColumns;
-    } else {
-      this.dataSource = new AccountManagementSource(this.paginator, this.sort);
+    if (!this.readonly) {
+      // this.dataSource = new ProductsSource(this.paginator, this.sort);
       this.columnsToDisplay = this.columnsToDisplay.concat(this.dataColumns.concat(['settings']));
+    } else {
+      this.columnsToDisplay = this.dataColumns;
+      console.log(this.columnsToDisplay);
     }
   }
 
