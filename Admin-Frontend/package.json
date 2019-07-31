@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "@angular/cli": "~7.0.0",
     "core-js": "^2.6.0",
     "material-design-icons": "^3.0.1",
     "ngx-bootstrap": "^3.2.0",
