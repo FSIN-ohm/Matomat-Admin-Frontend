@@ -28,7 +28,8 @@
     "ngx-bootstrap": "^3.2.0",
     "ngx-toastr": "^9.2.0",
     "rxjs": "~6.3.3",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "angular-cli-ghpages": "0.6.0-rc.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.7",

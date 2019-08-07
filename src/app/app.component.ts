@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   title = 'Admin-Frontend';
   showFiller = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit() {
   }
