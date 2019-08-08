@@ -12,7 +12,7 @@
       <div formArrayName="orders">
         <div *ngFor="let product of products; let i=index">
           <div [formGroupName]="i">
-            <mat-form-field class="col-md-6">
+            <mat-form-field class="col-md-5">
               <input matInput formControleName="name" placeholder="Name" [value]="product.name">
             </mat-form-field>
 
