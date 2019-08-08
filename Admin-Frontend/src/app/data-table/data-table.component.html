@@ -5,8 +5,7 @@
 <div class="mat-elevation-z8 data-table">
   <mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
     <ng-container *ngFor="let disCol of dataColumns; let colIndex = index" matColumnDef="{{disCol}}">
-      {{disCol |json }}
-      <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>{{changeHeader(disCol)}}</mat-header-cell>
       <mat-cell *matCellDef="let element "> 
         <span *ngIf="disCol !== 'thumbnail'">
           {{element[disCol]}}
@@ -14,8 +13,6 @@
         <img *ngIf="disCol === 'thumbnail'" [src]="element[disCol]"/>
       </mat-cell>
     </ng-container>
-
-
 
     <ng-container *ngIf="!readonly" matColumnDef="settings">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>

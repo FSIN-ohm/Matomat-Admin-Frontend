@@ -16,7 +16,11 @@ export class AccountManagementComponent implements OnInit {
   @ViewChild(DataTableComponent) table;
   users: any;
   admins: any;
-  columnsToDisplay = ['name', 'balance', 'last_seen', 'admin'];
+  columnsToDisplay = [
+    { key: 'name', value: 'Name' },
+    { key: 'balance', value: 'Bilanz' },
+    { key: 'last_seen', value: 'Zuletzt gesehen' },
+    { key: 'admin', value: 'Ist Admin' }];
 
   constructor(private injector: Injector, private service: DataService, private toastr: ToastrService) { }
 
@@ -32,13 +36,13 @@ export class AccountManagementComponent implements OnInit {
 
   checkForAdminRole() {
     setTimeout(() => {
-      if (typeof(this.admins) === 'undefined' || typeof(this.users) === 'undefined') {
+      if (typeof (this.admins) === 'undefined' || typeof (this.users) === 'undefined') {
         this.checkForAdminRole();
         return;
       } else {
-        for(let user of this.users) {
-          for(let admin of this.admins) {
-            if(user.id === admin.id) {
+        for (let user of this.users) {
+          for (let admin of this.admins) {
+            if (user.id === admin.id) {
               user.admin = true;
             }
           }

@@ -8,10 +8,10 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class DataService {
-  private _productsUrl = environment.URL + 'products';
-  private _transactionsUrl = environment.URL + 'transactions';
-  private _usersUrl = environment.URL + 'users';
-  private _adminUrl = environment.URL + 'admins'
+  private _productsUrl = environment.URL + 'v1/products';
+  private _transactionsUrl = environment.URL + 'v1/transactions';
+  private _usersUrl = environment.URL + 'v1/users';
+  private _adminUrl = environment.URL + 'v1/admins'
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

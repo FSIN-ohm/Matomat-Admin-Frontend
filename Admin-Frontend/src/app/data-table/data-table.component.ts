@@ -20,18 +20,52 @@ export class DataTableComponent implements OnInit {
   @Output() add = new EventEmitter();
   @Output() order = new EventEmitter();
   columnsToDisplay: any[] = [];
+  columnsHeader: any[] = [];
+  dataColumnsKeyValue;
   orderSideBarVisible: boolean;
   constructor() {
   }
 
   ngOnInit() {
-
+    this.dataColumnsKeyValue = this.dataColumns;
+    console.log(this.dataColumns);
+    // this.columnsHeader = this.extractValue(this.dataColumns);
+    this.dataColumns = this.extractKey(this.dataColumnsKeyValue);
     if (!this.readonly) {
-      // this.dataSource = new ProductsSource(this.paginator, this.sort);
       this.columnsToDisplay = this.columnsToDisplay.concat(this.dataColumns.concat(['settings']));
     } else {
       this.columnsToDisplay = this.dataColumns;
-      console.log(this.columnsToDisplay);
+    }
+  }
+
+  extractKey(dataColumns): any {
+    let newDataColumns = [];
+    for(let i=0; i< dataColumns.length; i++) {
+      newDataColumns.push(dataColumns[i].key);
+    }
+    console.log(newDataColumns);
+    return newDataColumns;
+  }
+
+  // extractValue(dataColumns): any {
+  //   let newColumnsHeader = [];
+  //   for(let i=0; i<dataColumns.length; i++) {
+  //     newColumnsHeader.push(dataColumns[i].value);
+  //   }
+  //   console.log(newColumnsHeader);
+  //   return newColumnsHeader;
+  // }
+
+  changeHeader(data) {
+    return this.findValueForKey(data, this.dataColumnsKeyValue);
+  }
+
+  findValueForKey(key: string, dataKeyValue): string {
+    for(let i=0; i<dataKeyValue.length; i++) {
+      if(key === dataKeyValue[i].key) {
+        console.log(dataKeyValue[i])
+        return dataKeyValue[i].value;
+      }
     }
   }
 
