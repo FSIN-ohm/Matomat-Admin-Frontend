@@ -43,18 +43,8 @@ export class DataTableComponent implements OnInit {
     for(let i=0; i< dataColumns.length; i++) {
       newDataColumns.push(dataColumns[i].key);
     }
-    console.log(newDataColumns);
     return newDataColumns;
   }
-
-  // extractValue(dataColumns): any {
-  //   let newColumnsHeader = [];
-  //   for(let i=0; i<dataColumns.length; i++) {
-  //     newColumnsHeader.push(dataColumns[i].value);
-  //   }
-  //   console.log(newColumnsHeader);
-  //   return newColumnsHeader;
-  // }
 
   changeHeader(data) {
     return this.findValueForKey(data, this.dataColumnsKeyValue);
@@ -63,7 +53,6 @@ export class DataTableComponent implements OnInit {
   findValueForKey(key: string, dataKeyValue): string {
     for(let i=0; i<dataKeyValue.length; i++) {
       if(key === dataKeyValue[i].key) {
-        console.log(dataKeyValue[i])
         return dataKeyValue[i].value;
       }
     }

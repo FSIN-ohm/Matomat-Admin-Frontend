@@ -38,7 +38,7 @@
   </mat-paginator> -->
 </div>
 
-<section class="bottom-toolbar">
+<section *ngIf="!readonly" class="bottom-toolbar">
   <button [ngStyle]="{'right':sideBarVisible === true ? '300px' : '16px'}" mat-fab color="primary"
     class="bot-toolbar-button" (click)="addData()">
     <mat-icon>add</mat-icon>
