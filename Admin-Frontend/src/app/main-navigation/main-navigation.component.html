@@ -5,7 +5,7 @@
             <button mat-button id="burger" (click)="drawer.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
-            <span class="icon-description">Matohmmat v1.0</span>
+            <span class="icon-description">Matohmat v1.0</span>
 
         </mat-toolbar>
         <ol class="sidenav-list">
@@ -13,19 +13,19 @@
             <button mat-flat-button class="sidenav-button" (click)="drawer.close()" routerLink="acc-management" routerLinkActive="highlight-navdrawer-button"
             [routerLinkActiveOptions]="{exact: true}">
               <mat-icon>keyboard_arrow_right</mat-icon>
-              <span class="icon-description">Accountmanagement</span>
+              <span class="icon-description">Accountverwaltung</span>
             </button>
             <mat-divider></mat-divider>
             <button mat-flat-button class="sidenav-button" (click)="drawer.close()" routerLink="transactions" routerLinkActive="highlight-navdrawer-button"
             [routerLinkActiveOptions]="{exact: true}">
               <mat-icon>keyboard_arrow_right</mat-icon>
-              <span class="icon-description">Transactions</span>
+              <span class="icon-description">Transaktionen</span>
             </button>
             <mat-divider></mat-divider>
             <button mat-flat-button class="sidenav-button" (click)="drawer.close()" routerLink="product-management" routerLinkActive="highlight-navdrawer-button"
             [routerLinkActiveOptions]="{exact: true}">
               <mat-icon>keyboard_arrow_right</mat-icon>
-              <span class="icon-description">Productmanagement</span>
+              <span class="icon-description">Produktverwaltung</span>
             </button>
             <mat-divider></mat-divider>
         </ol>
@@ -44,11 +44,11 @@
           
             <mat-list>
               <button mat-flat-button class="toolbar-button" color="primary" routerLink="acc-management" routerLinkActive="highlight-toolbar-button"
-              [routerLinkActiveOptions]="{exact: true}">Accountmanagement</button>
+              [routerLinkActiveOptions]="{exact: true}">Accountverwaltung</button>
               <button mat-flat-button class="toolbar-button" color="primary" routerLink="transactions" routerLinkActive="highlight-toolbar-button"
-              [routerLinkActiveOptions]="{exact: true}">Transactions</button>
+              [routerLinkActiveOptions]="{exact: true}">Transaktion</button>
               <button mat-flat-button class="toolbar-button" color="primary" routerLink="product-management" routerLinkActive="highlight-toolbar-button"
-              [routerLinkActiveOptions]="{exact: true}">Productmanagement</button>  
+              [routerLinkActiveOptions]="{exact: true}">Produktverwaltung</button>  
             </mat-list>
           
             <!-- This fills the remaining space of the current row -->
@@ -61,7 +61,7 @@
             <button mat-flat-button class="toolbar-button" color="primary" routerLink="/settings" routerLinkActive="highlight-toolbar-button" 
             [routerLinkActiveOptions]="{exact: true}">
                 <mat-icon>account_circle</mat-icon>
-                <span class="icon-description">Settings</span>
+                <span class="icon-description">Einstellungen</span>
             </button>
             <button mat-flat-button class="toolbar-button toolbar-icon-button" color="primary" (click)="logout()">
               <mat-icon>power_settings_new</mat-icon>
