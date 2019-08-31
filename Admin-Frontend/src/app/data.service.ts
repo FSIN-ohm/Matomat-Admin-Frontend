@@ -20,7 +20,7 @@ export class DataService {
   }
 
   public getUsers() {
-    return this.http.get(this._usersUrl, { headers: this.createHeader() });
+    return this.http.get(this._usersUrl + '?onlyAvailable=true', { headers: this.createHeader() });
   }
 
   public getUserById(id: number) {
@@ -36,7 +36,7 @@ export class DataService {
   }
 
   public getAdmins() {
-    return this.http.get(this._adminUrl, { headers: this.createHeader() });
+    return this.http.get(this._adminUrl + '?onlyAvailable=true', { headers: this.createHeader() });
   }
 
   public getAdminById(id: number) {

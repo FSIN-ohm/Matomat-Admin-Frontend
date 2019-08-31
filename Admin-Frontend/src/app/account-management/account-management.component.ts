@@ -26,6 +26,9 @@ export class AccountManagementComponent implements OnInit {
 
   ngOnInit() {
     this.getAdminsAndUsers();
+
+    console.log(this.users);
+    console.log(this.admins);
   }
 
   getAdminsAndUsers() {
@@ -41,14 +44,23 @@ export class AccountManagementComponent implements OnInit {
         return;
       } else {
         for (let user of this.users) {
-          for (let admin of this.admins) {
-            if (user.id === admin.id) {
-              user.admin = true;
-            }
+          if (this.userIsAdmin(user)) {
+            user.admin = true;
+          } else {
+            user.admin = false;
           }
         }
       }
     }, 200);
+  }
+
+  userIsAdmin(user: any): boolean {
+    for (let admin of this.admins) {
+      if (user.id === admin.id && !(user.name === "world" || user.name === "matohmat" || user.name === "root")) {
+        return true;
+      }
+    }
+    return false;
   }
 
   getUsers() {
@@ -96,7 +108,12 @@ export class AccountManagementComponent implements OnInit {
           });
           this.getAdminsAndUsers();
         },
-        error => { console.log(error); }
+        error => { 
+          this.toastr.error('Account konnte nicht angelgt werden. Bitte versuche einen andren Benutzernamen und/oder E-Mail!', 'Error', {
+            positionClass: 'toast-top-right',
+            timeOut: 6000
+          });
+          console.log(error); }
       );
     });
   }
