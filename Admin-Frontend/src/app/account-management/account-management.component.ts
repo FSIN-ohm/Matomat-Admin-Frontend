@@ -66,6 +66,7 @@ export class AccountManagementComponent implements OnInit {
   getUsers() {
     this.service.getUsers().subscribe(users => {
       this.users = users;
+      this.convertCentToEuro();
       console.log(this.users);
     });
   }
@@ -75,6 +76,12 @@ export class AccountManagementComponent implements OnInit {
       this.admins = admins;
       console.log(this.admins);
     })
+  }
+
+  convertCentToEuro() {
+    for (let user of this.users) {
+      user.balance = user.balance / 100 + '€';
+    }
   }
 
   editAccount(account) {
@@ -108,12 +115,13 @@ export class AccountManagementComponent implements OnInit {
           });
           this.getAdminsAndUsers();
         },
-        error => { 
+        error => {
           this.toastr.error('Account konnte nicht angelgt werden. Bitte versuche einen andren Benutzernamen und/oder E-Mail!', 'Error', {
             positionClass: 'toast-top-right',
             timeOut: 6000
           });
-          console.log(error); }
+          console.log(error);
+        }
       );
     });
   }

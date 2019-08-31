@@ -25,7 +25,14 @@ export class TransactionsComponent implements OnInit {
     this.dataService.getTransactions().subscribe(res => {
       console.log(res);
       this.transactions = res;
+      this.convertCentToEuro();
     });
+  }
+
+  convertCentToEuro() {
+    for(let transaction of this.transactions) {
+      transaction.amount = transaction.amount/100 + '€'; 
+    }
   }
 
 }

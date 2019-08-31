@@ -37,7 +37,14 @@ export class ProductsComponent implements OnInit {
   getProducts() {
     this.dataService.getProducts().subscribe(res => {
       this.products = res;
+      this.convertCentToEuro();
     })
+  }
+
+  convertCentToEuro() {
+    for(let product of this.products) {
+      product.price = product.price/100 + '€'; 
+    }
   }
 
   editProduct(product) {
