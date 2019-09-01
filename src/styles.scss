@@ -25,3 +25,30 @@ $fsin-theme: mat-light-theme($fsin-theme-primary, $fsin-theme-accent, $fsin-them
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($fsin-theme);
+<<<<<<< HEAD
+=======
+
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%; 
+  background-color: #fafafa;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif; }
+//End Thomas
+
+
+@import '~ngx-toastr/toastr.css';
+@import '~material-design-icons/iconfont/material-icons.css';
+// @import "@material/fab/mdc-fab";
+
+
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index: 99999 !important;
+}
+>>>>>>> af59b0ca37e3afc67cf2c0905de4d1da3d66ef7d

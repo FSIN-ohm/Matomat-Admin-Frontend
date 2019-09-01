@@ -1,23 +1,31 @@
+//scss classes used in main-navigation.component.html:
+
 .mat-toolbar{
-  padding: 0px 0px 0px 16px;
+  position: fixed;
+  z-index: 10;
+  padding: 0px 16px 0px 16px;
   height: 48px;
 }
 
 .mat-list-base{
-  padding: 0px 16px;
-}
+  padding: 0px 2px;}
+
+.mat-flat-button{
+  min-width: 36px;}
 
 .toolbar-button{
-  height: 48px;
-  border-radius: 0;
   font-size: 16px;
-  color: #FAFAFA;
+  margin: 0px 2px;
 }
 
-.highlight{
-  border-bottom: 6px solid #FAFAFA;
-  background-color: #008678;
-}
+.toolbar-button:focus{
+  outline: none;}
+
+.toolbar-button:hover{
+  background-color: #00796B;}  
+
+.toolbar-icon-button{
+  width: 56px;}
 
 .fill-remaining-space {
   /* This fills the remaining space, by using flexbox. 
@@ -25,11 +33,81 @@
   flex: 1 1 auto;
 }
 
-.logout{
-  width: 48px;
+.icon-description{
+  font-size: 16px;
+  padding-left: 8px;
+}
+
+.highlight-toolbar-button{
+  background-color: #00796B;
 }
 
 .main{
-  padding: 16px;
+  padding: 56px 5% 16px 5%;
   background-color: #FAFAFA;
+}
+
+//scss id's used in main-navigation.component.html:
+
+#logo{
+  padding-top: 20px;
+  background-color: #00796B;
+}
+
+#burger{
+  background-color: #00796B;
+  display: none;
+}
+
+#name{
+  display: none;
+}
+
+//scss for responsive behaviour of main-navigation.component.html:
+
+@media screen and (max-width: 960px) {
+
+  .mat-list-base, #logo{ 
+    display: none;}
+
+  #burger{
+    display: inline;
+    border-radius: 0px;
+    min-width: 58px;
+    min-height: 55px;
+    padding-top: 0px;
+  }
+
+  #burger:focus{ 
+    outline: none;}
+
+  #name{
+    display: inline;
+    margin-left: 8px;
+    font-size: 16px;
+  }
+
+  .mat-icon{ 
+    position: center;}
+
+  .menu-list{
+    padding: 24px;
+    margin: 0px;
+  }
+
+  .menu-button{
+    width: 216px;
+    text-align: left;
+    padding: 6px 0px;
+    margin: 2px 0px;
+    border-radius: 0px;
+    font-size: 16px;
+  }
+
+  .menu-button:focus{
+    outline: none;}
+
+  .highlight-navdrawer-button{
+    background-color: #b2dfdb;
+  }
 }
