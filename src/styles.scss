@@ -33,7 +33,9 @@ $fsin-theme: mat-light-theme($fsin-theme-primary, $fsin-theme-accent, $fsin-them
 /* You can add global styles to this file, and also import other style files */
 
 html, body {
-  height: 100%; }
+  height: 100%; 
+  background-color: #fafafa;
+}
 
 body {
   margin: 0;

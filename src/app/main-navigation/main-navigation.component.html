@@ -1,21 +1,58 @@
 <mat-toolbar color="primary">
-  <span>Matohmat</span>
+  <figure id="logo">
+    <img src="assets\img\logo-wh-55px-transparent.png">
+  </figure>
+
+  <button mat-button id="burger" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span id="name">FSIN Matohmat</span>
+
+  <mat-menu #menu="matMenu">
+    <ol class="menu-list">
+      <mat-divider></mat-divider>
+      <button mat-flat-button class="menu-button" (click)="drawer.close()" routerLink="acc-management" routerLinkActive="highlight-navdrawer-button"
+      [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        <span class="icon-description">Accountmanagement</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-flat-button class="menu-button" (click)="drawer.close()" routerLink="transactions" routerLinkActive="highlight-navdrawer-button"
+      [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        <span class="icon-description">Transactions</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-flat-button class="menu-button" (click)="drawer.close()" routerLink="product-management" routerLinkActive="highlight-navdrawer-button"
+      [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        <span class="icon-description">Productmanagement</span>
+      </button>
+      <mat-divider></mat-divider>
+    </ol>
+  </mat-menu>
+
+
 
   <mat-list class="button-list">
-    <button mat-flat-button class="toolbar-button" color="primary" routerLink="settings" routerLinkActive="highlight" [routerLinkActiveOptions]="{exact:
-      true}">Account Settings</button>
-    <button mat-flat-button class="toolbar-button" color="primary" routerLink="transactions" routerLinkActive="highlight"
-    [routerLinkActiveOptions]="{exact: true}">Transactions</button>
-    <button mat-flat-button class="toolbar-button" color="primary" routerLink="acc-management" routerLinkActive="highlight"
-    [routerLinkActiveOptions]="{exact: true}">Accountmanagement</button>
-    <button mat-flat-button class="toolbar-button" color="primary" routerLink="product-management" routerLinkActive="highlight"
-    [routerLinkActiveOptions]="{exact: true}">Productmanagement</button>  
+    <button mat-flat-button class="toolbar-button" color="primary" routerLink="acc-management" routerLinkActive="highlight-toolbar-button"
+      [routerLinkActiveOptions]="{exact: true}">Accountverwaltung</button>
+    <button mat-flat-button class="toolbar-button" color="primary" routerLink="transactions" routerLinkActive="highlight-toolbar-button"
+      [routerLinkActiveOptions]="{exact: true}">Transaktionen</button>
+    <button mat-flat-button class="toolbar-button" color="primary" routerLink="product-management" routerLinkActive="highlight-toolbar-button"
+      [routerLinkActiveOptions]="{exact: true}">Produktverwaltung</button>  
   </mat-list>
   
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
 
-  <button mat-button class="toolbar-button logout" (click)="logout()">
+  <button mat-flat-button class="toolbar-button" color="primary" routerLink="settings" routerLinkActive="highlight-logout-button" 
+    [routerLinkActiveOptions]="{exact: true}">
+    <mat-icon>account_circle</mat-icon>
+    <span class="icon-description">Einstellungen</span>
+  </button>
+  <button mat-button class="toolbar-button" (click)="logout()">
     <mat-icon>power_settings_new</mat-icon>
   </button>
 </mat-toolbar>

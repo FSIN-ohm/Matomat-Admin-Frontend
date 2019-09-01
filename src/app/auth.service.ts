@@ -10,7 +10,7 @@ export class AuthService {
     user: string;
     password: string;
     isAuthorized = false;
-    private url = environment.URL + 'admins/me'
+    private url = environment.URL + 'v1/admins/me'
 
     constructor(private http: HttpClient) { }
 

@@ -16,6 +16,7 @@ export class OrderFormComponent implements OnInit {
   selectedValue = 'buy';
   orderForm: FormGroup;
   orders: FormArray;
+  count: number[] = [];
 
   constructor(private toastr: ToastrService, private formBuilder: FormBuilder, private dataService: DataService) {
     this.orderForm = this.createFormGroup(formBuilder);
@@ -55,13 +56,16 @@ export class OrderFormComponent implements OnInit {
       let data = {
         id: product.id,
         name: product.name,
-        count: +1
-      }
+        count: 1
+      };
+      this.count[product.id] = 1;
       this.products.push(data);
     } else {
-      foundProduct.count = foundProduct.count + 1;
+      console.log("ELSE");
+      console.log(this.count);
+      this.count[product.id] += 1;
+      foundProduct.count = this.count[product.id];
     }
-    console.log(this.products);
   }
 
   deleteProduct(product) {

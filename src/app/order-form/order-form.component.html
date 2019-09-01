@@ -12,13 +12,13 @@
       <div formArrayName="orders">
         <div *ngFor="let product of products; let i=index">
           <div [formGroupName]="i">
-            <mat-form-field class="col-md-6">
+            <mat-form-field class="col-md-5">
               <input matInput formControleName="name" placeholder="Name" [value]="product.name">
             </mat-form-field>
 
             <mat-form-field class="col-md-3">
               <input type="number" formControlName="amount" matInput placeholder="Anzahl" [value]="product.count"
-                (keyup)="onKey($event)">
+              [(ngModel)]="count[product.id]">
             </mat-form-field>
 
             <button class="col-md-1" mat-button color="warn" (click)="deleteProduct(product)">
@@ -34,7 +34,7 @@
     </div>
 
     <mat-form-field *ngIf="selectedValue === 'buy'" class="col-md-12">
-      <input matInput formControlName="amount" placeholder="Einkaufspreis">
+      <input matInput formControlName="amount" placeholder="Einkaufspreis in Cent">
     </mat-form-field>
 
     <div class="col-md-12">
