@@ -51,7 +51,7 @@ export class ProductModalComponent implements OnInit {
       name: product.name,
       items_per_crate: product.items_per_crate,
       reorder_point: product.reorder_point,
-      price: product.price,
+      price: this.convertEuroToCent(product.price),
       thumbnail: product.thumbnail,
       is_available: product.is_available,
       barcode: product.barcode
@@ -98,7 +98,7 @@ export class ProductModalComponent implements OnInit {
     console.log(this.product);
     console.log(productForm);
     console.log(productForm.barcode);
-    if(typeof(productForm.barcode) !== 'undefined') {
+    if (typeof (productForm.barcode) !== 'undefined') {
       console.log("NOT EMPTY");
       this.product.barcode = productForm.barcode;
     }
@@ -121,5 +121,11 @@ export class ProductModalComponent implements OnInit {
         this.findInvalidControls(control);
       }
     })
+  }
+
+  convertEuroToCent(price): number {
+    let newPrice: number = +price.substring(0, price.length - 1) * 100;
+    console.log(typeof(newPrice));
+    return newPrice;
   }
 }
