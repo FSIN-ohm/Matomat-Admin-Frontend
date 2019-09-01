@@ -1,36 +1,91 @@
 img {
-    max-width: 45px;
-    max-height: 45px;
-    padding: 5px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-::ng-deep .mat-elevation-z8.data-table {
-  box-shadow: none;
+  max-width: 45px;
+  max-height: 45px;
+  padding: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 ::ng-deep .mat-table {
-  background-color: #fafafa;
+background-color: #fafafa;
 }
 
 ::ng-deep .mat-paginator {
-  background-color: #fafafa;
-}
-.footer {
-  // position: fixed;
-
-  width: 100%;
-  height: 80px;
-  right: 0px;
-  bottom: 0px;
-
-  background:transparent;
+background-color: #fafafa;
 }
 
-.stick-right{
-  position: fixed;
-  bottom: 16px;
+.mat-cell, mat-footer-cell, mat-header-cell{
+overflow: visible;
 }
 
+.table-paginator{
+padding-bottom: 64px;
+}
+
+.bottom-toolbar{
+position: fixed;
+z-index: 10;
+height: 4px;
+background-color: #009688;
+right: 20%;
+left: 20%;
+bottom: 0px;
+}
+
+.bot-toolbar-button{
+position: fixed;
+z-index: 10;
+margin-right: 20%;
+bottom: 20px;
+}
+
+//scss for responsive behaviour of data-table.component.html:
+
+@media screen and (max-width: 1600px) {
+
+.bottom-toolbar{
+  right: 17.5%;
+  left: 17.5%;
+}
+
+.bot-toolbar-button{
+  margin-right: 17.5%;
+}
+}
+
+@media screen and (max-width: 1366px) {
+
+.bottom-toolbar{
+  right: 15%;
+  left: 15%;
+}
+
+.bot-toolbar-button{
+  margin-right: 15%;
+}
+}
+
+@media screen and (max-width: 1024px) {
+
+.bottom-toolbar{
+  right: 10%;
+  left: 10%;
+}
+
+.bot-toolbar-button{
+  margin-right: 10%;
+}
+}
+
+@media screen and (max-width: 960px) {
+
+.bottom-toolbar{
+  right: 8px;
+  left: 8px;
+}
+
+.bot-toolbar-button{
+  margin-right: 8px;
+}
+}
