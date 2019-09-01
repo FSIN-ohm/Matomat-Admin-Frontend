@@ -20,7 +20,13 @@ export class ProductsComponent implements OnInit {
 
   sideBarVisible: boolean = false;
 
-  columnsToDisplay = ['thumbnail', 'name', 'price', 'reorder_point', 'is_available', 'items_per_crate'];
+  columnsToDisplay = [
+    { key: 'thumbnail', value: 'Thumbnail' },
+    { key: 'name', value: 'Name' },
+    { key: 'price', value: 'Preis' },
+    { key: 'reorder_point', value: 'Meldebestand' },
+    { key: 'is_available', value: 'Verfügbarkeit' },
+    { key: 'items_per_crate', value: 'Anzahl pro Kasten' }]
 
   constructor(private injector: Injector, private toastr: ToastrService, private dataService: DataService, private changeDetector: ChangeDetectorRef) { }
 
@@ -31,7 +37,14 @@ export class ProductsComponent implements OnInit {
   getProducts() {
     this.dataService.getProducts().subscribe(res => {
       this.products = res;
+      this.convertCentToEuro();
     })
+  }
+
+  convertCentToEuro() {
+    for(let product of this.products) {
+      product.price = product.price/100 + '€'; 
+    }
   }
 
   editProduct(product) {
@@ -41,13 +54,13 @@ export class ProductsComponent implements OnInit {
     modalRef.content.onClose.subscribe(newProduct => {
       this.dataService.editProduct(newProduct, product.id).subscribe(
         () => {
-        this.toastr.success('Produkt wurde erfolgreich bearbeitet!', 'Erfolg', {
-          positionClass: 'toast-top-right',
-          timeOut: 6000
-        });
-        this.getProducts();
-        error => { console.log(error); }
-      })
+          this.toastr.success('Produkt wurde erfolgreich bearbeitet!', 'Erfolg', {
+            positionClass: 'toast-top-right',
+            timeOut: 6000
+          });
+          this.getProducts();
+          error => { console.log(error); }
+        })
     });
   }
 

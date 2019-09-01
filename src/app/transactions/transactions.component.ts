@@ -8,13 +8,12 @@ import { DataService } from '../data.service';
 })
 export class TransactionsComponent implements OnInit {
   transactions: any;
-  columnsToDisplay = ['date', 'sender', 'receiver', 'amount', 'transaction_type'];
 
-  // columnsToDisplay = [{ 'key': 'date', 'value': 'Datum' },
-  // { 'key': 'sender', 'value': 'Sender' },
-  // { 'key': 'receiver', 'value': 'Empfänger' },
-  // { 'key': 'amount', 'value': 'Anzahl' },
-  // { 'key': 'transaction_type', 'value': 'Transaktionstyp' }];
+  columnsToDisplay = [{ key: 'date', value: 'Datum' },
+  { key: 'sender', value: 'Sender' },
+  { key: 'receiver', value: 'Empfänger' },
+  { key: 'amount', value: 'Anzahl' },
+  { key: 'transaction_type', value: 'Transaktionstyp' }];
 
   constructor(private dataService: DataService) { }
 
@@ -26,7 +25,14 @@ export class TransactionsComponent implements OnInit {
     this.dataService.getTransactions().subscribe(res => {
       console.log(res);
       this.transactions = res;
+      this.convertCentToEuro();
     });
+  }
+
+  convertCentToEuro() {
+    for(let transaction of this.transactions) {
+      transaction.amount = transaction.amount/100 + '€'; 
+    }
   }
 
 }

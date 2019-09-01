@@ -1,7 +1,7 @@
 <mat-sidenav-container *ngIf="products" class="order-container">
 
   <mat-sidenav [(opened)]="sideBarVisible" mode="side" position="end">
-    <app-order-form class="order" #order class="order" (closeSidaBar)="closeSideBar($event)"></app-order-form>
+    <app-order-form class="order" #order (closeSidaBar)="closeSideBar($event)"></app-order-form>
   </mat-sidenav>
 
   <!--<button [ngStyle]="{'right':sideBarVisible === true ? '380px' : '80px'}" mat-fab color="primary" class="bot-toolbar-button"

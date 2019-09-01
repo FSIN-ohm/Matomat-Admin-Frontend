@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { AccountModalComponent } from './account-management/account-modal/account-modal.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -62,6 +63,7 @@ import { DataService } from './data.service';
     MatIconModule,
     MatCheckboxModule,
     MatListModule,
+    MatTooltipModule,
     MatGridListModule,
     ModalModule.forRoot(),
     ReactiveFormsModule,
