@@ -57,9 +57,12 @@ export class OrderFormComponent implements OnInit {
         id: product.id,
         name: product.name,
         count: 1
-      }
+      };
+      this.count[product.id] = 1;
       this.products.push(data);
     } else {
+      console.log("ELSE");
+      console.log(this.count);
       this.count[product.id] += 1;
       foundProduct.count = this.count[product.id];
     }
