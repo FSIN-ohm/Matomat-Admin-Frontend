@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  URL: 'https://matohmat.fachschaft.in/'
+  URL: 'https://matohmat.fachschaft.in/api/'
 };
